@@ -22,7 +22,7 @@
       </div>
     </nav>
     <div class="content">
-      <div id="slider" class="w-50">
+      <div id="slider" class="">
         <transition name="fade" mode="out-in">
           <img :src="currentImage" :key="currentIndex" alt="Slide" class="slider-image animate__animated animate__fadeInLeft animate__slow" />
         </transition>
@@ -92,8 +92,8 @@
 
 <style scoped>
 #slider {
-  width: 100%;
   overflow: hidden;
+  width: 50% !important;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -176,19 +176,18 @@ nav{
   .navbar-brand h4{
     font-size: 17px;
   }
-
-  /* .navbar-brand img{
-    width: 10%;
-  } */
-  @media (max-width: 767px) {
-    .collapse{
-      background-color: #fff;
-    }
+  .collapse{
+    background-color: #fff;
   }
+  #slider{
+    width: 80% !important;
+  }
+  
+
   .content {
     flex-direction: column-reverse;
     align-items: center;
-    top: -30%;
+    top: -10%;
   }
 
 
