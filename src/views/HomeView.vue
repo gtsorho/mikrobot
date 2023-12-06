@@ -182,14 +182,12 @@ nav{
   #slider{
     width: 80% !important;
   }
-  
 
   .content {
     flex-direction: column-reverse;
     align-items: center;
     top: -10%;
   }
-
 
   .content img {
     max-width: 100%;
