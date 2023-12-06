@@ -4,7 +4,6 @@ const user = require('./user')
 
 require('dotenv').config()
 
-
 const sequelize = new Sequelize(
    process.env.DATABASE,
    process.env.DATABASE_USERNAME,
@@ -16,6 +15,18 @@ const sequelize = new Sequelize(
       logging: false
    }
 );
+
+// const sequelize = new Sequelize(
+//    process.env.DATABASE,
+//    process.env.DATABASE_USERNAME,
+//    process.env.DATABASE_PASSWORD,
+//    {
+//       host: process.env.DATABASE_HOST,
+//       port:process.env.DATABASE_PORT,
+//       dialect: 'mysql',
+//       logging: false
+//    }
+// );
 
 
 const db = {}
@@ -33,7 +44,7 @@ sequelize.sync({ alter: true,  force: false })
 
 
 sequelize.authenticate().then(() => {
-   console.log('Connection has been established successfully to mikbot_fb.');
+   console.log('Connection has been established successfully to mikbot_db.');
 }).catch((error) => {
    console.error('Unable to connect to the database: ', error);
 });
