@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "mikrobot",
+  "private_key_id": "450133e45abcd81569aed6c901fccc9fd9fa5008",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCqN7pVT3dncvR0\nI/VTDxDanNVtnjRWc42Dzcc+Q5LNLx+3T8+/uon2iVQktADHX9zqcXRriX7jsRSC\nH9516cOS+5CrqEKGlc5vVlu5bDLEC69wCKSqZt3Bka48IIX4KD/iVZM4E3NeMIIv\n05MF5sVklaYCLA+enYtPZg6FpuGJ1603BGd4Iw6BtxeVXWAX+wfd0zEXhbuVprJF\nqacdSyQd8NzXfwqHzgTrFWFvaS3OgpklvV1KlxsSnDV4fzy+oYjuhg4DKv16sNGd\noqV9YPOA2SPZH4tDPmnebBzuzgkFCxYKXaf3bIqfHa3NGo5Wn46GXVvz1J0RvXLP\nmPofgFQDAgMBAAECggEALoRoQaQj53t83rhs9LPrUTMHCJvxhaayh9CWoKdq2PQF\n4NzI04aw6VUCT715cQL7pn426KR8rtDX3+/BpcuqjOJ+2Mp0077g2YBqNLQi83yW\nBzH1fjP6aknbqcbhlb26J6pnPy3hm136VgOl7DjyvNhAs9tCsYAwcBRd55yBil+a\nI2eFRoJTlD9V5lH9yIx+37OA/M24ddLJlBFP9Ylhpudr0LswJRZQApGqif+4eTfH\nSkQnyVeSLo4jvZqGIAFAJk3r9rhSa0czDDqIvaAzzprWq/8D2jIILq+y/tIWeUN9\nhO/tvs+reh5YA5Yul5zzSrrnVIIjS3Sj4K93MNNOIQKBgQDhR0GU6QomhZeNQc+6\n936NlyyglMwb+yllkH1MB6oW2L6YF8hQOKbYB4zmDbHwrm3m8H729EssZQlzOM+Q\ndoRMNAh3VhU83cafFvKYwL1UT0aSKt8rLpO+Fkjf22eOC5yrxv2HOu0hxkxaNUq0\nNtAp5iLyCDim632DmvGy7glgWwKBgQDBbjyJsHbmdiZQPeK4Ny4+As6w+0SY5Fdm\nvRRI61uYmeKrxo92+2KtuDMEuGOV2N23H9b4SGmOQEAjE/GZb1+kvFkFgA5GWbYb\nQ6CvOaq4OYK2odlZOyWetQOuwqdw5GuLj7Yx2X5gVLfLzc+I97Vk6pTHEQJV85gF\nisScSy+reQKBgQDGLX429m80hi9VV8DblF/jRUtAFMYeE2xOabagDNoHcTLx73IL\niFrWDoZX11JjDb+m+ohmzW/YJSYUE7UdO/WUZ+3OtY7HVb4mM/TEhkHICllluotK\nnJXiEg6Xx5aosfRodQyRSzhSjvSaIumN8e5b/ZVeX/ceeGmZPdREeP0MowKBgQCE\nDULs6PizKvPLEgSmqJ08HmSG9HMHQdPdQrYHdg3pJx1VEdA9dS8P09GYplzuHsh2\nTRlQFPdi8sAWcnYcvqj36NGJbLvSEUq+YDPhjCfdbv2quuGMBlIPgBpMg30WGArH\nk0vZylZ5Yzy6uP22zw0aIP+Cyzzh+tPM7Mh+vuGDWQKBgFpEDKAqel4dfQ3PnTZd\nNDCpDcym9exPh+RvczKPuqtmeIYHj00sTjilX4G16b1EL5TMeLpUZ8SpA0NqLuB8\nMaD52SJ59sfd8eESdvCbAU+YYxVg8qSK7RFNFme9q+Onocg0dOCuwarOeun0O7it\ndsaGLEdR5sXA/HRHi4pOrt7I\n-----END PRIVATE KEY-----\n",
+  "client_email": "mikrobot@mikrobot.iam.gserviceaccount.com",
+  "client_id": "107501781259316200104",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mikrobot%40mikrobot.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
