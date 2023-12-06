@@ -28,7 +28,7 @@ db.user = user(sequelize, DataTypes)
 
 sequelize.sync({ alter: true,  force: false })
 .then(()=>{
-    console.log('all mikbot_fb in sync')
+    console.log('all mikbot_db in sync')
 })
 
 
