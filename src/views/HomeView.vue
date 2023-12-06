@@ -186,7 +186,7 @@ nav{
   .content {
     flex-direction: column-reverse;
     align-items: center;
-    top: -10%;
+    top: -20%;
   }
 
   .content img {

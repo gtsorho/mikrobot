@@ -1,13 +1,14 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg  "  :class="{ 'navbar-hidden': !showNavbar }" >
       <div class="container-fluid">
-        <router-link class="navbar-brand mx-5 d-flex" :to="{name:'home', hash:'#home'}">
+        <router-link class="navbar-brand  d-flex" :to="{name:'home', hash:'#home'}">
           <img src="../assets/images/logo1.png" alt="Logo" width="50" class=" d-inline-block align-text-top">
           <h4 class="mx-3 my-auto">Mikrobot Academy</h4>
         </router-link>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"></i>
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
         <div class="collapse navbar-collapse" style="width:100%" id="navbarNavAltMarkup">
           <div class="navbar-nav mx-4 d-flex justify-content-between" style="width: 70%">
             <router-link class="nav-link" :to="{name:'home'}">Home</router-link>
@@ -17,7 +18,7 @@
               <a class=" nav-link" data-bs-toggle="dropdown" id="dropdownMenuButton"  aria-haspopup="true" aria-expanded="false">
                 Academy 
               </a>
-              <ul class="dropdown-menu dropdown-menu" :class="{ show: isDropdownVisible }" aria-labelledby="dropdownMenuButton" >
+              <ul class="dropdown-menu dropdown-menu" v-if="isDropdownVisible" :class="{ show: isDropdownVisible }" aria-labelledby="dropdownMenuButton" >
                 <li><router-link class="drops dropdown-item " :to="{name:'level', hash:'#elementary'}">Elementary</router-link></li>
                 <li><router-link class="drops dropdown-item " :to="{name:'level', hash:'#junior'}">Junior</router-link></li>
                 <li><router-link class="drops dropdown-item " :to="{name:'level', hash:'#senior'}">Senior</router-link></li>
