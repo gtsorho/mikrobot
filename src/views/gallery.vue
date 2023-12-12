@@ -64,8 +64,8 @@ img {
     margin: 10px;
     object-fit: cover;
     border: 10px solid #fefae033;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+    /* -webkit-filter: grayscale(0%); */
+    /* filter: grayscale(100%); */
     border-radius: 5px;
     transition-duration: 1s;
 }

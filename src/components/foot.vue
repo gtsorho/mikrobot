@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-6 fabout">
                 <h3><a href="about_1.html">About Us</a></h3>
-                <p >Mellentesque habitant morbi tristique senectus et netus et malesuada famesac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi.</p>
+                <p >Our Mission is to inspire, unlock creativity, innovation and passion for science and technology for young Ghanaians, by using the motivational effects of robotics to develop science, engineering and technology skills (STEM).</p>
             </div>
             <div class="col-md-3 col-sm-6">
                 <h3><a href="elements_recent_works.html"></a></h3>

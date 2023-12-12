@@ -7,8 +7,8 @@
       </div>
       <div class="col-md-6 col-sm-12 d-flex" >
         <div class="my-auto">
-          <label class="fs-4 mb-3" for="">Elementary(6-9 years)</label>
-          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus inventore tempora beatae porro maxime ipsam reiciendis, laboriosam adipisci minima, sit ab quod blanditiis cumque tenetur vel pariatur, praesentium sed sapiente. Text on the right</p>
+          <label class="fs-4 mb-3" for="">Elementary(8-11 years)</label>
+          <p>Students will engage in inquiry-based investigations that teach lessons in designing, building and programming robots.  Students develop leadership, teamwork and project management skills that prepare them for the future work force. The robotics curriculum is based on the Global Mathematics, Science and Technology standards.</p>
         </div>
       </div>
     </div>
@@ -20,8 +20,8 @@
       </div>
       <div class="col-md-6 col-sm-12 order-md-1 6 d-flex text-end">
         <div class="my-auto">
-          <label class="fs-4 mb-3" for="">Junior(6-9 years)</label>
-          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus inventore tempora beatae porro maxime ipsam reiciendis, laboriosam adipisci minima, sit ab quod blanditiis cumque tenetur vel pariatur, praesentium sed sapiente. Text on the right</p>
+          <label class="fs-4 mb-3" for="">Junior(12-14 years)</label>
+          <p>Students will work in groups to build and test increasingly complex autonomous robots. The purpose of this course is to offer a fun and practical approach to the learning of Science, Technology, Engineering and Mathematics and aid students to apply their STEM knowledge acquired effectively in solving real life problems. </p>
         </div>
       </div>
     </div>
@@ -33,8 +33,8 @@
       </div>
       <div class="col-md-6 col-sm-12 d-flex">
         <div class="my-auto">
-          <label class="fs-4 mb-3" for="">Senior(6-9 years)</label>
-          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus inventore tempora beatae porro maxime ipsam reiciendis, laboriosam adipisci minima, sit ab quod blanditiis cumque tenetur vel pariatur, praesentium sed sapiente. Text on the right</p>
+          <label class="fs-4 mb-3" for="">Senior(15-19 years)</label>
+          <p> Students design, construct and program autonomous robot that can solve specific challenges on a field. Students create their own innovative intelligent robotics solution relating to the pressing societal needs. There is no restriction on the use of materials. This includes free choice of controllers, motors, sensors, etc.</p>
         </div>
       </div>
     </div>
