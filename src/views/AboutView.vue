@@ -13,7 +13,7 @@
         <div class="col-sm-4">
             <p>Our students consistently showcase dedication, evident in their triumphs across diverse international competitions. Many have secured admissions to esteemed universities riding on the wings of robotics. Join us at Mikrobot Academy and be a part of this inspiring journey toward academic excellence and innovation!</p>
             <h4><a href="about_me.html">Ing. Wilson </a></h4>
-            <small>Founder</small>
+            <small>Principal</small>
         </div>
       </div>
     </div>
@@ -63,19 +63,19 @@
                 </div>
                 <div class="col-sm-4 offset-md-1">
                     <h3>Robotics Training</h3>
-                    <p>At Mikrobot Academy, our cornerstone lies in Robotics Training, where innovation meets education. Our curriculum is meticulously designed to immerse students in the world of robotics, providing hands-on experiences that foster creativity and problem-solving skills. Our expert instructors, seasoned in the field of robotics, guide students through a journey of discovery, from understanding foundational concepts to designing and building their robots. The training sessions are dynamic, interactive, and tailored to each student's pace, ensuring a comprehensive grasp of robotics principles. At Mikrobot Academy, we're not just teaching robotics; we're nurturing the next generation of innovators and thinkers in this exciting field.</p>
+                    <p>Mikrobot Academy excels in Robotics Training, blending innovation with education. Our curriculum immerses students in robotics, fostering creativity through hands-on experiences. Led by expert instructors, our dynamic sessions cater to individual paces, ensuring a comprehensive understanding of foundational concepts and hands-on robot design. Mikrobot Academy goes beyond teaching robotics; we cultivate the next generation of innovators in this exciting field.</p>
                 </div>
                 <div class="col-sm-4">
                     <h3>Coding & Software Dev.</h3>
-                    <p>our commitment to excellence extends to Coding and Software Development training. Our curriculum is finely crafted to introduce students to the world of programming languages, software architecture, and application development. Led by our adept instructors, who possess a wealth of industry experience, our sessions empower students to grasp coding fundamentals and delve into the intricacies of software design. Through hands-on projects and real-world simulations, students learn to create, debug, and optimize code, honing their problem-solving abilities along the way.</p>
+                    <p>Mikrobot Academy is committed to excellence in Coding and Software Development training. Our curriculum introduces students to programming languages, software architecture, and application development. Led by experienced instructors, our sessions empower students to grasp coding fundamentals and delve into software design intricacies. Through hands-on projects, students learn to create, debug, and optimize code, honing their problem-solving abilities.</p>
                 </div>
                 <div class="col-sm-4 ">
                     <h3>Additive Manufacturing and 3D Printing.</h3>
-                    <p>our expertise extends to Additive Manufacturing and 3D Printing, offering students an immersive journey into the world of cutting-edge technology. Our specialized curriculum is meticulously crafted to delve into the intricacies of 3D printing, from understanding design principles to hands-on creation using advanced additive manufacturing techniques. Guided by our experienced instructors, who possess a deep understanding of this evolving field, students explore the limitless possibilities of additive manufacturing. Through practical projects and innovative exercises, students learn to conceptualize, design, and bring their ideas to life using state-of-the-art 3D printing technology.</p>
+                    <p>Mikrobot Academy excels in Additive Manufacturing and 3D Printing, immersing students in cutting-edge technology. Our specialized curriculum explores 3D printing intricacies, from design principles to hands-on creation using advanced additive manufacturing techniques. Guided by experienced instructors, students delve into limitless possibilities in this evolving field. Through practical projects, they learn to conceptualize, design, and bring ideas to life using state-of-the-art 3D printing technology.</p>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4 offset-md-4">
                     <h3>Drone Tech & Piloting.</h3>
-                    <p>we soar beyond limits with our Drone Technology and Piloting training. Our program is tailored to unveil the fascinating world of drones, from understanding their mechanics to mastering the art of piloting. Led by seasoned instructors deeply rooted in the field, our sessions blend theoretical knowledge with practical applications. Students delve into the intricacies of drone technology, learning about flight dynamics, safety protocols, and aerial navigation. Through hands-on exercises and simulated flights, our students gain proficiency in piloting drones, honing their skills in maneuvering and capturing aerial perspectives. Mikrobot Academy isn't just about drones; it's about fostering the next generation of skilled and responsible drone pilots ready to explore new horizons.</p>
+                    <p>Mikrobot Academy excels in Drone Technology and Piloting training, unveiling the world of drones from mechanics to piloting. Led by seasoned instructors, our program blends theory with hands-on practice, covering flight dynamics, safety, and navigation. Through simulated flights and exercises, students gain proficiency, honing skills in maneuvering and aerial capture. Mikrobot Academy nurtures skilled, responsible drone pilots, fostering the next generation of aviation enthusiasts ready to explore new horizons. It's more than drones; it's about shaping the future of aviation.</p>
                 </div>
             </div>
         </div>
