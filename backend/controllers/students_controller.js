@@ -6,7 +6,29 @@ require('dotenv').config()
 const path = require('path');
 const { google } = require('googleapis');
 const { JWT } = require('google-auth-library');
+const fs = require('fs').promises;
 
+
+const deleteStudentProfile = async (studentId) => {
+    const student = await db.student.findOne({
+        where: {
+            id: studentId
+        }
+    });
+
+    if (!student) {
+        return; 
+    }
+
+    const imagePath = `./profileImages/${student.imageName}`;
+    
+    await db.student.destroy({
+        where: {
+            id: studentId
+        }
+    });
+    await fs.unlink(imagePath);
+};
 
 module.exports = {
 
@@ -81,13 +103,20 @@ module.exports = {
         res.send(student)
     }, 
 
-    delete: async(req, res) =>{
-       await db.student.destroy({
-          where: {
-            id: req.params.id
-          }
-        });
-        res.sendStatus(200)  
+    // delete: async(req, res) =>{
+    //    await db.student.destroy({
+    //       where: {
+    //         id: req.params.id
+    //       }
+    //     });
+    //     res.sendStatus(200)  
+    // },
+    delete: async (req, res) => {
+        const studentId = req.params.id;
+
+        await deleteStudentProfile(studentId);
+
+        res.sendStatus(200);
     },
 
     search: async (req, res) => {

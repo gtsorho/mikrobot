@@ -95,7 +95,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" ref="modalClose" class="btn btn-secondary" hidden data-bs-dismiss="modal">Close</button>
-        <button type="button" @click="login()" class="btn btn-primary">Login</button>
+        <button type="button" @click="login()" class="btn btn-sm rounded-pill btn-primary">Login</button>
       </div>
     </div>
   </div>
