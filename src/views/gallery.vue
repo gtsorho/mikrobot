@@ -5,7 +5,7 @@
       <input type="range" v-model="zoom" class="form-range w-25  mx-auto d-block"  min="100" max="600"  id="customRange1">
     </div>
     <div class="container">
-        <img v-for="(image, i) in images" :key="i" :style="'width:'+zoom+'px'" :src="image.webContentLink" alt="Herd of horses">
+        <img v-for="(image, i) in images" :key="i" :style="'width:'+ zoom +'px'" :src="image.webContentLink" alt="gallary">
     </div>
   </div>
 </template>

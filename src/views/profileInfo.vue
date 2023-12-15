@@ -14,7 +14,7 @@
     </div>
     <div class="row">
       <div class="col-md-4 border border-warning" v-if="profile.image">
-        <img :src="`https://mikrobots.miphost.com/profile_images/${ profile.image}`" style="height:4in; width:100%; object-fit:cover" alt="News Image" class="img-fluid">
+        <img :src="`https://mikrobotacademy.com/profile_images/${ profile.image}`" style="height:4in; width:100%; object-fit:cover" alt="News Image" class="img-fluid">
       </div>
       <div class="col border-3 border-warning border-end">
         <h1 class="text-start">Profile</h1>
@@ -52,7 +52,7 @@ export default {
   },
   methods:{
     getStudent(){
-      axios.get('https://mikrobots.miphost.com/api/students/student/'+this.student
+      axios.get('https://mikrobotacademy.com/api/students/student/'+this.student
       ).then(response =>{
         this.profile = response.data
         console.log(response.data)

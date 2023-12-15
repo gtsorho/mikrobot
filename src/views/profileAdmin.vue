@@ -7,7 +7,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="list-group">
+      <div class="list-group" style="max-height:5in !important; overflow-y:auto">
         <a href="#"  class="list-group-item border rounded-2 list-group-item-action my-2"  v-for="(student,i) in students" :key="i" @click="assignStudent(student), update= true" aria-current="true">
           <div class="row">
               <div class="col-8">
@@ -19,7 +19,7 @@
               <small>{{student.guardian}} - ({{student.phone}})</small>
             </div>
             <div class="col-md-4 d-flex justify-content-center my-auto">
-              <img v-if="student.hasOwnProperty('image')" :src="`https://mikrobots.miphost.com/profile_images/${ student.image}`" class="rounded-circle" style="width:5rem; height:5rem; object-fit:cover">
+              <img v-if="student.hasOwnProperty('image')" :src="`https://mikrobotacademy.com/profile_images/${ student.image}`" class="rounded-circle" style="width:5rem; height:5rem; object-fit:cover">
             </div>
           </div>
         </a>
@@ -140,7 +140,7 @@ export default {
     },
     methods:{
       getStudents(){
-        axios.get('https://mikrobots.miphost.com/api/students/'
+        axios.get('https://mikrobotacademy.com/api/students/'
         ).then(response =>{
           this.students = response.data
           console.log(response.data)
@@ -149,7 +149,7 @@ export default {
         })
       },
       login(){
-        axios.post('https://mikrobots.miphost.com/api/users/login', this.user
+        axios.post('https://mikrobotacademy.com/api/users/login', this.user
         ).then(response =>{
           this.setCookie('token', response.data, 1 )
           const trig = this.$refs.modalClose
@@ -173,7 +173,7 @@ export default {
           }
         }
 
-        axios.post('https://mikrobots.miphost.com/api/students/', formData,
+        axios.post('https://mikrobotacademy.com/api/students/', formData,
           { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()
@@ -196,7 +196,7 @@ export default {
           }
         }
 
-        axios.post('https://mikrobots.miphost.com/api/students/update/' + id, formData,
+        axios.post('https://mikrobotacademy.com/api/students/update/' + id, formData,
           { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()

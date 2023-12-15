@@ -11,7 +11,7 @@
             <div class="card-body pt-3" style="min-height:80%">
                 <div class="widget-49">
                     <div class="widget-49-title-wrapper">
-                        <div class="widget-49-date-primary" :style="`background-image:url('https://mikrobots.miphost.com/profile_images/${ student.image}') !important`"></div>
+                        <div class="widget-49-date-primary" :style="`background-image:url('https://mikrobotacademy.com/profile_images/${ student.image}') !important`"></div>
                         <div class="widget-49-meeting-info mx-auto" style="width: 70%;">
                             <p class="fst-italic m-0 text-muted">Meet:</p>
                             <h3 class="widget-49-pro-title fw-bold text-uppercase">{{student.name}} <span class="float-end">Age: {{calculateAge(student.dob)}} yrs</span></h3>
@@ -45,10 +45,17 @@ export default {
     },
     methods:{
       getStudents(){
-        axios.get('https://mikrobots.miphost.com/api/students/'
+        axios.get('https://mikrobotacademy.com/api/students/'
         ).then(response =>{
           this.students = response.data
-          console.log(response.data)
+        }).catch(error =>{
+          console.log(error.response)
+        })
+      },
+      search(){
+        axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
+        ).then(response =>{
+          this.students = response.data
         }).catch(error =>{
           console.log(error.response)
         })
