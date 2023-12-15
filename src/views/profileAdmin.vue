@@ -1,7 +1,7 @@
 <template>
   <div class="container my-5">
     <div class=" d-flex justify-content-between ">
-      <input type="text" class="form-control form-control-sm rounded-pill my-3 w-25" v-model="searchQuery" placeholder="Search by title" />
+      <input type="text" class="form-control form-control-sm rounded-pill my-3 w-25" v-model="searchQuery" @keyup="search" placeholder="Search by title" />
       <p class="my-3" style="font-size:13px">{{students.length}} Item(s) Found</p>
     </div>
 
@@ -110,7 +110,7 @@ import axios from 'axios'
 export default {
     data() {
         return {
-         students:{},
+         students:[],
          searchQuery:'',
          user:{
           username:null,
@@ -161,6 +161,14 @@ export default {
       handleImageChange(event) {
         this.student.image = event.target.files[0];
         this.updateImg = true
+      },
+      search(){
+        axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
+        ).then(response =>{
+          this.students = response.data
+        }).catch(error =>{
+          console.log(error.response)
+        })
       },
       submitForm() {
         let token = this.getCookie('token')

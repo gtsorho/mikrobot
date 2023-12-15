@@ -55,7 +55,6 @@ export default {
       axios.get('https://mikrobotacademy.com/api/students/student/'+this.student
       ).then(response =>{
         this.profile = response.data
-        console.log(response.data)
       }).catch(error =>{
         console.log(error.response)
       })

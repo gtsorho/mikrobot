@@ -55,8 +55,7 @@ export default {
       search(){
         axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
         ).then(response =>{
-          console.log(response.data)
-          // this.students = response.data
+          this.students = response.data
         }).catch(error =>{
           console.log(error.response)
         })
