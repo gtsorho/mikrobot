@@ -1,7 +1,7 @@
 <template>
   <div class="container my-5">
     <div class=" d-flex justify-content-around ">
-      <input type="text" class="form-control form-control-sm rounded-pill my-3 w-50" v-model="searchQuery" @keydown="search()" placeholder="Search by title" />
+      <input type="text" class="form-control form-control-sm rounded-pill my-3 w-50" v-model="searchQuery" @keyup="search" placeholder="Search by title" />
       <p class="my-3" style="font-size:13px">{{students.length}} Item(s) Found</p>
     </div>
 
@@ -17,7 +17,7 @@
                             <h3 class="widget-49-pro-title fw-bold text-uppercase">{{student.name}} <span class="float-end">Age: {{calculateAge(student.dob)}} yrs</span></h3>
                         </div>
                     </div>
-                    <p class="widget-49-meeting-points">{{ truncateData(student.profile,200)}}</p>
+                    <p class="widget-49-meeting-points">{{ truncateData(student.profile, 200)}}</p>
                 </div>
             </div>
             <div class="widget-49-meeting-action card-footer border-0 bg-transparent  d-flex justify-content-end">
@@ -55,7 +55,8 @@ export default {
       search(){
         axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
         ).then(response =>{
-          this.students = response.data
+          console.log(response.data)
+          // this.students = response.data
         }).catch(error =>{
           console.log(error.response)
         })
