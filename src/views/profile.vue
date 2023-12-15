@@ -1,7 +1,7 @@
 <template>
   <div class="container my-5">
     <div class=" d-flex justify-content-around ">
-      <input type="text" class="form-control form-control-sm rounded-pill my-3 w-50" v-model="searchQuery" placeholder="Search by title" />
+      <input type="text" class="form-control form-control-sm rounded-pill my-3 w-50" v-model="searchQuery" @keydown="search()" placeholder="Search by title" />
       <p class="my-3" style="font-size:13px">{{students.length}} Item(s) Found</p>
     </div>
 

@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     getImages(){
-      axios.get('https://mikrobots.miphost.com/api/students/gallery'
+      axios.get('https://mikrobotacademy.com/api/students/gallery'
         ).then(response =>{
           this.images = response.data.data.files
           console.log(response.data.data.files)
