@@ -9,8 +9,8 @@
         <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button> -->
-        <div class="collapse navbar-collapse" style="width:100%" id="navbarNavAltMarkup">
-          <div class="navbar-nav mx-4 d-flex justify-content-between" style="width: 70%">
+        <div class="collapse navbar-collapse  d-flex  justify-content-end " style="width:100%" id="navbarNavAltMarkup">
+          <div class="navbar-nav mx-0 mx-md-4 d-flex  justify-content-between" style="width: 70%">
             <router-link class="nav-link" :to="{name:'home'}">Home</router-link>
             <router-link class="nav-link" :to="{name:'about'}">About</router-link>
             <!-- <router-link class="nav-link" :to="{name:'level'}">Academy</router-link> -->
@@ -93,6 +93,7 @@ export default {
     border: 2px solid rgba(255, 255, 255, 0);
     transition: 0.5s ease-out;
     padding-block: 2px;
+    text-align: end !important;
 
   }
   .nav-link:hover{

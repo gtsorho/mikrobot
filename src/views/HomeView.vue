@@ -10,8 +10,8 @@
         <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button> -->
-        <div class="collapse navbar-collapse " style="width:100%" id="navbarNavAltMarkup">
-          <div class="navbar-nav mx-4 d-flex  justify-content-between" style="width: 70%">
+        <div class="collapse navbar-collapse  d-flex  justify-content-end " style="width:100%" id="navbarNavAltMarkup">
+          <div class="navbar-nav mx-0 mx-md-4 d-flex  justify-content-between" style="width: 70%">
             <router-link class="nav-link" :to="{name:'home'}">Home</router-link>
             <router-link class="nav-link" :to="{name:'about'}">About</router-link>
             <router-link class="nav-link" :to="{name:'level'}">Academy</router-link>
@@ -21,16 +21,18 @@
         </div>
       </div>
     </nav>
-    <div class="content">
-      <div id="slider" class="">
+    <div class="row h-100">
+      <div id="" class="col-12 col-md-6 d-flex align-items-center justify-content-center">
         <transition name="fade" mode="out-in">
           <img :src="currentImage" :key="currentIndex" alt="Slide" class="slider-image animate__animated animate__fadeInLeft animate__slow" />
         </transition>
       </div>
       <!-- <img src="../assets/images/ev31.png" class="w-50 mt-md-4 animate__animated animate__fadeInLeft animate__slow" alt=""> -->
-      <div class="text-center animate__animated animate__lightSpeedInLeft animate__slow">
-        <h1 class="fw-bold text-secondary mainText" style="font-size:50px"><span style="color: #004e7c;">Code</span> Create <span style="color: #004e7c;">Conquer</span></h1>
-        <p style="color: #004e7c;">Unleash the Future with the <span class="text-warning fw-bolder">MIKROBOT</span>  Academy Experience!</p>
+      <div class="text-center animate__animated animate__lightSpeedInLeft animate__slow col-12 col-md-6 d-flex align-items-md-center align-items-sm-start justify-content-center">
+        <div>
+          <h1 class="fw-bold text-secondary mainText d-block" style="font-size:50px"><span style="color: #004e7c;">Code</span> Create <span style="color: #004e7c;">Conquer</span></h1>
+          <p style="color: #004e7c;" class="d-block">Unleash the Future with the <span class="text-warning fw-bolder">MIKROBOT</span>  Academy Experience!</p>
+        </div>
       </div>
     </div>
   </div>
@@ -105,7 +107,7 @@
 }
 
 .slider-image {
-  width: 100%;
+  width: 70%;
   height: auto;
   z-index: -1
 }
