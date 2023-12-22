@@ -6,9 +6,6 @@
           <h4 class="mx-3 my-auto">Mikrobot Academy</h4>
         </router-link>
         <i class="bi bi-list navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"></i>
-        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button> -->
         <div class="collapse navbar-collapse  d-flex  justify-content-end " style="width:100%" id="navbarNavAltMarkup">
           <div class="navbar-nav mx-0 mx-md-4 d-flex  justify-content-between" style="width: 70%">
             <router-link class="nav-link" :to="{name:'home'}">Home</router-link>
@@ -26,6 +23,7 @@
             </div>
             <router-link class="nav-link" :to="{name:'profile'}">Profiles</router-link>
             <router-link class="nav-link" :to="{name:'gallery'}">Gallery</router-link>
+            <router-link class="nav-link" :to="{name:'home', hash:'#news'}">News</router-link>
             
           </div>
         </div>

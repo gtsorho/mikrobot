@@ -30,6 +30,7 @@
     "vue-carousel": "^0.18.0",
     "vue-router": "^4.2.5",
     "vueperslides": "^3.5.1"
+    
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.4.0",

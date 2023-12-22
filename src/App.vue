@@ -13,6 +13,12 @@ import HelloWorld from './components/navbar.vue'
       font-family: 'Roboto Slab', serif;
       color: #243050
    }
+   p{
+   font-weight: 200;
+   }
+   h1,h2,h3,h4,h5,h6{
+   font-weight: 400;
+   }
    html {
   scroll-behavior: smooth;
    }

@@ -1,202 +1,221 @@
 <template>
-  <div class="background-container " :class="{ 'animated fadeIn animate__slow': fadeInAnimation }">
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow">
-      <div class="container-fluid">
-        <router-link class="navbar-brand d-flex" :to="{name:'home', hash:'#home'}">
-          <img src="../assets/images/logo1.png" alt="Logo" width="50" class="d-inline-block align-text-top">
-          <h4 class="mx-3 my-auto">Mikrobot Academy</h4>
-        </router-link>
-        <i class="bi bi-list navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"></i>
-        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button> -->
-        <div class="collapse navbar-collapse  d-flex  justify-content-end " style="width:100%" id="navbarNavAltMarkup">
-          <div class="navbar-nav mx-0 mx-md-4 d-flex  justify-content-between" style="width: 70%">
-            <router-link class="nav-link" :to="{name:'home'}">Home</router-link>
-            <router-link class="nav-link" :to="{name:'about'}">About</router-link>
-            <router-link class="nav-link" :to="{name:'level'}">Academy</router-link>
-            <router-link class="nav-link" :to="{name:'profile'}">Profiles</router-link>
-            <router-link class="nav-link" :to="{name:'gallery'}">Gallery</router-link>
+  <div> 
+    <Banner/>
+  <section class="services-section my-5">
+    <div class="services-warp">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="service-item">
+              <div class="si-head">
+                <div class="si-icon d-flex justify-content-center">
+                  <img src="../assets/images/industrial-robot(1).png" style="width:25%" class="my-3" alt >
+                </div>
+              </div>
+              <p>Mikrobot Academy excels in innovative robotics training, fostering creativity through hands-on experiences led by expert instructors</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="service-item">
+              <div class="si-head">
+                <div class="si-icon d-flex justify-content-center">
+                  <img src="../assets/images/code.png" style="width:25%" class="my-3" alt >
+                </div>
+              </div>
+              <p>Mikrobot Academy excels in coding and software development training, empowering students through hands-on projects led by experienced instructors.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="service-item">
+              <div class="si-head">
+                <div class="si-icon d-flex justify-content-center">
+                  <img src="../assets/images/3d-printer.png" style="width:25%" class="my-3" alt >
+                </div>
+              </div>
+              <p>The Academy excels in Additive Manufacturing and 3D Printing, guiding students through hands-on projects using cutting-edge technology.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="service-item">
+              <div class="si-head">
+                <div class="si-icon d-flex justify-content-center">
+                  <img src="../assets/images/drone.png" style="width:25%" class="my-3" alt >
+                </div>
+              </div>
+              <p>Elevate skills in drone technology through hands-on piloting training, led by seasoned instructors at Mikrobot Academy.</p>
+            </div>
           </div>
         </div>
       </div>
-    </nav>
-    <div class="row h-100">
-      <div id="" class="col-12 col-md-6 d-flex align-items-center justify-content-center">
-        <transition name="fade" mode="out-in">
-          <img :src="currentImage" :key="currentIndex" alt="Slide" class="slider-image animate__animated animate__fadeInLeft animate__slow" />
-        </transition>
-      </div>
-      <!-- <img src="../assets/images/ev31.png" class="w-50 mt-md-4 animate__animated animate__fadeInLeft animate__slow" alt=""> -->
-      <div class="text-center animate__animated animate__lightSpeedInLeft animate__slow col-12 col-md-6 d-flex align-items-md-center align-items-sm-start justify-content-center">
-        <div>
-          <h1 class="fw-bold text-secondary mainText d-block" style="font-size:50px"><span style="color: #004e7c;">Code</span> Create <span style="color: #004e7c;">Conquer</span></h1>
-          <p style="color: #004e7c;" class="d-block">Unleash the Future with the <span class="text-warning fw-bolder">MIKROBOT</span>  Academy Experience!</p>
+    </div>
+  </section>
+
+
+  <section class="video-section spad mt-5">
+    <div class="container">
+      <div class="row" >
+        <div class="col-lg-6">
+          <div class="video-text">
+            <h2>Who Are We?</h2>
+            <p>
+              "At Mikrobot Academy, we revolutionize learning with a hands-on approach, engaging students in contextualized activities that provide immediate feedback. This dynamic strategy not only quenches the thirst for success but also nurtures lasting motivation. With a proven track record of serving over 3000 students across elementary, junior, and senior high school levels, both nationally and internationally, our academy is a beacon of excellence in education."
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6" style="height:inherit">
+          <div class="video-box set-bg d-flex justify-content-end" style="height:inherit">
+            <img src="../assets/images/boys.png" style="height:3.2in">
+          </div>
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="testimonial-section my-5 ">
+    <div class="container">
+      <div class="row inforow text-center">
+          <div class="col-md-3 col-sm-6 target">
+              <i class="bi fs-1 bi-people"></i>
+              <div class="num" data-increment="3" data-num="368">3000+</div>
+              <h3>Students</h3>
+              <p>Students served in 12 years; our academy epitomizes excellence.</p>
+          </div>
+          <div class="col-md-3 col-sm-6 target">
+              <i class="bi fs-1 bi-buildings"></i>
+              <div class="num" data-increment="56" data-num="6980">3</div>
+              <h3>Brunches</h3>
+              <p>Branches with Four student training categories each.</p>
+          </div>
+          <div class="col-md-3 col-sm-6 target">
+              <i class="bi fs-1 bi-mortarboard"></i>
+              <div class="num" data-increment="6" data-num="789">24</div>
+              <h3>Instructors</h3>
+              <p>Engineers pioneering STEM education through interactive robotics.</p>
+          </div>
+          <div class="col-md-3 col-sm-6 target">
+              <i class="bi fs-1 bi-send"></i>
+              <div class="num" data-increment="20" data-num="2450">5</div>
+              <h3>Programs</h3>
+              <p>Experiential STEM Programs for 21st century skills.</p>
+          </div>
+      </div>
+        </div>
+
+
+
+  </section>
+  <section class="m-5" id="news">
+    <h2>Updates</h2>
+    <vueper-slides
+      class="no-shadow"
+      bullets-outside 
+      transition-speed="250"
+      :duration="5000"
+      >
+        <vueper-slide 
+        class="text-light"
+        v-for="(slide, i) in slides"
+        :key="i"
+        :content="!slide.image ? slide.content : null"
+        :title="!slide.image ? slide.title : null"
+        style="background-color: #004e7c"
+        :image="slide.image ? slide.image : null">
+        </vueper-slide>
+    </vueper-slides>
+  </section>
+        
+
+  <Footer/>
   </div>
-
 </template>
-
 <script>
-  import 'animate.css'
-  // import 'swiper/swiper-bundle.css';
-  import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+// import Slideshow from '../components/slideshow.vue'
+import Banner from '../components/banner.vue'
+import { VueperSlides, VueperSlide } from 'vueperslides'
+import 'vueperslides/dist/vueperslides.css'
+    import Footer from "../components/foot.vue"
+
 
   export default {
-    components: {
-      Swiper,
-      SwiperSlide,
-    },
-    data() {
-      return {
-        fadeInAnimation: false,
-      currentIndex: 0,
-      slides: [
-        { image: new URL(`@/assets/images/bock2.png`, import.meta.url).href   },
-        { image: new URL(`@/assets/images/boys.png`, import.meta.url).href  },
-        { image: new URL(`@/assets/images/ev31.png`, import.meta.url).href  },
-      ],
-      }
-    },
-    mounted() {
-    setTimeout(() => {
-      this.fadeInAnimation = true;
-    }, 500); 
-  },
-  computed: {
-    currentImage() {
-      return this.slides[this.currentIndex].image;
-    },
-  },
-  mounted() {
-    this.autoPlay();
-  },
-  methods: {
-    showSlide(index) {
-      if (index < 0) {
-        this.currentIndex = this.slides.length - 1;
-      } else if (index >= this.slides.length) {
-        this.currentIndex = 0;
-      } else {
-        this.currentIndex = index;
-      }
-    },
-    autoPlay() {
-      setInterval(() => {
-        this.showSlide(this.currentIndex + 1);
-      }, 5000); // Change 3000 to adjust the autoplay interval in milliseconds
-    },
-  }
+      components:{
+        VueperSlides,
+         VueperSlide,
+          Banner,
+          Footer,
+
+      },
+      data() {
+        return {
+          slides: [
+            {
+              // image: new URL(`../assets/images/img1.jpg`,  import.meta.url).href,
+              title:'*****Christmas Break*****',
+              content:"We at the Mikrobot Academy hereby informs guardians and students that we will be closed for the seasonal period from 16th December 2023 to 6th January 2024. We wish you a merry christmas and a prosperous new year " 
+            },
+            {
+              image: new URL(`../assets/images/img2.jpg`,  import.meta.url).href,
+            },
+            {
+              image: new URL(`../assets/images/lineup.jpg`,  import.meta.url).href,
+            },
+            {
+              image: new URL(`../assets/images/img4.jpg`,  import.meta.url).href,
+            }
+          ],
+          // slides: [
+          //   {
+          //     image: `../assets/images/img1.png`
+          //   },
+          //   {
+          //     image: `../assets/images/img2.png`
+          //   },
+          //   {
+          //     image: `../assets/images/lineup.png`
+          //   },
+          //   {
+          //     image: `../assets/images/img4.png`
+          //   }
+          // ],
+        }
+      },
+
+
   }
 </script>
 
-<style scoped>
-#slider {
-  overflow: hidden;
-  width: 50% !important;
-}
+<style>
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 1s;
+.vueperslide__image {
+    background-size: contain !important;
+    background-repeat: no-repeat;
 }
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
+.vueperslides__inner {
+  height: 2in;
 }
-
-.slider-image {
+.vueperslide__title {
+  font-weight: bold;
+}
+.vueperslide__content {
   width: 70%;
-  height: auto;
-  z-index: -1
+}
+.vueperslide{
+  height: 2in;
+}
+.ex--center-mode {
+  width: 600px;
+  max-width: 100%;
+  margin: auto;
+}
+.feature-box img{
+    height: 2.5in;
+    object-fit: cover;
+}
+.features-section{
+  background-image:linear-gradient(45deg, #001f52, transparent), url('../assets/img/pumpbg.jpg')!important;
+}
+.testimonial-bg{
+background-size: contain;    
 }
 
-
-nav{
-  z-index: 1;
-}
-
-
-.background-container {
-  position: relative;
-  background: url('../assets/images/SL_073119_22070_041.png') center/cover no-repeat;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.7);
-  display: flex;
-  align-items: center;
-  color: #004e7c;
-  z-index: -1;
-}
-
-.navbar-light .navbar-toggler-icon {
-  background-color: #ffffff;
-}
-
-  .nav-link{
-    color:  #004e7c;;
-    border: 2px solid rgba(255, 255, 255, 0);
-    transition: 0.5s ease-out;
-    padding-block: 2px;
-    text-align: end !important;
-
-  }
-  .nav-link:hover{
-    color:  #004e7c;;
-    padding-inline: 20px;
-    border: 2px solid  #004e7c;
-    border-radius: 50px;
-    background-color: #fff;
-  }
-
-@media (max-width: 767px) {
-  .navbar-nav {
-    flex-direction: column;
-  }
-  .navbar-nav .nav-link {
-    text-align: center;
-  }
-}
-
-@media (max-width: 767px) {
-  .navbar-nav {
-    flex-direction: column;
-  }
-  .navbar-nav .nav-link {
-    text-align: center;
-  }
-
-  .navbar-brand h4{
-    font-size: 17px;
-  }
-  .collapse{
-    background-color: #fff;
-  }
-  #slider{
-    width: 80% !important;
-  }
-
-  .content {
-    flex-direction: column-reverse;
-    align-items: center;
-    top: -20%;
-  }
-
-  .content img {
-    max-width: 100%;
-    width: 100% !important;
-  }
-  .mainText{
-      font-size: 35px !important;
-  }
-}
 </style>
+
