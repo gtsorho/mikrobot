@@ -70,7 +70,7 @@
     mounted() {
       setInterval(() => {
         this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
-      }, 300000);
+      }, 5000);
     },
     methods: {
      
@@ -81,9 +81,6 @@
 
 <style scoped>
 
-
-
-
 .brand {
   width:100%;
   height: 400px;
@@ -92,10 +89,6 @@
 .brand-text  {
   color: #ffffff;
   text-align: left !important;
-}
-
- .sub-text {
-
 }
 
 .address{
