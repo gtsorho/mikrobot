@@ -3,7 +3,7 @@
     <Banner/>
   <section class="services-section my-5">
     <div class="services-warp">
-      <div class="container">
+      <div class="container text-center">
         <div class="row">
           <div class="col-lg-3 col-md-6">
             <div class="service-item">
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="col-lg-6" style="height:inherit">
-          <div class="video-box set-bg d-flex justify-content-end" style="height:inherit">
+          <div class="video-box set-bg d-flex justify-content-lg-end justify-content-sm-center" style="height:inherit">
             <img src="../assets/images/boys.png" style="height:3.2in">
           </div>
         </div>
@@ -198,8 +198,26 @@ import 'vueperslides/dist/vueperslides.css'
 .vueperslide__content {
   width: 70%;
 }
+.vueperslides__arrow svg{
+  color: yellow;
+  width: 2.9em;
+}
 .vueperslide{
   height: 2in;
+}
+@media (max-width: 767px) {
+  .vueperslide__title {
+  font-size: 90%;
+}
+.vueperslide__content {
+  font-size: 60%;
+}
+  .vueperslide{
+   height: inherit;
+  }
+  .vueperslides__inner {
+   height: inherit;
+  }
 }
 .ex--center-mode {
   width: 600px;
