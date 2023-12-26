@@ -216,7 +216,10 @@ export default {
             }
         },
         deleteItem(id) {
-          axios.get('https://mikrobotacademy.com/api/students/delete/' + id
+          let token = this.getCookie('token')
+          
+          axios.get('https://mikrobotacademy.com/api/students/delete/' + id,
+          { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()            
           }).catch(error =>{

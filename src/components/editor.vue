@@ -341,7 +341,10 @@ methods: {
             }
         },
         deleteItem(id) {
-            axios.get('https://mikrobotacademy.com/api/news/delete/' + id
+            let token = this.getCookie('token')
+
+            axios.get('https://mikrobotacademy.com/api/news/delete/' + id,
+            { headers:{'Authorization': `Bearer ${token}`}}
             ).then(response =>{
                 this.getNews()            
             }).catch(error =>{

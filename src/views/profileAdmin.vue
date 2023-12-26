@@ -86,6 +86,7 @@ export default {
       },
       logout(){
         this.setCookie('token', null)
+        location.reload();
       },
       getCookie(cname) {
         let name = cname + "=";
