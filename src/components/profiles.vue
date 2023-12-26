@@ -145,7 +145,7 @@ export default {
           }
         }
 
-        axios.post('http://localhost:3000/api/students/', formData,
+        axios.post('https://mikrobotacademy.com/api/students/', formData,
           { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()
@@ -170,7 +170,7 @@ export default {
           }
         }
 
-        axios.post('http://localhost:3000/api/students/update/' + id, formData,
+        axios.post('https://mikrobotacademy.com/api/students/update/' + id, formData,
           { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()
@@ -227,7 +227,7 @@ export default {
         deleteItem(id) {
           let token = this.getCookie('token')
 
-          axios.get('http://localhost:3000/api/students/delete/' + id,
+          axios.get('https://mikrobotacademy.com/api/students/delete/' + id,
           { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()            
