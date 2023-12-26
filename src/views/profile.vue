@@ -4,8 +4,18 @@
       <input type="text" class="form-control form-control-sm rounded-pill my-3 w-50" v-model="searchQuery" @keyup="search" placeholder="Search by title" />
       <p class="my-3" style="font-size:13px">{{students.length}} Item(s) Found</p>
     </div>
-
-      <div class="row row-cols-md-2 justify-content-center row-cols-lg-3" >
+      <ul class="nav nav-tabs my-4">
+        <li class="nav-item">
+          <a class="nav-link" :class="currentTab == 'directors' ? 'active' : ''" @click="currentTab = 'directors'" aria-current="page" href="#">Directors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" :class="currentTab == 'coaches' ? 'active' : ''" @click="currentTab = 'coaches'" href="#">Coaches</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" :class="currentTab == 'students' ? 'active' : ''"  @click="currentTab = 'students'" href="#">Students</a>
+        </li>
+      </ul>
+      <div v-if="currentTab == 'students'" class="row row-cols-md-2 justify-content-center row-cols-lg-3" >
       <div  class="col-lg-4" v-for="(student, index) in students" :key="index">
         <div class="card card-margin">
             <div class="card-body pt-3" style="min-height:80%">
@@ -26,6 +36,48 @@
         </div>
       </div>
     </div>
+      <div v-if="currentTab == 'coaches'" class="row row-cols-md-2 justify-content-center row-cols-lg-3" >
+      <div  class="col-lg-4" v-for="(coach, index) in coaches" :key="index">
+        <div class="card card-margin">
+            <div class="card-body pt-3" style="min-height:80%">
+                <div class="widget-49">
+                    <div class="widget-49-title-wrapper">
+                        <div class="widget-49-date-primary" :style="`background-image:url('https://mikrobotacademy.com/profile_images/${ coach.image}') !important`"></div>
+                        <div class="widget-49-meeting-info mx-auto" style="width: 70%;">
+                            <p class="fst-italic m-0 text-muted">Meet:</p>
+                            <h3 class="widget-49-pro-title fw-bold text-uppercase">{{coach.name}} <span class="float-end">Age: {{calculateAge(coach.dob)}} yrs</span></h3>
+                        </div>
+                    </div>
+                    <p class="widget-49-meeting-points">{{ truncateData(coach.profile, 300)}}</p>
+                </div>
+            </div>
+            <!-- <div class="widget-49-meeting-action card-footer border-0 bg-transparent  d-flex justify-content-end">
+                <router-link class="btn rounded-pill btn-sm px-4" style="background-color:#e6b600" :to="{ name: 'profileInfo', params: {student: student.id }}" >View <i class="bi bi-arrow-right-short"></i></router-link>
+            </div> -->
+        </div>
+      </div>
+    </div>
+      <div v-if="currentTab == 'directors'" class="row row-cols-md-2 justify-content-center row-cols-lg-3" >
+      <div  class="col-lg-4" v-for="(director, index) in directors" :key="index">
+        <div class="card card-margin">
+            <div class="card-body pt-3" style="min-height:80%">
+                <div class="widget-49">
+                    <div class="widget-49-title-wrapper">
+                        <div class="widget-49-date-primary" :style="`background-image:url('https://mikrobotacademy.com/profile_images/${ director.image}') !important`"></div>
+                        <div class="widget-49-meeting-info mx-auto" style="width: 70%;">
+                            <p class="fst-italic m-0 text-muted">Meet:</p>
+                            <h3 class="widget-49-pro-title fw-bold text-uppercase">{{director.name}} <span class="float-end">Age: {{calculateAge(director.dob)}} yrs</span></h3>
+                        </div>
+                    </div>
+                    <p class="widget-49-meeting-points">{{ truncateData(director.profile, 300)}}</p>
+                </div>
+            </div>
+            <!-- <div class="widget-49-meeting-action card-footer border-0 bg-transparent  d-flex justify-content-end">
+                <router-link class="btn rounded-pill btn-sm px-4" style="background-color:#e6b600" :to="{ name: 'profileInfo', params: {student: student.id }}" >View <i class="bi bi-arrow-right-short"></i></router-link>
+            </div> -->
+        </div>
+      </div>
+    </div>
 <br><br>
 <br><br>
 </div>
@@ -36,7 +88,10 @@ import axios from 'axios'
 export default {
     data() {
         return {
-         students:{},
+         students:[],
+         currentTab:'students',
+         coaches:[],
+         directors:[],
          searchQuery:'',
         }
     },  
@@ -44,20 +99,52 @@ export default {
       this.getStudents()
     },
     methods:{
+      // getStudents(){
+      //   axios.get('https://mikrobotacademy.com/api/students/'
+      //   ).then(response =>{
+      //     this.students = response.data
+      //   }).catch(error =>{
+      //     console.log(error.response)
+      //   })
+      // },
       getStudents(){
-        axios.get('https://mikrobotacademy.com/api/students/'
-        ).then(response =>{
-          this.students = response.data
-        }).catch(error =>{
-          console.log(error.response)
+        axios.get('https://mikrobotacademy.com/api/students/')
+        .then(res =>{
+          const groupedData = res.data.reduce((acc, currentItem) => {
+          const { tag, ...rest } = currentItem;
+          if (!acc[tag]) {
+            acc[tag] = [];
+          }
+          acc[tag].push({ tag, ...rest });
+          return acc;
+        }, {});
+
+          this.students = groupedData.student
+          this.coaches = groupedData.coach
+          this.directors = groupedData.director
         })
-      },
+        .catch(err=>{
+          console.log(err)
+        })
+    },
       search(){
-        axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
-        ).then(response =>{
-          this.students = response.data
-        }).catch(error =>{
-          console.log(error.response)
+        axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery)
+        .then(res =>{
+          const groupedData = res.data.reduce((acc, currentItem) => {
+          const { tag, ...rest } = currentItem;
+          if (!acc[tag]) {
+            acc[tag] = [];
+          }
+          acc[tag].push({ tag, ...rest });
+          return acc;
+        }, {});
+
+          this.students = groupedData.student
+          this.coaches = groupedData.coach
+          this.directors = groupedData.director
+        })
+        .catch(err=>{
+          console.log(err)
         })
       },
       truncateData(data, count) {
@@ -87,7 +174,15 @@ export default {
 p{
   font-weight: 200 !important;
 }
-
+.nav-link{
+  color: #004e7c;
+}
+.nav-link:active{
+  color: #4b4b4b;
+}
+.nav-link:hover{
+  color: #575757 !important;
+}
 h1,h2,h3,h4,h5,h6{
   font-weight: 400 !important;
 }

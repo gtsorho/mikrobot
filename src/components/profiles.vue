@@ -28,6 +28,14 @@
             </div>
             <div class="col-md-6">
             <div class="row g-3">
+              <div class="col-12">
+                <label for="name" class="form-label">Profile Tag *</label>
+                <select class="form-select form-select-sm" v-model="student.tag" aria-label="Small select example">
+                  <option value="student">student</option>
+                  <option value="coach">Coach</option>
+                  <option value="director">Director</option>
+                </select>
+              </div>
                 <div class="col-md-6">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" v-model="student.name" class="form-control form-control-sm" id="name">
@@ -95,7 +103,8 @@ export default {
           profile:null,
           sub_profile:null,
           achievement:null,
-          image:null
+          image:null,
+          tag:'student'
          }
         }
     },  
@@ -136,15 +145,15 @@ export default {
           }
         }
 
-        axios.post('https://mikrobotacademy.com/api/students/', formData,
+        axios.post('http://localhost:3000/api/students/', formData,
           { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()
           }).catch(error =>{
+            this.errorMsg = error.response.data
             setInterval(() => {
-              this.errorMsg = error.response.data
+              this.errorMsg = null
             }, 5000);
-            this.errorMsg = ''
             })
       },
       updateProfile(id) {
@@ -155,14 +164,13 @@ export default {
           delete this.student.image
         }
 
-
         for (const key in this.student) {
           if (this.student.hasOwnProperty(key)) {
             formData.append(key, this.student[key]);
           }
         }
 
-        axios.post('https://mikrobotacademy.com/api/students/update/' + id, formData,
+        axios.post('http://localhost:3000/api/students/update/' + id, formData,
           { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()
@@ -203,7 +211,8 @@ export default {
           profile:'',
           sub_profile:'',
           achievement:'',
-          image:''
+          image:'',
+          tag:'student'
          }
       },
       confirmDelete(student) {
@@ -217,8 +226,8 @@ export default {
         },
         deleteItem(id) {
           let token = this.getCookie('token')
-          
-          axios.get('https://mikrobotacademy.com/api/students/delete/' + id,
+
+          axios.get('http://localhost:3000/api/students/delete/' + id,
           { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()            

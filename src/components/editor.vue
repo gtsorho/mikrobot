@@ -208,7 +208,6 @@ methods: {
     getNews(){
         axios.get('https://mikrobotacademy.com/api/news')
         .then(res =>{
-          console.log(res.data)
           const groupedData = res.data.reduce((acc, currentItem) => {
           const { tag, ...rest } = currentItem;
           if (!acc[tag]) {

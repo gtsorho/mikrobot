@@ -58,6 +58,7 @@ module.exports = {
                 guardian:Joi.string().required(),
                 phone:Joi.string().required(),
                 profile:Joi.string().required(),
+                tag:Joi.string().required(),
                 sub_profile:Joi.string().allow(null).allow(''),
                 achievement:Joi.string().allow(null).allow(''),
             }).unknown(true)
@@ -87,6 +88,7 @@ module.exports = {
                 guardian:Joi.string().required(),
                 phone:Joi.string().required(),
                 profile:Joi.string().required(),
+                tag:Joi.string().required(),  
                 sub_profile:Joi.string().allow(null).allow(''),
                 achievement:Joi.string().allow(null).allow(''),
             }).unknown(true)
