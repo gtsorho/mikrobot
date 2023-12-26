@@ -17,7 +17,7 @@ const deleteNews = async (newsId) => {
         return 'no news found'; 
     }
 
-    const imagePath = `./newsImages/${news.imageName}`;
+    const imagePath = `./newsImages/${news.image}`;
     
     await db.news.destroy({
         where: {

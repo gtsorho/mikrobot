@@ -20,7 +20,7 @@ const deleteStudentProfile = async (studentId) => {
         return; 
     }
 
-    const imagePath = `./profileImages/${student.imageName}`;
+    const imagePath = `./profileImages/${student.image}`;
     
     await db.student.destroy({
         where: {
