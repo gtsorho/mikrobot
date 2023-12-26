@@ -1,7 +1,7 @@
 <template>
   <div v-if="articleContent" class="" style="margin-inline:10%; margin-block:5%">
     <div class=" border border-warning">
-      <img :src=" articleContent.image ? `https://mikrobotacademy.com/news_images/${ articleContent.image}` : '../../src/assets/images/article.png' " style="height:3in; width:100%; object-fit:cover" alt="News Image" class="img-fluid">
+      <img :src=" articleContent.image ? `https://mikrobotacademy.com/news_images/${ articleContent.image}` : noImage " style="height:3in; width:100%; object-fit:cover" alt="News Image" class="img-fluid">
     </div>
     <h1>{{articleContent.header}}</h1>
     <div>
@@ -18,6 +18,7 @@ export default {
     props: ['article'],
   data() {
     return {
+      noImage: new URL(`../assets/images/article.png`,  import.meta.url).href,
       articleContent:null
     }
   },
