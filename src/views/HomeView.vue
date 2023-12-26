@@ -109,29 +109,29 @@
     <vueper-slides
       class="no-shadow"
       bullets-outside 
-      transition-speed="250"
+      autoplay
       :duration="5000"
       >
         <vueper-slide 
         class="text-light"
-        v-for="(slide, i) in slides"
+        v-for="(slide, i) in announcements"
         :key="i"
         :content="!slide.image ? slide.content : null"
-        :title="!slide.image ? slide.title : null"
+        :title="!slide.image ? slide.header : null"
         style="background-color: #004e7c"
-        :image="slide.image ? slide.image : null">
+        :image="slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null">
         </vueper-slide>
     </vueper-slides>
 
-    <div class="container d-flex justify-content-around"  v-if="articles.length > 0">
-      <div class="row g-0 bg-body-secondary position-relative shadow rounded-1" style="width:3in; height:1in; overflow:hidden"  v-for="(article , i) in articles.slice(0, 4)" :key="i" >
+    <div class="container d-flex justify-content-around"  v-if="allNews.length > 0">
+      <div class="row g-0 bg-body-secondary position-relative shadow rounded-1" style="width:3in; height:1in; overflow:hidden"  v-for="(news , i) in allNews.slice(0, 3)" :key="i" >
         <div class="col-md-6 mb-md-0 p-md-2" style=" height:inherit !important;">
-          <img :src="article.image ? article.image : 'src/assets/images/no-photos.png'"  style=" height:inherit !important;" class="w-100 object-fit-cover rounded-1">
+          <img :src="news.image ? news.image : noImage"  style=" height:inherit !important;" class="w-100 object-fit-cover rounded-1">
         </div>
         <div class="col-md-6 p-2 ps-md-0"  style=" height:inherit !important;">
-          <h6 style="font-size:15px" class="mt-0  text-truncate">{{article.header}}</h6>
-          <p style="font-size:12px" class="" v-if="article.content">  {{truncateText(article.content, 8)}}</p>
-          <a :href="article.url" class="stretched-link"></a>
+          <h6 style="font-size:15px" class="mt-0  text-truncate">{{news.header}}</h6>
+          <p style="font-size:12px" class="" v-if="news.content">  {{truncateText(news.content, 8)}}</p>
+          <a :href="news.url" class="stretched-link"></a>
         </div>
       </div>
     </div>
@@ -160,38 +160,40 @@ import axios from 'axios'
       data() {
         return {
           articles:[],
-          slides: [
-            {
-              title:'*****Christmas Break*****',
-              content:"We at the Mikrobot Academy hereby informs guardians and students that we will be closed for the seasonal period from 16th December 2023 to 6th January 2024. We wish you a merry christmas and a prosperous new year " 
-            },
-            {
-              image: new URL(`../assets/images/img2.jpg`,  import.meta.url).href,
-            },
-            {
-              image: new URL(`../assets/images/lineup.jpg`,  import.meta.url).href,
-            },
-            {
-              image: new URL(`../assets/images/img4.jpg`,  import.meta.url).href,
-            }
-          ],
+          allNews:[],
+          announcements: [],
+          noImage: new URL(`../assets/images/no-photos.png`,  import.meta.url).href,
         }
       },
       created(){
-        axios.get('https://mikrobotacademy.com/api/news')
-        .then(res =>{
-          this.articles = res.data
-        })
-        .catch(err=>{
-          console.log(err)
-        })
+        this.getNews()
       },
       methods: {
+        getNews(){
+          axios.get('https://mikrobotacademy.com/api/news')
+          .then(res =>{
+            console.log(res.data)
+            const groupedData = res.data.reduce((acc, currentItem) => {
+            const { tag, ...rest } = currentItem;
+            if (!acc[tag]) {
+              acc[tag] = [];
+            }
+            acc[tag].push(rest);
+            return acc;
+          }, {});
+
+            this.articles = groupedData.article
+            this.allNews = groupedData.news
+            this.announcements = groupedData.announcement
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+        },
         truncateText(text, limit) {
-        const words = text.split(' ');
-        const truncatedWords = words.slice(0, limit);
-        console.log(truncatedWords.join(' '))
-        return truncatedWords.join(' ');
+          const words = text.split(' ');
+          const truncatedWords = words.slice(0, limit);
+          return truncatedWords.join(' ');
       }
     }
   }

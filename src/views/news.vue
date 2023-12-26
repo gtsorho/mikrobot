@@ -42,9 +42,9 @@
   <section class="m-5" v-if="articles.length > 0">
     <h2>Articles</h2>
     <div class="row row-cols-md-2 my-2 justify-content-center row-cols-lg-3" >
-      <div  class="col-lg-4" v-for="(article, index) in articles" :key="index" @click="handleArticle(article.id)">
+      <div  class="col-lg-4 my-2" v-for="(article, index) in articles" :key="index" @click="handleArticle(article.id)">
         <div class="card shadow" style="width: 18rem; height:4in">
-          <img :src="article.image ? `https://mikrobotacademy.com/news_images/${article.image}` : '../src/assets/images/article.png'" style="height:2.5in; object-fit:cover" class="card-img-top" > 
+          <img :src="article.image ? `https://mikrobotacademy.com/news_images/${article.image}` : noImage" style="height:2.5in; object-fit:cover" class="card-img-top" > 
           <div class="card-body"> 
             <h5 class="card-title">{{article.header}}</h5>
             <p class="card-text" style="font-size:12px" v-if="article.content" v-html="truncateData(parseData(article.content), 150)"></p>
@@ -74,6 +74,7 @@ export default {
       },
     data() {
         return {
+         noImage: new URL(`../assets/images/article.png`,  import.meta.url).href,
          students:{},
          searchQuery:'',
          articles:[],
@@ -88,7 +89,6 @@ export default {
       getNews(){
         axios.get('https://mikrobotacademy.com/api/news')
         .then(res =>{
-          console.log(res.data)
           const groupedData = res.data.reduce((acc, currentItem) => {
           const { tag, ...rest } = currentItem;
           if (!acc[tag]) {
@@ -125,7 +125,6 @@ export default {
       },
       parseData(article){
       const parser = new edjsParser();
-      console.log(article)
         let articleJson = JSON.parse(article)
         const firstParagraphBlock = articleJson.blocks.find(block => block.type === 'paragraph');
         const markup = parser.parseBlock(firstParagraphBlock);
