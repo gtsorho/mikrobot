@@ -61,6 +61,7 @@
                 <textarea class="form-control" v-model="student.achievement" id="exampleFormControlTextarea1" rows="2"></textarea>
                 </div>
                 <div class="col-12">
+                <button type="button" v-if="update" @click="confirmDelete(student)" class="btn btn-sm float-start btn-outline-danger">Delete Student</button>
                 <button type="button" v-if="!update" @click="submitForm()" class="btn btn-sm float-end btn-outline-primary">Add Student</button>
                 <button type="button" v-else @click="updateProfile(student.id)" class="btn btn-sm float-end btn-outline-primary">Update {{student.name}}</button>
                 <button type="button" v-if="update" @click="update = false, emptyStudent()" class="btn mx-1 btn-sm float-end btn-outline-dark">+</button>
@@ -205,6 +206,23 @@ export default {
           image:''
          }
       },
+      confirmDelete(student) {
+            const isConfirmed = window.confirm(`Are you sure you want to delete this profile`);
+
+            if (isConfirmed) {
+                this.deleteItem(student.id);
+            } else {
+                console.log('Deletion canceled.');
+            }
+        },
+        deleteItem(id) {
+          axios.get('https://mikrobotacademy.com/api/students/delete/' + id
+          ).then(response =>{
+            this.getStudents()            
+          }).catch(error =>{
+            console.log(error.response)
+          })
+        },
       getCookie(cname) {
         let name = cname + "=";
         let ca = document.cookie.split(';');

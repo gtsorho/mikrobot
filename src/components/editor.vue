@@ -17,18 +17,21 @@
             </div>
             <div class="card-body text-start">
                 <div v-if="tab == 'news'">
-                    <div class="alert alert-light shadow" @click="currentTab = 'news', newsData = news , assignUpdate()" v-for="(news, i) in allNews" :key="i" role="alert">
+                    <div class="alert alert-light shadow alert-dismissible fade show " @click="currentTab = 'news', newsData = news , assignUpdate()" v-for="(news, i) in allNews" :key="i" role="alert">
                         {{news.header}}
+                        <button type="button"  @click="confirmDelete(news.id)"  class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
                 <div v-if="tab == 'announcements'">
-                    <div class="alert alert-secondary shadow" @click="currentTab = 'announcement', newsData = announcement , assignUpdate()" role="alert" v-for="(announcement, i) in announcements" :key="i">
+                    <div class="alert alert-secondary shadow alert-dismissible fade show" @click="currentTab = 'announcement', newsData = announcement , assignUpdate()" role="alert" v-for="(announcement, i) in announcements" :key="i">
                         {{announcement.header}}
+                        <button type="button" @click="confirmDelete(announcement.id)"  class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div> 
                 <div v-if="tab == 'articles'">
-                    <div class="alert alert-light shadow" @click="currentTab = 'article', newsData = article, passEditorProp(article.content) , assignUpdate()" role="alert" v-for="(article, i) in articles" :key="i">
+                    <div class="alert alert-light shadow alert-dismissible fade show" @click="currentTab = 'article', newsData = article, passEditorProp(article.content) , assignUpdate()" role="alert" v-for="(article, i) in articles" :key="i">
                         {{article.header}}
+                        <button type="button" @click="confirmDelete(article.id)"  class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
             </div>
@@ -327,6 +330,23 @@ methods: {
                 link:null,
                 tag:null
             }
+        },
+        confirmDelete(id) {
+            const isConfirmed = window.confirm(`Are you sure you want to delete this item`);
+
+            if (isConfirmed) {
+                this.deleteItem(id);
+            } else {
+                console.log('Deletion canceled.');
+            }
+        },
+        deleteItem(id) {
+            axios.get('https://mikrobotacademy.com/api/news/delete/' + id
+            ).then(response =>{
+                this.getNews()            
+            }).catch(error =>{
+                console.log(error.response)
+            })        
         },
         getCookie(cname) {
             let name = cname + "=";

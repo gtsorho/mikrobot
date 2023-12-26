@@ -6,6 +6,28 @@ const axios = require('axios');
 const {getLinkPreview, getPreviewFromContent } = require("link-preview-js");
 
 
+const deleteNews = async (newsId) => {
+    const news = await db.news.findOne({
+        where: {
+            id: newsId
+        }
+    });
+
+    if (!news) {
+        return 'no news found'; 
+    }
+
+    const imagePath = `./newsImages/${news.imageName}`;
+    
+    await db.news.destroy({
+        where: {
+            id: newsId
+        }
+    });
+    await fs.unlink(imagePath);
+};
+ 
+
 module.exports = {
 
 
@@ -107,12 +129,11 @@ module.exports = {
     },
 
     
-    delete: async(req, res) =>{
-       let news = await db.news.destroy({
-          where: {
-            id: req.params.id
-          }
-        });
-        res.sendStatus(200)  
+    delete: async (req, res) => {
+        const newsId = req.params.id;
+
+        await deleteNews(newsId);
+
+        res.sendStatus(200);
     },
 }

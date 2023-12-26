@@ -68,7 +68,7 @@ export default {
         }
     },  
     mounted(){
-      if(!this.getCookie('token')){
+      if(!this.getCookie('token') || this.getCookie('token') == 'null'){
         const trig = this.$refs.modal
         trig.click()
       }
