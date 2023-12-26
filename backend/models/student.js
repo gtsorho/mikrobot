@@ -31,8 +31,14 @@ module.exports = (sequelize, DataTypes) => {
         image: {
             type: DataTypes.STRING,
             allowNull:true,
-
         },
+        tag: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+              isIn: [['student', 'coach', 'director']],
+            },
+          },
     })
     return student
 }

@@ -105,7 +105,7 @@
 
   </section>
   <section class="m-5" id="news">
-    <h2>Updates</h2>
+    <h2>News | Updates</h2>
     <vueper-slides
       class="no-shadow"
       bullets-outside 
@@ -122,6 +122,20 @@
         :image="slide.image ? slide.image : null">
         </vueper-slide>
     </vueper-slides>
+
+    <div class="container d-flex justify-content-around"  v-if="articles.length > 0">
+      <div class="row g-0 bg-body-secondary position-relative shadow rounded-1" style="width:3in; height:1in; overflow:hidden"  v-for="(article , i) in articles.slice(0, 4)" :key="i" >
+        <div class="col-md-6 mb-md-0 p-md-2" style=" height:inherit !important;">
+          <img :src="article.image ? article.image : 'src/assets/images/no-photos.png'"  style=" height:inherit !important;" class="w-100 object-fit-cover rounded-1">
+        </div>
+        <div class="col-md-6 p-2 ps-md-0"  style=" height:inherit !important;">
+          <h6 style="font-size:15px" class="mt-0  text-truncate">{{article.header}}</h6>
+          <p style="font-size:12px" class="">  {{truncateText(article.content, 8)}}</p>
+          <a :href="article.url" class="stretched-link"></a>
+        </div>
+      </div>
+    </div>
+    
   </section>
         
 
@@ -133,8 +147,8 @@
 import Banner from '../components/banner.vue'
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
-    import Footer from "../components/foot.vue"
-
+import Footer from "../components/foot.vue"
+import axios from 'axios'
 
   export default {
       components:{
@@ -142,13 +156,12 @@ import 'vueperslides/dist/vueperslides.css'
          VueperSlide,
           Banner,
           Footer,
-
       },
       data() {
         return {
+          articles:[],
           slides: [
             {
-              // image: new URL(`../assets/images/img1.jpg`,  import.meta.url).href,
               title:'*****Christmas Break*****',
               content:"We at the Mikrobot Academy hereby informs guardians and students that we will be closed for the seasonal period from 16th December 2023 to 6th January 2024. We wish you a merry christmas and a prosperous new year " 
             },
@@ -162,24 +175,25 @@ import 'vueperslides/dist/vueperslides.css'
               image: new URL(`../assets/images/img4.jpg`,  import.meta.url).href,
             }
           ],
-          // slides: [
-          //   {
-          //     image: `../assets/images/img1.png`
-          //   },
-          //   {
-          //     image: `../assets/images/img2.png`
-          //   },
-          //   {
-          //     image: `../assets/images/lineup.png`
-          //   },
-          //   {
-          //     image: `../assets/images/img4.png`
-          //   }
-          // ],
         }
       },
-
-
+      created(){
+        axios.get('https://mikrobotacademy.com/api/news')
+        .then(res =>{
+          this.articles = res.data
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+      },
+      methods: {
+        truncateText(text, limit) {
+        const words = text.split(' ');
+        const truncatedWords = words.slice(0, limit);
+        console.log(truncatedWords.join(' '))
+        return truncatedWords.join(' ');
+      }
+    }
   }
 </script>
 

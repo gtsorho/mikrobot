@@ -29,7 +29,7 @@ const deleteStudentProfile = async (studentId) => {
     });
     await fs.unlink(imagePath);
 };
-
+ 
 module.exports = {
 
 
@@ -47,6 +47,10 @@ module.exports = {
 
     create: async (req, res) => {
 
+        if (req.fileValidationError) {
+            return res.status(400).json({ error: req.fileValidationError });
+        }
+
         function validExtOfficer(student){
             const schema = Joi.object({
                 name:Joi.string().required(),
@@ -58,7 +62,7 @@ module.exports = {
                 achievement:Joi.string().allow(null).allow(''),
             }).unknown(true)
             return schema.validate(student)
-        }
+        } 
         const validate = validExtOfficer(req.body) 
         if (validate.error) return res.status(400).send(validate.error.details[0].message)
 
@@ -72,8 +76,10 @@ module.exports = {
         res.send(student)
     }, 
     update: async (req, res) => {
+        if (req.fileValidationError) {
+            return res.status(400).json({ error: req.fileValidationError });
+        }
 
-        console.log(req.body)
         function validExtOfficer(student){
             const schema = Joi.object({
                 name:Joi.string().required(),

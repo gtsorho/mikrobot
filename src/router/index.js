@@ -7,10 +7,8 @@ import Profile from '../views/profile.vue'
 import ProfileInfo from '../views/profileInfo.vue'
 import Profile_admin from '../views/profileAdmin.vue'
 import Gallery from '../views/gallery.vue'
-
-
-
-
+import News from '../views/news.vue'
+import Article from '../views/article.vue'
 
 
 const router = createRouter({
@@ -52,9 +50,20 @@ const router = createRouter({
           component:Gallery
         },
         {
+          path:'news',
+          name:'news',
+          component:News
+        },
+        {
           path:'profileInfo/:student',
           name:'profileInfo',
           component:ProfileInfo,
+          props: true
+        },
+        {
+          path:'article/:article',
+          name:'article',
+          component:Article,
           props: true
         }
       ]

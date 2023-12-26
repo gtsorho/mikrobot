@@ -3,7 +3,8 @@ const path = require('path')
 const serveStatic = require('serve-static')
 const students = require('./backend/routes/students')
 const users = require('./backend/routes/users')
-
+const news = require('./backend/routes/news')
+const multer = require('multer');
 
 const cors = require('cors');
 require('dotenv').config()
@@ -19,11 +20,21 @@ app.use(cors({
 
 app.use('/api/students', students)
 app.use('/api/users', users)
+app.use('/api/news', news)
 
 
+app.use((err, req, res, next) => {
+    if (err instanceof multer.MulterError) {
+      res.status(400).send('Multer Error: ' + err.message);
+    } else {
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
 app.use('/', serveStatic(path.join(__dirname,'/dist')))
 app.use('/profile_images', express.static(path.join(__dirname, 'backend', 'profileImages')));
+app.use('/news_images', express.static(path.join(__dirname, 'backend', 'newsImages')));
+
 
 app.get(/.*/, function(req, res){
     res.sendFile(path.join(__dirname, 'dist/index.html'))

@@ -17,7 +17,7 @@
               <router-link class="nav-link" :to="{name:'level'}">Academy</router-link>
               <router-link class="nav-link" :to="{name:'profile'}">Profiles</router-link>
               <router-link class="nav-link" :to="{name:'gallery'}">Gallery</router-link>
-              <router-link class="nav-link" :to="{name:'home', hash:'#news'}">News</router-link>
+              <router-link class="nav-link" :to="{name:'news'}">News</router-link>
             </div>
            </div>
           </div>

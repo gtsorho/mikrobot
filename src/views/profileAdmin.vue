@@ -1,72 +1,16 @@
 <template>
   <div class="container my-5">
-    <div class=" d-flex justify-content-between ">
-      <input type="text" class="form-control form-control-sm rounded-pill my-3 w-25" v-model="searchQuery" @keyup="search" placeholder="Search by title" />
-      <p class="my-3" style="font-size:13px">{{students.length}} Item(s) Found</p>
+  <div class="alert alert-warning d-flex  justify-content-around" role="alert">
+    <div>
+      <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-pill" @click="currentTab='Profile'">Profiles</button>
+      <button class="btn btn-sm btn-outline-warning mx-2 px-3 rounded-pill" @click="currentTab='Editor'">Articles</button>
     </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="list-group" style="max-height:5in !important; overflow-y:auto">
-        <a href="#"  class="list-group-item border rounded-2 list-group-item-action my-2"  v-for="(student,i) in students" :key="i" @click="assignStudent(student), update= true" aria-current="true">
-          <div class="row">
-              <div class="col-8">
-                <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{student.name}}</h5>
-                <small>{{calculateAge(student.dob)}} years old</small>
-              </div>
-              <p class="mb-1">{{ truncateData(student.profile,70)}}</p>
-              <small>{{student.guardian}} - ({{student.phone}})</small>
-            </div>
-            <div class="col-md-4 d-flex justify-content-center my-auto">
-              <img v-if="student.hasOwnProperty('image')" :src="`https://mikrobotacademy.com/profile_images/${ student.image}`" class="rounded-circle" style="width:5rem; height:5rem; object-fit:cover">
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="row g-3">
-        <div class="col-md-6">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" v-model="student.name" class="form-control form-control-sm" id="name">
-        </div>
-        <div class="col-3">
-          <label for="pp" class="form-label">Profile Picture</label>
-          <input type="file" @change="handleImageChange"  class="form-control form-control-sm" id="pp" >
-        </div>
-        <div class="col-3">
-          <label for="dob" class="form-label">Dob <span style="font-size:13px">({{new Date(student.dob).toDateString()}})</span></label>
-          <input type="date" v-model="student.dob" class="form-control form-control-sm" id="dob" >
-        </div>
-        <div class="col-md-6">
-          <label for="guardian" class="form-label">Parent</label>
-          <input type="text" v-model="student.guardian" class="form-control form-control-sm" id="guardian" placeholder="Mr John">
-        </div>
-        <div class="col-6">
-          <label for="phone" class="form-label">Phone</label>
-          <input type="text" v-model="student.phone" class="form-control form-control-sm" id="phone" placeholder="eg 0244456335">
-        </div>
-        <div class="col-12">
-          <label for="exampleFormControlTextarea1" class="form-label">Profile</label>
-          <textarea class="form-control" v-model="student.profile" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <div class="col-6">
-          <label for="exampleFormControlTextarea1" class="form-label">Sub Profile</label>
-          <textarea class="form-control" v-model="student.sub_profile" id="exampleFormControlTextarea1" rows="2"></textarea>
-        </div>
-        <div class="col-6">
-          <label for="exampleFormControlTextarea1" class="form-label">Achievements</label>
-          <textarea class="form-control" v-model="student.achievement" id="exampleFormControlTextarea1" rows="2"></textarea>
-        </div>
-        <div class="col-12">
-          <button type="button" v-if="!update" @click="submitForm()" class="btn btn-sm float-end btn-outline-primary">Add Student</button>
-          <button type="button" v-else @click="updateProfile(student.id)" class="btn btn-sm float-end btn-outline-primary">Update {{student.name}}</button>
-          <button type="button" v-if="update" @click="update = false, emptyStudent()" class="btn mx-1 btn-sm float-end btn-outline-dark">+</button>
-        </div>
-      </div>
-    </div>
+    <button class="btn btn-sm btn-outline-danger mx-2 px-3 rounded-pill" @click="logout()">Logout</button>
   </div>
+
+  <component :is="currentTab"></component>
+
 <br><br>
 <br><br>
 </div>
@@ -105,49 +49,31 @@
 
 </template>
 <script>
+import Editor from '../components/editor.vue'
+import Profile from '../components/profiles.vue'
 
 import axios from 'axios'
 export default {
+    components:{
+      Editor,
+      Profile
+    },
     data() {
         return {
-         students:[],
-         searchQuery:'',
+          currentTab:'Profile',
          user:{
           username:null,
           password:null
          },
-         update:false,
-         updateImg:false,
-         student: {
-          name:null,
-          dob:null,
-          guardian:null,
-          phone:null,
-          profile:null,
-          sub_profile:null,
-          achievement:null,
-          image:null
-         }
         }
     },  
     mounted(){
-      this.getStudents()
-
       if(!this.getCookie('token')){
         const trig = this.$refs.modal
         trig.click()
       }
     },
     methods:{
-      getStudents(){
-        axios.get('https://mikrobotacademy.com/api/students/'
-        ).then(response =>{
-          this.students = response.data
-          console.log(response.data)
-        }).catch(error =>{
-          console.log(error.response)
-        })
-      },
       login(){
         axios.post('https://mikrobotacademy.com/api/users/login', this.user
         ).then(response =>{
@@ -158,95 +84,8 @@ export default {
           console.log(error.response)
         })
       },
-      handleImageChange(event) {
-        this.student.image = event.target.files[0];
-        this.updateImg = true
-      },
-      search(){
-        axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
-        ).then(response =>{
-          this.students = response.data
-        }).catch(error =>{
-          console.log(error.response)
-        })
-      },
-      submitForm() {
-        let token = this.getCookie('token')
-
-        const formData = new FormData();
-
-        for (const key in this.student) {
-          if (this.student.hasOwnProperty(key)) {
-            formData.append(key, this.student[key]);
-          }
-        }
-
-        axios.post('https://mikrobotacademy.com/api/students/', formData,
-          { headers:{'Authorization': `Bearer ${token}`}}
-          ).then(response =>{
-            this.getStudents()
-          }).catch(error =>{
-            console.log(error.response)
-          })
-      },
-      updateProfile(id) {
-        let token = this.getCookie('token')
-        const formData = new FormData();
-
-        if(!this.updateImg){
-          delete this.student.image
-        }
-
-
-        for (const key in this.student) {
-          if (this.student.hasOwnProperty(key)) {
-            formData.append(key, this.student[key]);
-          }
-        }
-
-        axios.post('https://mikrobotacademy.com/api/students/update/' + id, formData,
-          { headers:{'Authorization': `Bearer ${token}`}}
-          ).then(response =>{
-            this.getStudents()
-            this.emptyStudent
-          }).catch(error =>{
-            console.log(error.response)
-          })
-      },
-      assignStudent(data){
-        this.student  = data
-        this.updateImg = false
-      },
-     calculateAge(birthdate){
-        const currentDate = new Date();
-        const birthDate = new Date(birthdate);
-
-        let age = currentDate.getFullYear() - birthDate.getFullYear();
-
-        // Adjust age if birthday hasn't occurred yet this year
-        if (
-          currentDate.getMonth() < birthDate.getMonth() ||
-          (currentDate.getMonth() === birthDate.getMonth() &&
-            currentDate.getDate() < birthDate.getDate())
-        ) {
-          age--;
-        }
-        return age;
-      },
-      truncateData(data, count) {
-        return data.substring(0, count);
-      },
-      emptyStudent(){
-        this.student = {
-          name:'',
-          dob:'',
-          guardian:'',
-          phone:'',
-          profile:'',
-          sub_profile:'',
-          achievement:'',
-          image:''
-         }
+      logout(){
+        this.setCookie('token', null)
       },
       getCookie(cname) {
         let name = cname + "=";
