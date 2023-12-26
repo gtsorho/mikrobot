@@ -130,7 +130,7 @@
         </div>
         <div class="col-md-6 p-2 ps-md-0"  style=" height:inherit !important;">
           <h6 style="font-size:15px" class="mt-0  text-truncate">{{article.header}}</h6>
-          <p style="font-size:12px" class="">  {{truncateText(article.content, 8)}}</p>
+          <p style="font-size:12px" class="" v-if="article.content">  {{truncateText(article.content, 8)}}</p>
           <a :href="article.url" class="stretched-link"></a>
         </div>
       </div>
