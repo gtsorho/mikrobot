@@ -101,12 +101,15 @@ export default {
         }
         return "";
       },
-        setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-      },
+       setCookie(cname, cvalue, exdays) {
+          const d = new Date();
+          d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+          let expires = "expires=" + d.toUTCString();
+
+          let sameSite = ";SameSite=None;Secure";
+
+          document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/" + sameSite;
+        }
     }, 
 }
 </script>
