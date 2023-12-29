@@ -39,16 +39,16 @@
       <div v-if="currentTab == 'coaches'" class="row row-cols-md-2 justify-content-center row-cols-lg-3" >
       <div  class="col-lg-4" v-for="(coach, index) in coaches" :key="index">
         <div class="card card-margin">
-            <div class="card-body pt-3" style="min-height:80%">
+            <div class="card-body pt-3" style="min-height:100%">
                 <div class="widget-49">
                     <div class="widget-49-title-wrapper">
-                        <div class="widget-49-date-primary" :style="`background-image:url('https://mikrobotacademy.com/profile_images/${ coach.image}') !important`"></div>
-                        <div class="widget-49-meeting-info mx-auto" style="width: 70%;">
+                        <div class="widget-49-date-primary shadow m-2" style=" border-radius: 10px; width:7rem; height:7rem " :style="`background-image:url('https://mikrobotacademy.com/profile_images/${ coach.image}') !important`"></div>
+                        <div class="widget-49-meeting-info mx-auto" style="width: 100%;">
                             <p class="fst-italic m-0 text-muted">Meet:</p>
-                            <!-- <h3 class="widget-49-pro-title fw-bold text-uppercase">{{coach.name}} <span class="float-end">Age: {{calculateAge(coach.dob)}} yrs</span></h3> -->
+                            <h2 class="widget-49-pro-title fw-bold text-uppercase shadow-lg px-2 py-4 rounded-2" style="background-image: linear-gradient(30deg, rgb(254, 254, 227), rgb(251, 251, 251));">{{coach.name}}</h2>
                         </div>
                     </div>
-                    <p class="widget-49-meeting-points">{{ truncateData(coach.profile, 300)}}</p>
+                    <p class="widget-49-meeting-points text-center shadow p-2 rounded-1" style="background-color: #ffffe9a8;">{{ truncateData(coach.profile, 700)}}</p>
                 </div>
             </div>
             <!-- <div class="widget-49-meeting-action card-footer border-0 bg-transparent  d-flex justify-content-end">
@@ -60,16 +60,17 @@
       <div v-if="currentTab == 'directors'" class="row row-cols-md-2 justify-content-center row-cols-lg-3" >
       <div  class="col-lg-4" v-for="(director, index) in directors" :key="index">
         <div class="card card-margin">
-            <div class="card-body pt-3" style="min-height:80%">
+            <div class="card-body pt-3" style="min-height:100%">
                 <div class="widget-49">
                     <div class="widget-49-title-wrapper">
-                        <div class="widget-49-date-primary" :style="`background-image:url('https://mikrobotacademy.com/profile_images/${ director.image}') !important`"></div>
-                        <div class="widget-49-meeting-info mx-auto" style="width: 70%;">
-                            <p class="fst-italic m-0 text-muted">Meet:</p>
-                            <!-- <h3 class="widget-49-pro-title fw-bold text-uppercase">{{director.name}} <span class="float-end">Age: {{calculateAge(director.dob)}} yrs</span></h3> -->
+                        <div class="widget-49-date-primary shadow m-2" style=" border-radius: 10px; width:7rem; height:7rem " :style="`background-image:url('https://mikrobotacademy.com/profile_images/${ director.image}') !important`"></div>
+                        <div class="widget-49-meeting-info mx-auto" style="width: 100%;">
+                            <!-- <p class="fst-italic m-0 text-muted">Meet:</p> -->
+                            <!-- <hr> -->
+                            <h2 class="widget-49-pro-title fw-bold text-uppercase shadow-lg px-2 py-4 rounded-2" style="background-image: linear-gradient(30deg, rgb(254, 254, 227), rgb(251, 251, 251));">{{director.name}}</h2>
                         </div>
                     </div>
-                    <p class="widget-49-meeting-points">{{ truncateData(director.profile, 300)}}</p>
+                    <p class="widget-49-meeting-points text-center shadow p-2 rounded-1" style="background-color: #ffffe9a8;">{{ truncateData(director.profile, 700)}}</p>
                 </div>
             </div>
             <!-- <div class="widget-49-meeting-action card-footer border-0 bg-transparent  d-flex justify-content-end">
@@ -277,7 +278,8 @@ h1,h2,h3,h4,h5,h6{
 
 .widget-49 .widget-49-title-wrapper .widget-49-meeting-info .widget-49-pro-title {
   color: #3c4142;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .widget-49 .widget-49-title-wrapper .widget-49-meeting-info .widget-49-meeting-time {
