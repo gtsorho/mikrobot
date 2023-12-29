@@ -55,9 +55,10 @@
         maxRotation: 5,
         maxTranslation: 10,
         images: [
-        'img1.jpg',
-        'img2.jpg',
-        'img4.jpg'
+        'nanaYaa.jpg',
+        'ing5.jpg',
+        'img4.jpg',
+        'ing1.jpg'
       ],
       currentImageIndex: 0
       }
