@@ -45,7 +45,7 @@
                         <div class="widget-49-date-primary" :style="`background-image:url('https://mikrobotacademy.com/profile_images/${ coach.image}') !important`"></div>
                         <div class="widget-49-meeting-info mx-auto" style="width: 70%;">
                             <p class="fst-italic m-0 text-muted">Meet:</p>
-                            <h3 class="widget-49-pro-title fw-bold text-uppercase">{{coach.name}} <span class="float-end">Age: {{calculateAge(coach.dob)}} yrs</span></h3>
+                            <!-- <h3 class="widget-49-pro-title fw-bold text-uppercase">{{coach.name}} <span class="float-end">Age: {{calculateAge(coach.dob)}} yrs</span></h3> -->
                         </div>
                     </div>
                     <p class="widget-49-meeting-points">{{ truncateData(coach.profile, 300)}}</p>
@@ -66,7 +66,7 @@
                         <div class="widget-49-date-primary" :style="`background-image:url('https://mikrobotacademy.com/profile_images/${ director.image}') !important`"></div>
                         <div class="widget-49-meeting-info mx-auto" style="width: 70%;">
                             <p class="fst-italic m-0 text-muted">Meet:</p>
-                            <h3 class="widget-49-pro-title fw-bold text-uppercase">{{director.name}} <span class="float-end">Age: {{calculateAge(director.dob)}} yrs</span></h3>
+                            <!-- <h3 class="widget-49-pro-title fw-bold text-uppercase">{{director.name}} <span class="float-end">Age: {{calculateAge(director.dob)}} yrs</span></h3> -->
                         </div>
                     </div>
                     <p class="widget-49-meeting-points">{{ truncateData(director.profile, 300)}}</p>
