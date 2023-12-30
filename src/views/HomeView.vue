@@ -83,7 +83,7 @@
           <div class="col-md-3 col-sm-6 target">
               <i class="bi fs-1 bi-buildings"></i>
               <div class="num" data-increment="56" data-num="6980">3</div>
-              <h3>Brunches</h3>
+              <h3>Branches</h3>
               <p>Branches with Four student training categories each.</p>
           </div>
           <div class="col-md-3 col-sm-6 target">
