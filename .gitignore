@@ -16,8 +16,8 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
-/backend/newsImages
-/backend/profileImages
+newsImages/
+profileImages/
 
 # Editor directories and files
 .vscode/*
