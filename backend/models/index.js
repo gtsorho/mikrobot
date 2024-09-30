@@ -6,29 +6,29 @@ const news = require('./news')
 
 require('dotenv').config()
 
-const sequelize = new Sequelize(
-   process.env.DATABASE,
-   process.env.DATABASE_USERNAME,
-   process.env.DATABASE_PASSWORD,
-   {
-      host: process.env.DATABASE_HOST,
-      port:process.env.DATABASE_PORT,
-      dialect: 'mysql',
-      logging: false
-   }
-);
-
 // const sequelize = new Sequelize(
 //    process.env.DATABASE,
 //    process.env.DATABASE_USERNAME,
 //    process.env.DATABASE_PASSWORD,
 //    {
-//       host: '5.182.33.208',
-//       port:9001,
+//       host: process.env.DATABASE_HOST,
+//       port:process.env.DATABASE_PORT,
 //       dialect: 'mysql',
 //       logging: false
 //    }
 // );
+
+const sequelize = new Sequelize(
+   process.env.DATABASE,
+   process.env.DATABASE_USERNAME,
+   process.env.DATABASE_PASSWORD,
+   {
+      host: '5.182.33.208',
+      port:9001,
+      dialect: 'mysql',
+      logging: false
+   }
+);
 
 
 const db = {}
