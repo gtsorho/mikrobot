@@ -153,9 +153,15 @@ module.exports = {
     });
 
     const driveService = google.drive({ version: 'v3', auth });
-    const result = await driveService.files.list({
+    var result = await driveService.files.list({
         q: "'1vEf9o5h4oOMA2LhOsLuQc4b4iwnTeKYg' in parents",
-        fields: 'files(name, webContentLink)'
+        fields: 'files(name, webContentLink, thumbnailLink)'
+      });
+
+      result.data.files.forEach(file => {
+        if (file.thumbnailLink) {
+            file.thumbnailLink  = file.thumbnailLink.replace(/=s\d+/, '=s1600');
+        }
       });
 
       res.send(result)

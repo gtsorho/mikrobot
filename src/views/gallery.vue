@@ -1,99 +1,96 @@
-<template>
-  <div class="main py-5">
-    <div class="text-center my-4">
-      <label for="customRange1" class="form-label d-block"><span class="bg-light py-1 px-3 rounded-3 text-muted" >zoom - {{zoom}}%</span></label>
-      <input type="range" v-model="zoom" class="form-range w-25  mx-auto d-block"  min="100" max="600"  id="customRange1">
+  <template>
+    <div class="row">
+      <div class="column" v-for="(imageGroup, index) in groupedImages" :key="index">
+        <img v-for="(image, imgIndex) in imageGroup" :src="image.thumbnailLink" :key="imgIndex" />
+      </div>
     </div>
-    <div class="container">
-        <img v-for="(image, i) in images" :key="i" :style="'width:'+ zoom +'px'" :src="image.webContentLink" alt="gallary">
-    </div>
-  </div>
-</template>
+  </template>
 
-<script>
-import axios from 'axios';
+  <script>
+  import axios from 'axios';
 
-export default {
-  data() {
-    return {
-      images: [
-      ],
-      zoom:275
-    };
-  },
-  mounted(){
-    this.getImages()
-  },
-  methods: {
-    getImages(){
-      axios.get('https://mikrobotacademy.com/api/students/gallery'
-        ).then(response =>{
-          this.images = response.data.data.files
-          console.log(response.data.data.files)
-        }).catch(error =>{
-          console.log(error.response)
-        })
+  export default {
+    data() {
+      return {
+        images: [],
+        imagesPerColumn: 5, 
+        zoom:275
+      };
     },
-  },
-};
-</script>
+    created(){
+      this.getImages()
+    },
+    methods: {
+    async getImages(){
+        await axios.get('http://localhost:3000/api/students/gallery'
+          ).then(response =>{
+            this.images = response.data.data.files
+            console.log('Total images:', this.images.length);
+            console.log(this.images)
+          }).catch(error =>{
+            console.log(error.response)
+          })
+      },
+    },
+    computed: {
+      groupedImages() {
+        const groups = [];
+        for (let i = 0; i < this.images.length; i += this.imagesPerColumn) {
+          groups.push(this.images.slice(i, i + this.imagesPerColumn));
+        }
+        return groups;
+      },
+    },
+  };
+  </script>
 
 <style scoped>
-  @import url(https://fonts.bunny.net/css?family=amita:700);
+@import url(https://fonts.bunny.net/css?family=amita:700);
 
 .main {
-    background: url(https://images.unsplash.com/photo-1562852561-ce295949e3f8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
-        center center/cover no-repeat;
-    min-height: 100vh;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
+  background: url(https://images.unsplash.com/photo-1562852561-ce295949e3f8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+    center center/cover no-repeat;
+  min-height: 100vh;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
 }
 
-p{
-  font-weight: 200 !important;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
 }
 
-h1,h2,h3,h4,h5,h6, label{
-  font-weight: 400 !important;
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
 }
 
-img {
-    /* width: 200px; */
-    height: 300px;
-    margin: 10px;
-    object-fit: cover;
-    border: 10px solid #fefae033;
-    /* -webkit-filter: grayscale(0%); */
-    /* filter: grayscale(100%); */
-    border-radius: 5px;
-    transition-duration: 1s;
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  max-height:4in;
+  object-fit:cover;
+  object-position: 50% 0%;
 }
 
-  .form-range::-webkit-slider-thumb:active {
-      background-color: red;
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
   }
-  .form-range::-webkit-slider-thumb,
-  .custom-range:focus::-webkit-slider-thumb, 
-  .custom-range:focus::-moz-range-thumb,
-  .custom-range:focus::-ms-thumb {
-      box-shadow: red;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
   }
-
-img:hover {
-    border: 5px solid #ffffff5b;
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
-    -webkit-filter: none;
-    filter: none;
 }
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
-  </style>
+</style>
