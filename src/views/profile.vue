@@ -45,10 +45,10 @@
                         <div class="widget-49-date-primary shadow m-2" style=" border-radius: 10px; width:7rem; height:7rem " :style="`background-image:url('https://mikrobotacademy.com/profile_images/${ coach.image}') !important`"></div>
                         <div class="widget-49-meeting-info mx-auto" style="width: 100%;">
                             <p class="fst-italic m-0 text-muted">Meet:</p>
-                            <h2 class="widget-49-pro-title fw-bold text-uppercase shadow-lg px-2 py-4 rounded-2" style="background-image: linear-gradient(30deg, rgb(254, 254, 227), rgb(251, 251, 251));">{{coach.name}}</h2>
+                            <h2 class="widget-49-pro-title fw-bold text-uppercase px-2 py-4 rounded-2" style="background-image: linear-gradient(30deg, rgb(254, 254, 227), rgb(251, 251, 251));">{{coach.name}}</h2>
                         </div>
                     </div>
-                    <p class="widget-49-meeting-points text-center shadow p-2 rounded-1" style="background-color: #ffffe9a8;">{{ truncateData(coach.profile, 700)}}</p>
+                    <p class="widget-49-meeting-points text-center p-2 rounded-1" >{{ truncateData(coach.profile, 700)}}</p>
                 </div>
             </div>
             <!-- <div class="widget-49-meeting-action card-footer border-0 bg-transparent  d-flex justify-content-end">
@@ -67,10 +67,10 @@
                         <div class="widget-49-meeting-info mx-auto" style="width: 100%;">
                             <!-- <p class="fst-italic m-0 text-muted">Meet:</p> -->
                             <!-- <hr> -->
-                            <h2 class="widget-49-pro-title fw-bold text-uppercase shadow-lg px-2 py-4 rounded-2" style="background-image: linear-gradient(30deg, rgb(254, 254, 227), rgb(251, 251, 251));">{{director.name}}</h2>
+                            <h2 class="widget-49-pro-title fw-bold text-uppercase  px-2 py-4 rounded-2" style="background-image: linear-gradient(30deg, rgb(254, 254, 227), rgb(251, 251, 251));">{{director.name}}</h2>
                         </div>
                     </div>
-                    <p class="widget-49-meeting-points text-center shadow p-2 rounded-1" style="background-color: #ffffe9a8;">{{ truncateData(director.profile, 700)}}</p>
+                    <p class="widget-49-meeting-points text-center  p-2 rounded-1">{{ truncateData(director.profile, 700)}}</p>
                 </div>
             </div>
             <!-- <div class="widget-49-meeting-action card-footer border-0 bg-transparent  d-flex justify-content-end">

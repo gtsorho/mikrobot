@@ -72,7 +72,7 @@
             </div>
             <div class="col-md-6 col-sm-5 ">
                 <ul class="social pull-right m-0 d-flex justify-content-end ">
-                    <li><a href="https://www.linkedin.com/company/mikrobot-academy/"><i class="bi bi-twitter"></i></a></li>
+                    <li><a href="https://x.com/MikrobotAcademy?t=tnhGyebwqcTBixlZaMerGg&s=09"><i class="bi bi-twitter"></i></a></li>
                     <li><a href="https://www.facebook.com/mikrobotacademy"><i class="bi bi-facebook"></i></a></li>
                     <li><a href="https://www.linkedin.com/company/mikrobot-academy/"><i class="bi bi-linkedin"></i></a></li>
                 </ul>

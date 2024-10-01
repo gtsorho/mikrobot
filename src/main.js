@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import Editor from 'vue3-editor-js';
+// import Editor from 'vue3-editor-js';
 
 // Import Bootstrap styles and icons
 import 'bootstrap';
@@ -13,7 +13,7 @@ const app = createApp(App);
 app.use(router);
 
 // Use the vue-editor-js plugin
-app.use(Editor);
+// app.use(Editor);
 
 app.mount('#app');
   

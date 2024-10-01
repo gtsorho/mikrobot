@@ -123,7 +123,7 @@
         </vueper-slide>
     </vueper-slides>
 
-    <div class="container d-flex justify-content-around"  v-if="allNews.length > 0">
+    <div class="container d-flex justify-content-around mt-5"  v-if="allNews.length > 0">
       <div class="row g-0 bg-body-secondary position-relative shadow rounded-1" style="width:3in; height:1in; overflow:hidden"  v-for="(news , i) in allNews.slice(0, 3)" :key="i" >
         <div class="col-md-6 mb-md-0 p-md-2" style=" height:inherit !important;">
           <img :src="news.image ? news.image : noImage"  style=" height:inherit !important;" class="w-100 object-fit-cover rounded-1">
@@ -172,7 +172,6 @@ import axios from 'axios'
         getNews(){
           axios.get('https://mikrobotacademy.com/api/news')
           .then(res =>{
-            console.log(res.data)
             const groupedData = res.data.reduce((acc, currentItem) => {
             const { tag, ...rest } = currentItem;
             if (!acc[tag]) {
