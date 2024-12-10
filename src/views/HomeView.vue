@@ -89,12 +89,11 @@
 
   </section>
     <section class="m-5" id="news">
-      <swiper :pagination="{ type: 'progressbar', }" :navigation="true" :modules="modules" class="mySwiper">
+      <swiper  :autoplay="{ delay: 2500, disableOnInteraction: false,}" :pagination="{ type: 'progressbar', }" :navigation="true" :modules="modules" class="mySwiper">
           <swiper-slide class="slide" v-for="(slide, i) in announcements"
-              :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null})` }"
-              :key="i">
+              :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null})` }" :key="i">
               <div class="container hero-item overlay">
-                  <a class="post-category-marker" style="  background: rgb(228, 107, 0);" href="category.html">Announcement</a>
+                  <a class="post-category-marker" style="  background: rgb(228, 107, 0);">Announcement</a>
                   <div class="clearfix"></div>
                   <h2><a href="post-single.html" class="text-light fw-bolder">{{ slide.header }}</a></h2>
                   <p style="font-size:14px" class="text-light fw-medium">{{ slide.content }} </p>
@@ -102,7 +101,7 @@
                   <p class="post-date font-bold fw-normal" style="font-size:12px ;color: #fff;"><i
                           class="bi bi-clock-fill" style="color: rgb(228, 107, 0);"></i> {{ convertDate(slide.updatedAt) }}</p>
               </div>
-              <a class="post-category-marker" style="  background: rgb(228, 107, 0); font-weight:700; font-size:15px;letter-spacing: .1rem;" href="category.html">More News...</a>
+              <router-link class="nav-link post-category-marker" style="  background: rgb(228, 107, 0); font-weight:600; font-size:15px;letter-spacing: .08rem;" :to="{name:'news'}">More News...</router-link>
           </swiper-slide>
       </swiper> 
   </section>
@@ -123,7 +122,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation , Autoplay} from 'swiper/modules';
 
 
   export default {
@@ -137,7 +136,7 @@ import { Pagination, Navigation } from 'swiper/modules';
       },
       data() {
         return {
-          modules: [Pagination, Navigation],
+          modules: [Pagination, Navigation, Autoplay],
           articles:[],
           allNews:[],
           facts:[],

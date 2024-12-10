@@ -1,5 +1,5 @@
 <template>
-    <swiper :pagination="{ type: 'progressbar', }" :navigation="true" :modules="modules" class="mySwiper">
+      <swiper  :autoplay="{ delay: 2500, disableOnInteraction: false,}" :pagination="{ type: 'progressbar', }" :navigation="true" :modules="modules" class="mySwiper">
         <swiper-slide class="slide" v-for="(slide, i) in announcements"
             :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null})` }"
             :key="i">
@@ -93,7 +93,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation , Autoplay} from 'swiper/modules';
 import axios from 'axios';
 import edjsParser from "editorjs-parser";
 
@@ -105,7 +105,7 @@ export default {
     },
     data() {
         return {
-            modules: [Pagination, Navigation],
+            modules: [Pagination, Navigation, Autoplay],
             noImage: new URL(`../assets/images/article.png`, import.meta.url).href,
             students: {},
             searchQuery: '',
