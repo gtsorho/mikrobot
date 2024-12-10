@@ -78,7 +78,6 @@ import axios from 'axios'
             axios.get('https://mikrobotacademy.com/api/facts/',
             ).then(response => {
                 this.facts = response.data
-                console.log(response.data)
             }).catch(error => {
                 console.log(error.response)
             })

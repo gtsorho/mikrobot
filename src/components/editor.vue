@@ -279,7 +279,6 @@ export default {
         assignUpdate() {
             this.update = true
             this.updateImg = false
-            console.log(this.newsData)
         },
         async saveNews() {
             let token = this.getCookie('token');
@@ -302,6 +301,7 @@ export default {
                     formData,
                     { headers: { 'Authorization': `Bearer ${token}` } }
                 );
+                this.emptyData()
             } catch (error) {
                 console.error('Error uploading:', error);
             }

@@ -4,13 +4,13 @@
             :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null})` }"
             :key="i">
             <div class="container hero-item overlay">
-                <a class="post-category-marker" style="  background: #e93314;" href="category.html">Announcement</a>
+                <a class="post-category-marker" style="  background: rgb(228, 107, 0);" href="category.html">Announcement</a>
                 <div class="clearfix"></div>
                 <h2><a href="post-single.html" class="text-light fw-bolder">{{ slide.header }}</a></h2>
                 <p style="font-size:14px" class="text-light fw-medium">{{ slide.content }} </p>
                 <div class="clearfix"></div>
                 <p class="post-date font-bold fw-normal" style="font-size:12px ;color: #fff;"><i
-                        class="bi bi-clock-fill" style="color: #e93314;"></i> {{ convertDate(slide.updatedAt) }}</p>
+                        class="bi bi-clock-fill" style="color: rgb(228, 107, 0);"></i> {{ convertDate(slide.updatedAt) }}</p>
             </div>
         </swiper-slide>
     </swiper>
@@ -59,7 +59,7 @@
             <!-- Right Section: Popular/Recent Articles -->
             <div class="col-lg-4 d-flex align-items-center overflow-y-auto " style="max-height:7in">
                 <div>
-                    <li class="btn btn-sm w-100 rounded-0 rounded-top-1" style="  background: #e93314; color:#fff;">
+                    <li class="btn btn-sm w-100 rounded-0 rounded-top-1" style="  background: rgb(228, 107, 0); color:#fff;">
                         Popular News
                     </li>
                     <div class="list-group">
@@ -178,9 +178,6 @@ export default {
 </script>
 
 <style scoped>
-/* Swiper container */
-
-
 .hero-item {
     text-align: start;
     max-width: 7in !important;
@@ -330,7 +327,7 @@ export default {
 .multi-pag .swiper-pagination-bullet.swiper-pagination-bullet-active,
 .hc-cont,
 .hero-carousel-pag .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    background: #e93314;
+    background: rgb(228, 107, 0);
 }
 
 .swiper-button-next,

@@ -149,6 +149,7 @@ export default {
           { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()
+            this.emptyStudent()
           }).catch(error =>{
             this.errorMsg = error.response.data
             setInterval(() => {
@@ -174,7 +175,7 @@ export default {
           { headers:{'Authorization': `Bearer ${token}`}}
           ).then(response =>{
             this.getStudents()
-            this.emptyStudent
+            this.emptyStudent()
           }).catch(error =>{
             console.log(error.response)
           })

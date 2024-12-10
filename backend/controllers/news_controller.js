@@ -90,7 +90,7 @@ module.exports = {
                 content:Joi.string().allow(null),
                 link:Joi.string().allow(null),
                 tag:Joi.string().required(),
-                studentId:Joi.number().allow(null)
+                studentId:Joi.allow(null)
             }).unknown(true)
             return schema.validate(news)
         }
@@ -120,7 +120,7 @@ module.exports = {
                 content:Joi.string().allow(null),
                 link:Joi.string().allow(null),
                 tag:Joi.string().required(),
-                studentId:Joi.number().allow(null)
+                studentId:Joi.allow(null)
             }).unknown(true)
             return schema.validate(news)
         }

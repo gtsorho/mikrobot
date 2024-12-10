@@ -88,38 +88,23 @@
 
 
   </section>
-  <section class="m-5" id="news">
-    <h2>News | Updates</h2>
-    <vueper-slides
-      class="no-shadow"
-      bullets-outside 
-      autoplay
-      :duration="5000"
-      >
-        <vueper-slide 
-        class="text-light"
-        v-for="(slide, i) in announcements"
-        :key="i"
-        :content="!slide.image ? slide.content : null"
-        :title="!slide.image ? slide.header : null"
-        style="background-color: #004e7c"
-        :image="slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null">
-        </vueper-slide>
-    </vueper-slides>
-
-    <div class="container d-flex justify-content-around mt-5"  v-if="allNews.length > 0">
-      <div class="row g-0 bg-body-secondary position-relative shadow rounded-1" style="width:3in; height:1in; overflow:hidden"  v-for="(news , i) in allNews.slice(0, 3)" :key="i" >
-        <div class="col-md-6 mb-md-0 p-md-2" style=" height:inherit !important;">
-          <img :src="news.image ? news.image : noImage"  style=" height:inherit !important;" class="w-100 object-fit-cover rounded-1">
-        </div>
-        <div class="col-md-6 p-2 ps-md-0"  style=" height:inherit !important;">
-          <h6 style="font-size:15px" class="mt-0  text-truncate">{{news.header}}</h6>
-          <p style="font-size:12px" class="" v-if="news.content">  {{truncateText(news.content, 8)}}</p>
-          <a :href="news.url" class="stretched-link"></a>
-        </div>
-      </div>
-    </div>
-    
+    <section class="m-5" id="news">
+      <swiper :pagination="{ type: 'progressbar', }" :navigation="true" :modules="modules" class="mySwiper">
+          <swiper-slide class="slide" v-for="(slide, i) in announcements"
+              :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null})` }"
+              :key="i">
+              <div class="container hero-item overlay">
+                  <a class="post-category-marker" style="  background: rgb(228, 107, 0);" href="category.html">Announcement</a>
+                  <div class="clearfix"></div>
+                  <h2><a href="post-single.html" class="text-light fw-bolder">{{ slide.header }}</a></h2>
+                  <p style="font-size:14px" class="text-light fw-medium">{{ slide.content }} </p>
+                  <div class="clearfix"></div>
+                  <p class="post-date font-bold fw-normal" style="font-size:12px ;color: #fff;"><i
+                          class="bi bi-clock-fill" style="color: rgb(228, 107, 0);"></i> {{ convertDate(slide.updatedAt) }}</p>
+              </div>
+              <a class="post-category-marker" style="  background: rgb(228, 107, 0); font-weight:700; font-size:15px;letter-spacing: .1rem;" href="category.html">More News...</a>
+          </swiper-slide>
+      </swiper> 
   </section>
         
 
@@ -134,15 +119,25 @@ import 'vueperslides/dist/vueperslides.css'
 import Footer from "../components/foot.vue"
 import axios from 'axios'
 
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Pagination, Navigation } from 'swiper/modules';
+
+
   export default {
       components:{
         VueperSlides,
          VueperSlide,
           Banner,
           Footer,
+          Swiper,
+          SwiperSlide,
       },
       data() {
         return {
+          modules: [Pagination, Navigation],
           articles:[],
           allNews:[],
           facts:[],
@@ -184,15 +179,77 @@ import axios from 'axios'
             axios.get('https://mikrobotacademy.com/api/facts/',
             ).then(response => {
                 this.facts = response.data
-                console.log(response.data)
             }).catch(error => {
                 console.log(error.response)
             })
             },
+            convertDate(date) {
+            const event = new Date(date);
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            };
+            return event.toLocaleDateString('en-US', options)
+        }
     }
   }
 </script>
 
+<style scoped>
+.hero-item {
+    text-align: start;
+    max-width: 7in !important;
+    margin: 7%;
+    color: #fff !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+    right: var(--swiper-navigation-sides-offset, 10px);
+    left: auto;
+}
+.hero-item .post-category-marker {
+    float: left;
+    margin: 0 0 10px 0;
+
+}
+
+.post-category-marker {
+    padding: 6px 13px;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+
+.swiper {
+    width: 100%;
+    height: 4in;
+}
+
+.swiper-slide {
+    text-align: start;
+    background: #fff;
+    color: #fff;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+</style>
 <style>
 
 .vueperslide__image {
