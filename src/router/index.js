@@ -7,7 +7,7 @@ import Profile from '../views/profile.vue'
 import ProfileInfo from '../views/profileInfo.vue'
 import Profile_admin from '../views/profileAdmin.vue'
 import Gallery from '../views/gallery.vue'
-import News from '../views/news.vue'
+import News from '../views/newNews.vue'
 import Article from '../views/article.vue'
 
 

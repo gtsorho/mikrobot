@@ -47,6 +47,7 @@
     "mysql2": "^3.6.5",
     "sequelize": "^6.35.1",
     "sequelize-cli": "^6.6.2",
+    "swiper": "^11.1.15",
     "vue": "^3.3.4",
     "vue-awesome-swiper": "^5.0.1",
     "vue-carousel": "^0.18.0",

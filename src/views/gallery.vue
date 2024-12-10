@@ -26,7 +26,6 @@
           ).then(response =>{
             this.images = response.data.data.files
             console.log('Total images:', this.images.length);
-            console.log(this.images)
           }).catch(error =>{
             console.log(error.response)
           })

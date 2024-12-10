@@ -39,7 +39,8 @@ db.student = student(sequelize, DataTypes)
 db.user = user(sequelize, DataTypes)
 db.news = news(sequelize, DataTypes)
 
-
+db.student.hasMany(db.news)
+db.news.belongsTo(db.student)
 
 sequelize.sync({ alter: true,  force: false })
 .then(()=>{

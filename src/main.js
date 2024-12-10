@@ -1,6 +1,10 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 // import Editor from 'vue3-editor-js';
 
 // Import Bootstrap styles and icons

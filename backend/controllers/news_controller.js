@@ -32,7 +32,13 @@ module.exports = {
 
 
     getNews: async(req, res)=>{
-        const allNews = await db.news.findAll({});
+        const allNews = await db.news.findAll({
+            include:[
+                {
+                    model:db.student
+                }
+            ]
+        });
 
         for (const article of allNews) {
             if (article.link) {
@@ -61,7 +67,12 @@ module.exports = {
 
     getOneNews: async(req, res)=>{
         const news = await db.news.findOne({
-            where:{id:req.params.id}
+            where:{id:req.params.id},
+            include:[
+                {
+                    model:db.student
+                }
+            ]
         });
         
         res.send(news)
