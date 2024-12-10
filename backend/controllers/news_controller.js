@@ -88,7 +88,7 @@ module.exports = {
                 content: Joi.string().allow(null),
                 link: Joi.string().allow(null),
                 tag: Joi.string().required(),
-                studentId: Joi.alternatives().try(Joi.number(), Joi.valid(null))
+                studentId: Joi.alternatives().try( Joi.valid(null))
             }).unknown(true);
             return schema.validate(news);
         }
@@ -122,7 +122,7 @@ module.exports = {
                 content: Joi.string().allow(null),
                 link: Joi.string().allow(null),
                 tag: Joi.string().required(),
-                studentId: Joi.alternatives().try(Joi.number(), Joi.valid(null))
+                studentId: Joi.alternatives().try(Joi.valid(null))
             }).unknown(true);
             return schema.validate(news);
         }
