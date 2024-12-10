@@ -97,6 +97,7 @@
                 { headers: { 'Authorization': `Bearer ${token}` } }
             ).then(response => {
                 this.facts = response.data
+                console.log(response.data)
             }).catch(error => {
                 console.log(error.response)
             })

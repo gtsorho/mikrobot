@@ -19,6 +19,9 @@
                   </div>
                   <p class="mb-1" style="font-size: 13px;">{{ fact.description }}</p>
                 </div>
+                <div class="col">
+                  <i :class="fact.icon"></i>
+                </div>
               </div>
             </a>
           </div>
@@ -37,7 +40,7 @@
             </div>
             <div class="col-md-12">
               <label for="name" style="font-size: 13px;" class="form-label fs-6">Icon</label>
-              <input type="text" v-model="fact.icon" style="font-size: 13px;"
+              <input type="text" v-model="fact.icon" style="font-size: 13px;" placeholder="eg. bi fs-1 bi-send (bootstrap icon)"
                 class="form-control fw-light text-dark rounded-1 form-control-sm" id="name">
             </div>
             <div class="col-12">
@@ -95,7 +98,6 @@ export default {
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
         this.facts = response.data
-        console.log(response.data)
       }).catch(error => {
         console.log(error.response)
       })
@@ -122,7 +124,7 @@ export default {
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
         this.getFacts()
-        this.emptyFact
+        this.emptyFact()
       }).catch(error => {
         console.log(error.response)
       })
