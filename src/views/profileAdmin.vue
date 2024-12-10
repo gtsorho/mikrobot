@@ -1,21 +1,19 @@
 <template>
   <div class="container my-5">
-  <div class="alert alert-warning d-flex  justify-content-around" role="alert">
+  <div class="alert shadow-sm d-flex  justify-content-between rounded-1" role="alert">
     <div>
-      <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-pill" @click="currentTab='Profile'">Profiles</button>
-      <button class="btn btn-sm btn-outline-warning mx-2 px-3 rounded-pill" @click="currentTab='Editor'">Articles</button>
+      <button class="btn btn-sm mx-2 px-3 rounded-1" @click="currentTab='Profile'">Profiles</button>
+      <button class="btn btn-sm  mx-2 px-3 rounded-1" @click="currentTab='Editor'">Articles</button>
+      <button class="btn btn-sm  mx-2 px-3 rounded-1" @click="currentTab='Facts'">Facts</button>
     </div>
 
-    <button class="btn btn-sm btn-outline-danger mx-2 px-3 rounded-pill" @click="logout()">Logout</button>
+    <button class="btn btn-sm rounded-1 mx-2 px-3 rounded-1" style="background-color: red;" @click="logout()">Logout</button>
   </div>
 
   <component :is="currentTab"></component>
-
 <br><br>
 <br><br>
 </div>
-
-
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" ref="modal" hidden data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
@@ -51,12 +49,15 @@
 <script>
 import Editor from '../components/editor.vue'
 import Profile from '../components/profiles.vue'
+import Facts from '../components/facts.vue'
+
 
 import axios from 'axios'
 export default {
     components:{
       Editor,
-      Profile
+      Profile,
+      Facts
     },
     data() {
         return {
@@ -116,6 +117,13 @@ export default {
 </script>
 
 <style scoped>
+.btn-sm{
+  background-color: rgb(0, 5, 47);
+  color: #fff;
+}
+.btn-sm:hover{
+  opacity: .9;
+}
 p{
   font-weight: 200 !important;
 }

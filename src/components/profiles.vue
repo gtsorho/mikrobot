@@ -1,22 +1,22 @@
 <template>
-    <div class="border border-danger rounded-1 shadow ">
+    <div class=" rounded-0  ">
           <div class="container my-5">
             <div class=" d-flex justify-content-between ">
-            <input type="text" class="form-control form-control-sm rounded-pill my-3 w-25" v-model="searchQuery" @keyup="search" placeholder="Search by title" />
+            <input type="text" style="font-size: 13px;" class="form-control fw-light text-secondary form-control-sm rounded-1 my-3 w-25" v-model="searchQuery" @keyup="search" placeholder="Search by title" />
             <p class="my-3" style="font-size:13px">{{students.length}} Item(s) Found</p>
             </div>
 
         <div class="row">
             <div class="col-md-6">
-            <div class="list-group border border-2 border-primary" style="max-height:5in !important; overflow-y:auto">
-                <a href="#"  class="list-group-item border rounded-2 list-group-item-action my-2"  v-for="(student,i) in students" :key="i" @click="assignStudent(student), update= true" aria-current="true">
+            <div class="list-group " style="max-height:5in !important; overflow-y:auto">
+                <a href="#"  class="list-group-item  border-none rounded-0 shadow-sm list-group-item-action my-2"  v-for="(student,i) in students" :key="i" @click="assignStudent(student), update= true" aria-current="true">
                 <div class="row">
                     <div class="col-8">
                         <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{student.name}}</h5>
-                        <small>{{calculateAge(student.dob)}} years old</small>
+                        <h6 class="mb-1">{{student.name}}</h6>
+                        <small style="font-size: 13px;">{{calculateAge(student.dob)}} years old</small>
                     </div>
-                    <p class="mb-1">{{ truncateData(student.profile,70)}}</p>
+                    <p class="mb-1" style="font-size: 13px;">{{ truncateData(student.profile,70)}}</p>
                     <small>{{student.guardian}} - ({{student.phone}})</small>
                     </div>
                     <div class="col-md-4 d-flex justify-content-center my-auto">
@@ -26,53 +26,53 @@
                 </a>
             </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 shadow px-3 py-4">
             <div class="row g-3">
               <div class="col-12">
-                <label for="name" class="form-label">Profile Tag *</label>
-                <select class="form-select form-select-sm" v-model="student.tag" aria-label="Small select example">
+                <label for="name" style="font-size: 13px;" class="form-label fs-6">Profile Tag <span class="text-danger">*</span></label>
+                <select style="font-size: 13px;" class="form-select form-select-sm fw-light text-dark rounded-1" v-model="student.tag" aria-label="Small select example">
                   <option value="student">student</option>
                   <option value="coach">Coach</option>
                   <option value="director">Director</option>
                 </select>
               </div>
                 <div class="col-md-6">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" v-model="student.name" class="form-control form-control-sm" id="name">
+                <label for="name" style="font-size: 13px;" class="form-label fs-6">Name</label>
+                <input type="text" v-model="student.name" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="name">
                 </div>
                 <div class="col-3">
-                <label for="pp" class="form-label">Profile Picture</label>
-                <input type="file" @change="handleImageChange"  class="form-control form-control-sm" id="pp" >
+                <label for="pp" style="font-size: 13px;" class="form-label fs-6">Profile Picture</label>
+                <input type="file" @change="handleImageChange"  style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="pp" >
                 </div>
                 <div class="col-3">
-                <label for="dob" class="form-label">Dob <span style="font-size:13px">({{new Date(student.dob).toDateString()}})</span></label>
-                <input type="date" v-model="student.dob" class="form-control form-control-sm" id="dob" >
+                <label for="dob" style="font-size: 13px;" class="form-label fs-6">Dob <span style="font-size:10px">({{new Date(student.dob).toDateString()}})</span></label>
+                <input type="date" v-model="student.dob" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="dob" >
                 </div>
                 <div class="col-md-6">
-                <label for="guardian" class="form-label">Parent</label>
-                <input type="text" v-model="student.guardian" class="form-control form-control-sm" id="guardian" placeholder="Mr John">
+                <label for="guardian" style="font-size: 13px;" class="form-label fs-6">Parent</label>
+                <input type="text" v-model="student.guardian" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="guardian" placeholder="Mr John">
                 </div>
                 <div class="col-6">
-                <label for="phone" class="form-label">Phone</label>
-                <input type="text" v-model="student.phone" class="form-control form-control-sm" id="phone" placeholder="eg 0244456335">
+                <label for="phone" style="font-size: 13px;" class="form-label fs-6">Phone</label>
+                <input type="text" v-model="student.phone" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="phone" placeholder="eg 0244456335">
                 </div>
                 <div class="col-12">
-                <label for="exampleFormControlTextarea1" class="form-label">Profile</label>
-                <textarea class="form-control" v-model="student.profile" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <label for="exampleFormControlTextarea1" style="font-size: 13px;" class="form-label fs-6">Profile</label>
+                <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1" v-model="student.profile" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <div class="col-6">
-                <label for="exampleFormControlTextarea1" class="form-label">Sub Profile</label>
-                <textarea class="form-control" v-model="student.sub_profile" id="exampleFormControlTextarea1" rows="2"></textarea>
+                <label for="exampleFormControlTextarea1" style="font-size: 13px;" class="form-label fs-6">Sub Profile</label>
+                <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1" v-model="student.sub_profile" id="exampleFormControlTextarea1" rows="2"></textarea>
                 </div>
                 <div class="col-6">
-                <label for="exampleFormControlTextarea1" class="form-label">Achievements</label>
-                <textarea class="form-control" v-model="student.achievement" id="exampleFormControlTextarea1" rows="2"></textarea>
+                <label for="exampleFormControlTextarea1" style="font-size: 13px;" class="form-label fs-6">Achievements</label>
+                <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1" v-model="student.achievement" id="exampleFormControlTextarea1" rows="2"></textarea>
                 </div>
                 <div class="col-12">
-                <button type="button" v-if="update" @click="confirmDelete(student)" class="btn btn-sm float-start btn-outline-danger">Delete Student</button>
-                <button type="button" v-if="!update" @click="submitForm()" class="btn btn-sm float-end btn-outline-primary">Add Student</button>
-                <button type="button" v-else @click="updateProfile(student.id)" class="btn btn-sm float-end btn-outline-primary">Update {{student.name}}</button>
-                <button type="button" v-if="update" @click="update = false, emptyStudent()" class="btn mx-1 btn-sm float-end btn-outline-dark">+</button>
+                <button type="button" v-if="update" @click="confirmDelete(student)" class="btn btn-sm rounded-0 float-start btn-outline-danger">Delete Student</button>
+                <button type="button" v-if="!update" @click="submitForm()" class="btn btn-sm rounded-0 float-end btn-outline-primary">Add Student</button>
+                <button type="button" v-else @click="updateProfile(student.id)" class="btn btn-sm rounded-0 float-end btn-outline-primary">Update {{student.name}}</button>
+                <button type="button" v-if="update" @click="update = false, emptyStudent()" class="btn mx-1 btn-sm rounded-0 float-end btn-outline-dark">+</button>
                 <p class="text-danger">{{errorMsg}}</p>
                 </div>
             </div>

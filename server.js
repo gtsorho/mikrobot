@@ -4,7 +4,9 @@ const serveStatic = require('serve-static')
 const students = require('./backend/routes/students')
 const users = require('./backend/routes/users')
 const news = require('./backend/routes/news')
+const facts = require('./backend/routes/facts')
 const multer = require('multer');
+
 
 const cors = require('cors');
 require('dotenv').config()
@@ -21,6 +23,8 @@ app.use(cors({
 app.use('/api/students', students)
 app.use('/api/users', users)
 app.use('/api/news', news)
+app.use('/api/facts', facts)
+
 
 
 app.use((err, req, res, next) => {

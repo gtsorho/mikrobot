@@ -1,26 +1,26 @@
 <template>
     <div class="row">
         <div class="col">
-            <div class="card text-center">
-                <div class="card-header" style="background-color:#004e7c">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" :class="tab == 'news' ? 'active text-dark' : null"
+            <div class="card border-0 text-center">
+                <div class="card-header" style="background-color:#00263d">
+                    <ul class="nav nav-tabs card-header-tabs mx-auto">
+                        <li class="nav-item rounded-0">
+                            <a class="nav-link rounded-0 text-light" :class="tab == 'news' ? 'active text-dark' : null"
                                 @click="tab = 'news'" href="#">News</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" :class="tab == 'announcements' ? 'active text-dark' : null"
+                        <li class="nav-item rounded-0">
+                            <a class="nav-link text-light rounded-0" :class="tab == 'announcements' ? 'active text-dark' : null"
                                 @click="tab = 'announcements'" href="#">Announcements</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" :class="tab == 'articles' ? 'active text-dark' : null"
+                        <li class="nav-item rounded-0">
+                            <a class="nav-link text-light rounded-0" :class="tab == 'articles' ? 'active text-dark' : null"
                                 @click="tab = 'articles'" href="#">Articles</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body text-start">
                     <div v-if="tab == 'news'">
-                        <div class="alert alert-light shadow alert-dismissible fade show "
+                        <div class="alert alert-light border-0 rounded-1 shadow alert-dismissible fade show "
                             @click="currentTab = 'news', newsData = news, assignUpdate()" v-for="(news, i) in allNews"
                             :key="i" role="alert">
                             {{ news.header }}
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div v-if="tab == 'announcements'">
-                        <div class="alert alert-secondary shadow alert-dismissible fade show"
+                        <div class="alert alert-light border-0 rounded-1 shadow alert-dismissible fade show"
                             @click="currentTab = 'announcement', newsData = announcement, assignUpdate()" role="alert"
                             v-for="(announcement, i) in announcements" :key="i">
                             {{ announcement.header }}
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div v-if="tab == 'articles'">
-                        <div class="alert alert-light shadow alert-dismissible fade show"
+                        <div class="alert alert-light border-0 rounded-1 shadow alert-dismissible fade show"
                             @click="currentTab = 'article', newsData = article, passEditorProp(article.content), assignUpdate()"
                             role="alert" v-for="(article, i) in articles" :key="i">
                             {{ article.header }}
@@ -49,52 +49,56 @@
                 </div>
             </div>
         </div>
-        <div class="demo col-lg-8 col-sm-12">
+        <div class="demo col-lg-8 col-sm-12 my-0 ">
             <div>
-                <div class="">
-                    <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-pill"
+                <div class="pb-4">
+                    <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-1"
                         :class="currentTab == 'announcement' ? 'isActive' : null"
                         @click="selectTab('announcement'), newsData.tag = 'announcement'">Announcement</button>
-                    <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-pill"
+                    <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-1"
                         :class="currentTab == 'news' ? 'isActive' : null"
                         @click="selectTab('news'), newsData.tag = 'news'">News</button>
-                    <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-pill"
+                    <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-1"
                         :class="currentTab == 'article' ? 'isActive' : null"
                         @click="selectTab('article'), newsData.tag = 'article'">Article</button>
                 </div>
                 <div class="mb-3" v-if="currentTab === 'announcement'">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control form-control-sm" id="title" v-model="newsData.header"
+                    <label for="title" class="form-label fs-6">Title</label>
+                    <input type="text" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="title" v-model="newsData.header"
                         placeholder="Innovations in Ghana">
-                    <label for="image" class="form-label">Image</label>
-                    <input class="form-control form-control-sm " type="file" ref="fileInput"
+                    <label for="image" class="form-label fs-6">Image</label>
+                    <input style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm " type="file" ref="fileInput"
                         @change="handleFileChange" />
-                    <label for="content" class="form-label">Content</label>
-                    <textarea class="form-control form-control-sm" v-model="newsData.content" id="content"
+                    <label for="content" class="form-label fs-6">Content</label>
+                    <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" v-model="newsData.content" id="content"
                         rows="3"></textarea>
                 </div>
                 <div class="mb-3" v-if="currentTab === 'news'">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control form-control-sm" id="title" v-model="newsData.header"
+                    <label for="title" class="form-label fs-6">Title</label>
+                    <input type="text" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="title" v-model="newsData.header"
                         placeholder="News Title">
-                    <label for="link" class="form-label">Link</label>
-                    <input type="text" class="form-control form-control-sm" v-model="newsData.link" id="link"
+                    <label for="link" class="form-label fs-6">Link</label>
+                    <input type="text" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" v-model="newsData.link" id="link"
                         placeholder="News Link">
                 </div>
                 <div class="mb-3" v-if="currentTab === 'article'" :key="editorKey">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control form-control-sm" id="title" v-model="newsData.header"
-                        placeholder="Article Title">
-                    <label for="image" class="form-label">Image</label>
-                    <input class="form-control form-control-sm " type="file" ref="fileInput"
+                    <label for="title" class="form-label fs-6">Title</label>
+                    <input type="text" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="title" v-model="newsData.header" placeholder="Article Title">
+                    <label for="title" class="form-label fs-6">Author</label>
+                    <select style="font-size: 13px;" class="form-select  fw-light text-dark rounded-1 form-select-sm"  v-model="newsData.studentId"  aria-label="Small select example">
+                        <option :value="null" selected>select author</option>
+                        <option :value="student.id" v-for="(student, i) in students" :key="i" >{{ student.name }}<span style="font-size: 11px;">{{ student.tag }}</span> </option>
+                    </select>
+                    <label for="image" class="form-label fs-6">Image</label>
+                    <input style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm " type="file" ref="fileInput"
                         @change="handleFileChange" />
-                    <h1 style="text-align: start;">Start an Article</h1>
+                    <h5 class="mt-3" style="text-align: start;">Start an Article</h5>
                     <!-- <Editor class="shadow-lg p-3x" ref="editor" :data="newData" :config="config" @change="changeFn" :initEditorMethod="initializedFn" /> -->
                     <div id="editorjs"></div>
                 </div>
-                <button @click="saveNews" v-if="!update" class="btn btn-sm btn-warning my-4">Save</button>
-                <button @click="updateNews" v-if="update" class="btn btn-sm mx-2 btn-warning my-4">Save Changes</button>
-                <button @click="emptyData" v-if="update" class="btn btn-sm mx-2 btn-warning my-4">+</button>
+                <button @click="saveNews" v-if="!update" class="btn btn-sm px-4 btn-warning my-4">Save</button>
+                <button @click="updateNews" v-if="update" class="btn btn-sm px-4 mx-2 btn-warning my-4">Save Changes</button>
+                <button @click="emptyData" v-if="update" class="btn btn-sm  px-4 mx-2 btn-warning my-4">+</button>
 
                 <!-- <button @click="invokeSave" class="btn btn-sm btn-warning my-4">Save</button> -->
             </div>
@@ -125,23 +129,26 @@ export default {
         return {
             currentTab: 'article',
             tab: 'news',
-            newData:null,
+            newData: null,
             editorInstance: null,
             newsData: {
                 header: null,
                 image: null,
                 content: null,
                 tag: null,
+                studentId:null
             },
             update: false,
             allNews: [],
             announcements: [],
             articles: [],
+            students:[]
         };
     },
     mounted() {
         this.initializeEditor();
         this.getNews()
+        this.getStudents()
     },
     methods: {
         initializeEditor() {
@@ -151,7 +158,7 @@ export default {
                 tools: {
                     header: {
                         class: Header,
-                        inlineToolbar: ['link', 'bold', 'italic'] ,
+                        inlineToolbar: ['link', 'bold', 'italic'],
                         config: {
                             placeholder: 'Enter a header',
                             levels: [2, 3, 4],
@@ -244,6 +251,14 @@ export default {
                     console.log(err)
                 })
         },
+        getStudents(){
+        axios.get('https://mikrobotacademy.com/api/students/'
+        ).then(response =>{
+          this.students = response.data
+        }).catch(error =>{
+          console.log(error.response)
+        })
+      },
         handleFileChange(event) {
             this.newsData.image = event.target.files[0];
         },
@@ -279,6 +294,7 @@ export default {
             formData.append('link', this.newsData.link);
             formData.append('content', this.newsData.content);
             formData.append('tag', this.currentTab);
+            formData.append('studentId', this.newsData.studentId);
 
             try {
                 const response = await axios.post(
@@ -398,29 +414,59 @@ export default {
 </script>
 
 <style scoped>
-/* Add any required styles */
+.btn-outline-primary{
+    background-color: #00263d;
+    color: #fff;
+    border:none
+}
+
+
+.btn-outline-primary:hover{
+    opacity: .9;
+}
+
 .demo {
     margin: 20px;
 }
 
-.card-header {
-    background-color: #004e7c;
+.alert:hover{
+    background-color: rgba(240, 240, 240, 0.803);
 }
 
+.card-header {
+    background-color: #00263d;
+    font-size:13px;
+    padding-inline: 1px;
+  padding-block: 5px;
+}
+
+.nav-link{
+    padding-block: 6px;
+    border-bottom: none;
+    border-inline: none;
+}
+.nav-link:hover{
+    border-bottom: none;
+  border-inline: none;
+}
 .card-body {
-    padding: 20px;
+    padding:0px;
+    border:none;
+    padding-block: 20px;
+    font-size: 14px;
 }
 </style>
 
 <style>
-.codex-editor__redactor{
+.codex-editor__redactor {
     padding-bottom: 30px !important;
 }
-#editorjs{
+
+#editorjs {
     background-color: rgb(243, 242, 242);
     border: 1px solid rgb(120, 120, 120);
     padding: 5px;
-    border-radius:2px;
-    font-size:80%
+    border-radius: 2px;
+    font-size: 80%
 }
 </style>

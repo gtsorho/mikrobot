@@ -5,7 +5,6 @@
             :key="i">
             <div class="container hero-item overlay">
                 <a class="post-category-marker" style="  background: #e93314;" href="category.html">Announcement</a>
-                <p class="text-dark">{{ slide.image }}</p>
                 <div class="clearfix"></div>
                 <h2><a href="post-single.html" class="text-light fw-bolder">{{ slide.header }}</a></h2>
                 <p style="font-size:14px" class="text-light fw-medium">{{ slide.content }} </p>
@@ -360,7 +359,7 @@ export default {
     width: 100%;
     position: relative;
 }
-.widget-49 .widget-49-title-wrapper .widget-49-date-primary {
+ .widget-49-date-primary {
   display: flex;
   align-items: center;
   justify-content: center;

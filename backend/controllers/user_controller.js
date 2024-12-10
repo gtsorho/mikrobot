@@ -12,9 +12,7 @@ module.exports = {
 
 
     getUsers: async(req, res)=>{
-        let users = await db.user.findAll({
-            include:db.member
-        })
+        let users = await db.user.findAll({  })
         res.send(users)
     },
 

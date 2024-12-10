@@ -89,7 +89,8 @@ module.exports = {
                 header:Joi.string().allow(null),
                 content:Joi.string().allow(null),
                 link:Joi.string().allow(null),
-                tag:Joi.string().required()
+                tag:Joi.string().required(),
+                studentId:Joi.number().allow(null)
             }).unknown(true)
             return schema.validate(news)
         }
@@ -118,7 +119,8 @@ module.exports = {
                 header:Joi.string().allow(null),
                 content:Joi.string().allow(null),
                 link:Joi.string().allow(null),
-                tag:Joi.string().required()
+                tag:Joi.string().required(),
+                studentId:Joi.number().allow(null)
             }).unknown(true)
             return schema.validate(news)
         }
