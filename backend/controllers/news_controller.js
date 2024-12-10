@@ -77,69 +77,77 @@ module.exports = {
         
         res.send(news)
     },
-
     create: async (req, res) => {
-
         if (req.fileValidationError) {
             return res.status(400).json({ error: req.fileValidationError });
         }
-
-        function validExtOfficer(news){
+    
+        function validExtOfficer(news) {
             const schema = Joi.object({
-                header:Joi.string().allow(null),
-                content:Joi.string().allow(null),
-                link:Joi.string().allow(null),
-                tag:Joi.string().required(),
-                studentId:Joi.allow(null)
-            }).unknown(true)
-            return schema.validate(news)
+                header: Joi.string().allow(null),
+                content: Joi.string().allow(null),
+                link: Joi.string().allow(null),
+                tag: Joi.string().required(),
+                studentId: Joi.alternatives().try(Joi.number(), Joi.valid(null))
+            }).unknown(true);
+            return schema.validate(news);
         }
-        const validate = validExtOfficer(req.body) 
-        if (validate.error) return res.status(400).send(validate.error.details[0].message)
-
-
-        let news = req.body
-
+    
+        const validate = validExtOfficer(req.body);
+        if (validate.error) return res.status(400).send(validate.error.details[0].message);
+    
+        let news = req.body;
+    
+        // Convert 'null' string to null if it exists
+        if (news.studentId === 'null') {
+            news.studentId = null;
+        }
+    
         if (req.file) {
-            news.image = req.file.originalname
+            news.image = req.file.originalname;
         }
-
-        news = await db.news.create(news)
-        res.send(news)
-
-    }, 
-    update: async (req, res) => {
-
-        if (req.fileValidationError) {
-            return res.status(400).json({ error: req.fileValidationError });
-        }
-
-        function validExtOfficer(news){
-            const schema = Joi.object({
-                header:Joi.string().allow(null),
-                content:Joi.string().allow(null),
-                link:Joi.string().allow(null),
-                tag:Joi.string().required(),
-                studentId:Joi.allow(null)
-            }).unknown(true)
-            return schema.validate(news)
-        }
-        const validate = validExtOfficer(req.body) 
-        if (validate.error) return res.status(400).send(validate.error.details[0].message)
-
-
-        let news = req.body
-
-        if (req.file) {
-            news.image = req.file.originalname
-        }
-
-        news = await db.news.update(req.body, {
-            where:{id : req.params.id}
-        })
-
-        res.send(news)
+    
+        news = await db.news.create(news);
+        res.send(news);
     },
+    
+    update: async (req, res) => {
+        if (req.fileValidationError) {
+            return res.status(400).json({ error: req.fileValidationError });
+        }
+    
+        function validExtOfficer(news) {
+            const schema = Joi.object({
+                header: Joi.string().allow(null),
+                content: Joi.string().allow(null),
+                link: Joi.string().allow(null),
+                tag: Joi.string().required(),
+                studentId: Joi.alternatives().try(Joi.number(), Joi.valid(null))
+            }).unknown(true);
+            return schema.validate(news);
+        }
+    
+        const validate = validExtOfficer(req.body);
+        if (validate.error) return res.status(400).send(validate.error.details[0].message);
+    
+        let news = req.body;
+    
+        // Convert 'null' string to null if it exists
+        if (news.studentId === 'null') {
+            news.studentId = null;
+        }
+    
+        if (req.file) {
+            news.image = req.file.originalname;
+        }
+    
+        news = await db.news.update(req.body, {
+            where: { id: req.params.id }
+        });
+    
+        res.send(news);
+    },
+    
 
     
     delete: async (req, res) => {
