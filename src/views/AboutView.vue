@@ -25,29 +25,11 @@
                 </div>
             </div>
             <div class="row inforow text-center">
-                <div class="col-md-3 col-sm-6 target">
-                    <i class="bi fs-1 bi-people"></i>
-                    <div class="num" data-increment="3" data-num="368">3000+</div>
-                    <h3>Students</h3>
-                    <p>Students served in 12 years; our academy epitomizes excellence.</p>
-                </div>
-                <div class="col-md-3 col-sm-6 target">
-                    <i class="bi fs-1 bi-buildings"></i>
-                    <div class="num" data-increment="56" data-num="6980">3</div>
-                    <h3>Branches</h3>
-                    <p>Branches with Four student training categories each.</p>
-                </div>
-                <div class="col-md-3 col-sm-6 target">
-                    <i class="bi fs-1 bi-mortarboard"></i>
-                    <div class="num" data-increment="6" data-num="789">24</div>
-                    <h3>Instructors</h3>
-                    <p>Engineers pioneering STEM education through interactive robotics.</p>
-                </div>
-                <div class="col-md-3 col-sm-6 target">
-                    <i class="bi fs-1 bi-send"></i>
-                    <div class="num" data-increment="20" data-num="2450">5</div>
-                    <h3>Programs</h3>
-                    <p>Experiential STEM Programs for 21st century skills.</p>
+                <div class="col-md-3 col-sm-6 target" v-for="(fact, i) in facts" :key="i">
+                    <i :class="fact.icon"></i>
+                    <div class="num" data-increment="3" data-num="368">{{fact.figure}}</div>
+                    <h3>{{fact.title}}</h3>
+                    <p>{{fact.description}}</p>
                 </div>
             </div>
         </div>
@@ -81,6 +63,7 @@
 </template>
 
 <script>
+import axios from 'axios'
     export default{
         data() {
             return {
@@ -88,13 +71,11 @@
             }
         },
         created(){
-            this.getFacts()
+                this.getFacts()
         },
         methods:{
             getFacts() {
-            let token = this.getCookie('token')
             axios.get('https://mikrobotacademy.com/api/facts/',
-                { headers: { 'Authorization': `Bearer ${token}` } }
             ).then(response => {
                 this.facts = response.data
                 console.log(response.data)

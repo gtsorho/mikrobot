@@ -93,9 +93,7 @@ export default {
   },
   methods: {
     getFacts() {
-      let token = this.getCookie('token')
-      axios.get('https://mikrobotacademy.com/api/facts/',
-        { headers: { 'Authorization': `Bearer ${token}` } }
+      axios.get('https://mikrobotacademy.com/api/facts/'
       ).then(response => {
         this.facts = response.data
       }).catch(error => {
