@@ -12,38 +12,47 @@
               v-for="(fact, i) in facts" :key="i" @click="assignFact(fact), update = true" aria-current="true">
               <div class="row">
                 <div class="col-8">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1">{{ fact.title }}</h6>
+                  <div class="d-flex w-100 justify-content-start">
+                    <button type="button " class="btn btn-sm" style="background-color: #00263d; color:white">
+                      {{ fact.title }} <span class="badge text-bg-secondary">{{ fact.figure }}</span>
+                    </button>
                   </div>
-                  <p class="mb-1" style="font-size: 13px;">{{ fact.figure }}</p>
-                  <small>{{ fact.description }}</small>
+                  <p class="mb-1" style="font-size: 13px;">{{ fact.description }}</p>
                 </div>
               </div>
             </a>
           </div>
         </div>
-        <div class="col-md-6 shadow px-3 py-4">
+        <div class="col-md-6 shadow px-3 py-4 d-flex align-items-center" style="  height: max-content;">
           <div class="row g-3">
-            <div class="col-md-6">
+            <div class="col-md-9">
               <label for="name" style="font-size: 13px;" class="form-label fs-6">Title</label>
               <input type="text" v-model="fact.title" style="font-size: 13px;"
                 class="form-control fw-light text-dark rounded-1 form-control-sm" id="name">
             </div>
             <div class="col-3">
               <label for="pp" style="font-size: 13px;" class="form-label fs-6">Figure</label>
-              <input type="text" v-model="fact.figure" style="font-size: 13px;"
-              class="form-control fw-light text-dark rounded-1 form-control-sm" id="name">
+              <input type="number" v-model="fact.figure" style="font-size: 13px;"
+                class="form-control fw-light text-dark rounded-1 form-control-sm" id="name">
             </div>
-            <div class="col-6">
-              <label for="exampleFormControlTextarea1" style="font-size: 13px;" class="form-label fs-6">Description</label>
+            <div class="col-md-12">
+              <label for="name" style="font-size: 13px;" class="form-label fs-6">Icon</label>
+              <input type="text" v-model="fact.icon" style="font-size: 13px;"
+                class="form-control fw-light text-dark rounded-1 form-control-sm" id="name">
+            </div>
+            <div class="col-12">
+              <label for="exampleFormControlTextarea1" style="font-size: 13px;"
+                class="form-label fs-6">Description</label>
               <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1"
                 v-model="fact.description" id="exampleFormControlTextarea1" rows="2"></textarea>
             </div>
             <div class="col-12">
-              <button type="button" v-if="update" class="btn btn-sm rounded-0 float-start btn-outline-danger">Delete Student</button>
-              <button type="button" v-if="!update" @click="submitForm()" class="btn btn-sm rounded-0 float-end btn-outline-primary">Add Student</button>
+              <button type="button" @click="deleteItem(fact.id)" v-if="update" class="btn btn-sm rounded-0 float-start btn-outline-danger">Delete
+                Fact</button>
+              <button type="button" v-if="!update" @click="submitForm()"
+                class="btn btn-sm rounded-0 float-end btn-outline-primary">Add Fact</button>
               <button type="button" v-else @click="updateFact(fact.id)"
-                class="btn btn-sm rounded-0 float-end btn-outline-primary">Update {{ student.name }}</button>
+                class="btn btn-sm rounded-0 float-end btn-outline-primary">Update {{ fact.title }}</button>
               <button type="button" v-if="update" @click="update = false, emptyFact()"
                 class="btn mx-1 btn-sm rounded-0 float-end btn-outline-dark">+</button>
               <p class="text-danger">{{ errorMsg }}</p>
@@ -70,7 +79,8 @@ export default {
       fact: {
         title: null,
         figure: null,
-        description: null
+        description: null,
+        icon:null
       }
     }
   },
@@ -80,9 +90,11 @@ export default {
   },
   methods: {
     getFacts() {
-      axios.get('https://mikrobotacademy.com/api/facts/'
+      let token = this.getCookie('token')
+      axios.get('https://mikrobotacademy.com/api/facts/',
+        { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
-        this.students = response.data
+        this.facts = response.data
         console.log(response.data)
       }).catch(error => {
         console.log(error.response)
@@ -95,7 +107,7 @@ export default {
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
         this.getFacts()
-        this.emptyFact
+        this.emptyFact()
       }).catch(error => {
         this.errorMsg = error.response.data
         setInterval(() => {
@@ -106,35 +118,35 @@ export default {
     updateFact(id) {
       let token = this.getCookie('token')
 
-      axios.post('https://mikrobotacademy.com/api/fact/update/' + id, fact,
+      axios.post('https://mikrobotacademy.com/api/facts/update/' + id, this.fact,
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
-        this.getStudents()
+        this.getFacts()
         this.emptyFact
       }).catch(error => {
         console.log(error.response)
       })
     },
     emptyFact() {
-      this.student = {
+      this.fact = {
         title: null,
         figure: null,
-        description: null
+        description: null,
+        icon:null
       }
     },
     deleteItem(id) {
       let token = this.getCookie('token')
-
-      axios.get('https://mikrobotacademy.com/api/fact/delete/' + id,
+      axios.get('https://mikrobotacademy.com/api/facts/delete/' + id,
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
-        this.getStudents()
+        this.getFacts()
       }).catch(error => {
         console.log(error.response)
       })
     },
     assignFact(data) {
-      this.student = data
+      this.fact = data
     },
     getCookie(cname) {
       let name = cname + "=";
@@ -193,6 +205,10 @@ h6 {
   -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
   -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
   -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+}
+
+.form-control, .form-select{
+  background-color: #d9d9d941;
 }
 
 .card {

@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         description: {
           type: DataTypes.TEXT,
           allowNull: true,
+        },
+        icon: {
+          type: DataTypes.TEXT,
+          allowNull: true,
         }
       });
     return facts 

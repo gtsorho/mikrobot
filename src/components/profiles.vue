@@ -380,4 +380,9 @@ h1,h2,h3,h4,h5,h6{
 .widget-49 .widget-49-meeting-action a {
   text-transform: uppercase;
 }
+
+.form-control, .form-select{
+  background-color: #d9d9d941;
+}
+
 </style>

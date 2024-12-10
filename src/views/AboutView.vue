@@ -53,8 +53,6 @@
         </div>
 
     <div class="parallax"></div>
-
-
         <div class="container my-5">
             <div class="row inforow g-5 d-flex ">
                 <div class="col-md-3 col-sm-4">
@@ -81,6 +79,31 @@
         </div>
   </div>
 </template>
+
+<script>
+    export default{
+        data() {
+            return {
+                facts:[]
+            }
+        },
+        created(){
+            this.getFacts()
+        },
+        methods:{
+            getFacts() {
+            let token = this.getCookie('token')
+            axios.get('https://mikrobotacademy.com/api/facts/',
+                { headers: { 'Authorization': `Bearer ${token}` } }
+            ).then(response => {
+                this.facts = response.data
+            }).catch(error => {
+                console.log(error.response)
+            })
+            },
+        }
+    }
+</script>
 
 <style scoped>
 p{

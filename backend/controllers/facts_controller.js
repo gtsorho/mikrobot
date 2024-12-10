@@ -22,7 +22,8 @@ module.exports = {
             const schema = Joi.object({
                 title:Joi.string().required(),
                 figure:Joi.number().required(),
-                description: Joi.string().required()
+                description: Joi.string().required(),
+                icon: Joi.string().required()
             })
 
             return schema.validate(user)

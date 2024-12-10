@@ -414,6 +414,12 @@ export default {
 </script>
 
 <style scoped>
+
+.form-control, .form-select{
+  background-color: #d9d9d941;
+}
+
+
 .btn-outline-primary{
     background-color: #00263d;
     color: #fff;
