@@ -1,319 +1,378 @@
 <template>
-    <div class=" rounded-0  ">
-          <div class="container my-5">
-            <div class=" d-flex justify-content-between ">
-            <input type="text" style="font-size: 13px;" class="form-control fw-light text-secondary form-control-sm rounded-1 my-3 w-25" v-model="searchQuery" @keyup="search" placeholder="Search by title" />
-            <p class="my-3" style="font-size:13px">{{students.length}} Item(s) Found</p>
-            </div>
+  <div class=" rounded-0  ">
+    <div class="container my-5">
+      <div class=" d-flex justify-content-between ">
+        <input type="text" style="font-size: 13px;"
+          class="form-control fw-light text-secondary form-control-sm rounded-1 my-3 w-25" v-model="searchQuery"
+          @keyup="search" placeholder="Search by title" />
+        <p class="my-3" style="font-size:13px">{{ students.length }} Item(s) Found</p>
+      </div>
 
-        <div class="row">
-            <div class="col-md-6">
-            <div class="list-group " style="max-height:5in !important; overflow-y:auto">
-                <a href="#"  class="list-group-item  border-none rounded-0 shadow-sm list-group-item-action my-2"  v-for="(student,i) in students" :key="i" @click="assignStudent(student), update= true" aria-current="true">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="d-flex w-100 justify-content-between">
-                        <h6 class="mb-1">{{student.name}}</h6>
-                        <small style="font-size: 13px;">{{calculateAge(student.dob)}} years old</small>
-                    </div>
-                    <p class="mb-1" style="font-size: 13px;">{{ truncateData(student.profile,70)}}</p>
-                    <small>{{student.guardian}} - ({{student.phone}})</small>
-                    </div>
-                    <div class="col-md-4 d-flex justify-content-center my-auto">
-                    <img v-if="student.hasOwnProperty('image')" :src="`https://mikrobotacademy.com/profile_images/${ student.image}`" class="rounded-circle" style="width:5rem; height:5rem; object-fit:cover">
-                    </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="list-group " style="max-height:5in !important; overflow-y:auto">
+            <a href="#" class="list-group-item  border-none rounded-0 shadow-sm list-group-item-action my-2"
+              v-for="(student, i) in students" :key="i" @click="assignStudent(student), update = true"
+              aria-current="true">
+              <div class="row">
+                <div class="col-8">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1">{{ student.name }}</h6>
+                    <small style="font-size: 13px;">{{ calculateAge(student.dob) }} years old</small>
+                  </div>
+                  <p class="mb-1" style="font-size: 13px;">{{ truncateData(student.profile, 70) }}</p>
+                  <small>{{ student.guardian }} - ({{ student.phone }})</small>
                 </div>
-                </a>
-            </div>
-            </div>
-            <div class="col-md-6 shadow px-3 py-4">
-            <div class="row g-3">
-              <div class="col-12">
-                <label for="name" style="font-size: 13px;" class="form-label fs-6">Profile Tag <span class="text-danger">*</span></label>
-                <select style="font-size: 13px;" class="form-select form-select-sm fw-light text-dark rounded-1" v-model="student.tag" aria-label="Small select example">
-                  <option value="student">student</option>
-                  <option value="coach">Coach</option>
-                  <option value="director">Director</option>
-                </select>
+                <div class="col-md-4 d-flex justify-content-center my-auto">
+                  <img v-if="student.hasOwnProperty('image')"
+                    :src="`https://mikrobotacademy.com/profile_images/${student.image}`" class="rounded-circle"
+                    style="width:5rem; height:5rem; object-fit:cover">
+                </div>
               </div>
-                <div class="col-md-6">
-                <label for="name" style="font-size: 13px;" class="form-label fs-6">Name</label>
-                <input type="text" v-model="student.name" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="name">
-                </div>
-                <div class="col-3">
-                <label for="pp" style="font-size: 13px;" class="form-label fs-6">Profile Picture</label>
-                <input type="file" @change="handleImageChange"  style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="pp" >
-                </div>
-                <div class="col-3">
-                <label for="dob" style="font-size: 13px;" class="form-label fs-6">Dob <span style="font-size:10px">({{new Date(student.dob).toDateString()}})</span></label>
-                <input type="date" v-model="student.dob" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="dob" >
-                </div>
-                <div class="col-md-6">
-                <label for="guardian" style="font-size: 13px;" class="form-label fs-6">Parent</label>
-                <input type="text" v-model="student.guardian" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="guardian" placeholder="Mr John">
-                </div>
-                <div class="col-6">
-                <label for="phone" style="font-size: 13px;" class="form-label fs-6">Phone</label>
-                <input type="text" v-model="student.phone" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="phone" placeholder="eg 0244456335">
-                </div>
-                <div class="col-12">
-                <label for="exampleFormControlTextarea1" style="font-size: 13px;" class="form-label fs-6">Profile</label>
-                <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1" v-model="student.profile" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-                <div class="col-6">
-                <label for="exampleFormControlTextarea1" style="font-size: 13px;" class="form-label fs-6">Sub Profile</label>
-                <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1" v-model="student.sub_profile" id="exampleFormControlTextarea1" rows="2"></textarea>
-                </div>
-                <div class="col-6">
-                <label for="exampleFormControlTextarea1" style="font-size: 13px;" class="form-label fs-6">Achievements</label>
-                <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1" v-model="student.achievement" id="exampleFormControlTextarea1" rows="2"></textarea>
-                </div>
-                <div class="col-12">
-                <button type="button" v-if="update" @click="confirmDelete(student)" class="btn btn-sm rounded-0 float-start btn-outline-danger">Delete Student</button>
-                <button type="button" v-if="!update" @click="submitForm()" class="btn btn-sm rounded-0 float-end btn-outline-primary">Add Student</button>
-                <button type="button" v-else @click="updateProfile(student.id)" class="btn btn-sm rounded-0 float-end btn-outline-primary">Update {{student.name}}</button>
-                <button type="button" v-if="update" @click="update = false, emptyStudent()" class="btn mx-1 btn-sm rounded-0 float-end btn-outline-dark">+</button>
-                <p class="text-danger">{{errorMsg}}</p>
-                </div>
-            </div>
-            </div>
+            </a>
+          </div>
         </div>
+        <div class="col-md-6 shadow px-3 py-4">
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="name" style="font-size: 13px;" class="form-label fs-6">Profile Tag <span
+                  class="text-danger">*</span></label>
+              <select style="font-size: 13px;" class="form-select form-select-sm fw-light text-dark rounded-1"
+                v-model="student.tag" aria-label="Small select example">
+                <option value="student">student</option>
+                <option value="coach">Coach</option>
+                <option value="director">Director</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="name" style="font-size: 13px;" class="form-label fs-6">Name</label>
+              <input type="text" v-model="student.name" style="font-size: 13px;"
+                class="form-control fw-light text-dark rounded-1 form-control-sm" id="name">
+            </div>
+            <div class="col-3">
+              <label for="pp" style="font-size: 13px;" class="form-label fs-6">Profile Picture</label>
+              <input type="file" @change="handleImageChange" style="font-size: 13px;"
+                class="form-control fw-light text-dark rounded-1 form-control-sm" id="pp">
+            </div>
+            <div class="col-3">
+              <label for="dob" style="font-size: 13px;" class="form-label fs-6">Dob <span style="font-size:10px">({{ new
+                Date(student.dob).toDateString() }})</span></label>
+              <input type="date" v-model="student.dob" style="font-size: 13px;"
+                class="form-control fw-light text-dark rounded-1 form-control-sm" id="dob">
+            </div>
+            <div class="col-md-6">
+              <label for="guardian" style="font-size: 13px;" class="form-label fs-6">Parent</label>
+              <input type="text" v-model="student.guardian" style="font-size: 13px;"
+                class="form-control fw-light text-dark rounded-1 form-control-sm" id="guardian" placeholder="Mr John">
+            </div>
+            <div class="col-6">
+              <label for="phone" style="font-size: 13px;" class="form-label fs-6">Phone</label>
+              <input type="text" v-model="student.phone" style="font-size: 13px;"
+                class="form-control fw-light text-dark rounded-1 form-control-sm" id="phone"
+                placeholder="eg 0244456335">
+            </div>
+            <div class="col-12">
+              <label for="exampleFormControlTextarea1" style="font-size: 13px;" class="form-label fs-6">Profile</label>
+              <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1"
+                v-model="student.profile" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="col-6">
+              <label for="exampleFormControlTextarea1" style="font-size: 13px;" class="form-label fs-6">Sub
+                Profile</label>
+              <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1"
+                v-model="student.sub_profile" id="exampleFormControlTextarea1" rows="2"></textarea>
+            </div>
+            <div class="col-6">
+              <label for="exampleFormControlTextarea1" style="font-size: 13px;"
+                class="form-label fs-6">Achievements</label>
+              <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1"
+                v-model="student.achievement" id="exampleFormControlTextarea1" rows="2"></textarea>
+            </div>
+            <div class="col-12">
+              <button type="button" v-if="update" @click="confirmDelete(student)"
+                class="btn btn-sm rounded-0 float-start btn-outline-danger">Delete Student</button>
+              <button type="button" v-if="!update" @click="submitForm()"
+                class="btn btn-sm rounded-0 float-end btn-outline-primary">Add Student</button>
+              <button type="button" v-else @click="updateProfile(student.id)"
+                class="btn btn-sm rounded-0 float-end btn-outline-primary">Update {{ student.name }}</button>
+              <button type="button" v-if="update" @click="update = false, emptyStudent()"
+                class="btn mx-1 btn-sm rounded-0 float-end btn-outline-dark">+</button>
+              <p class="text-danger">{{ errorMsg }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </template>
 <script>
 import Editor from '../components/editor.vue'
 import axios from 'axios'
+import imageCompression from 'browser-image-compression';
+
 export default {
-    components:{
-      Editor
+  components: {
+    Editor
+  },
+  data() {
+    return {
+      students: [],
+      searchQuery: '',
+      update: false,
+      updateImg: false,
+      errorMsg: null,
+      student: {
+        name: null,
+        dob: null,
+        guardian: null,
+        phone: null,
+        profile: null,
+        sub_profile: null,
+        achievement: null,
+        image: null,
+        tag: 'student'
+      }
+    }
+  },
+  mounted() {
+    this.getStudents()
+
+  },
+  methods: {
+    getStudents() {
+      axios.get('https://mikrobotacademy.com/api/students/'
+      ).then(response => {
+        this.students = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error.response)
+      })
     },
-    data() {
-        return {
-         students:[],
-         searchQuery:'',
-         update:false,
-         updateImg:false,
-         errorMsg:null,
-         student: {
-          name:null,
-          dob:null,
-          guardian:null,
-          phone:null,
-          profile:null,
-          sub_profile:null,
-          achievement:null,
-          image:null,
-          tag:'student'
-         }
-        }
-    },  
-    mounted(){
-      this.getStudents()
+    async handleImageChange(event) {
+      this.updateImg = true;
+      const file = event.target.files[0];
 
+      if (file) {
+        try {
+          const options = {
+            maxSizeMB: 0.1,
+            maxWidthOrHeight: 1024,
+            useWebWorker: true,
+          };
+
+          const compressedFile = await imageCompression(file, options);
+
+          const renamedCompressedFile = new File(
+            [compressedFile],
+            file.name,
+            { type: compressedFile.type }
+          );
+
+          this.student.image = renamedCompressedFile;
+          // console.log('Original size:', file.size / 1024, 'KB');
+          // console.log('Compressed size:', renamedCompressedFile.size / 1024, 'KB');
+        } catch (error) {
+          console.error('Error compressing image:', error);
+        }
+      }
     },
-    methods:{
-      getStudents(){
-        axios.get('https://mikrobotacademy.com/api/students/'
-        ).then(response =>{
-          this.students = response.data
-          console.log(response.data)
-        }).catch(error =>{
-          console.log(error.response)
-        })
-      },
-      handleImageChange(event) {
-        this.student.image = event.target.files[0];
-        this.updateImg = true
-      },
-      search(){
-        axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
-        ).then(response =>{
-          this.students = response.data
-        }).catch(error =>{
-          console.log(error.response)
-        })
-      },
-      submitForm() {
-        let token = this.getCookie('token')
+    search() {
+      axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
+      ).then(response => {
+        this.students = response.data
+      }).catch(error => {
+        console.log(error.response)
+      })
+    },
+    submitForm() {
+      let token = this.getCookie('token')
 
-        const formData = new FormData();
+      const formData = new FormData();
 
-        for (const key in this.student) {
-          if (this.student.hasOwnProperty(key)) {
-            formData.append(key, this.student[key]);
-          }
+      for (const key in this.student) {
+        if (this.student.hasOwnProperty(key)) {
+          formData.append(key, this.student[key]);
         }
+      }
 
-        axios.post('https://mikrobotacademy.com/api/students/', formData,
-          { headers:{'Authorization': `Bearer ${token}`}}
-          ).then(response =>{
-            this.getStudents()
-            this.emptyStudent()
-          }).catch(error =>{
-            this.errorMsg = error.response.data
-            setInterval(() => {
-              this.errorMsg = null
-            }, 5000);
-            })
-      },
-      updateProfile(id) {
-        let token = this.getCookie('token')
-        const formData = new FormData();
+      axios.post('https://mikrobotacademy.com/api/students/', formData,
+        { headers: { 'Authorization': `Bearer ${token}` } }
+      ).then(response => {
+        this.getStudents()
+        this.emptyStudent()
+      }).catch(error => {
+        this.errorMsg = error.response.data
+        setInterval(() => {
+          this.errorMsg = null
+        }, 5000);
+      })
+    },
+    updateProfile(id) {
+      let token = this.getCookie('token')
+      const formData = new FormData();
 
-        if(!this.updateImg){
-          delete this.student.image
+      if (!this.updateImg) {
+        delete this.student.image
+      }
+
+      for (const key in this.student) {
+        if (this.student.hasOwnProperty(key)) {
+          formData.append(key, this.student[key]);
         }
+      }
 
-        for (const key in this.student) {
-          if (this.student.hasOwnProperty(key)) {
-            formData.append(key, this.student[key]);
-          }
+      axios.post('https://mikrobotacademy.com/api/students/update/' + id, formData,
+        { headers: { 'Authorization': `Bearer ${token}` } }
+      ).then(response => {
+        this.getStudents()
+        this.emptyStudent()
+      }).catch(error => {
+        console.log(error.response)
+      })
+    },
+    assignStudent(data) {
+      this.student = data
+      this.updateImg = false
+    },
+    calculateAge(birthdate) {
+      const currentDate = new Date();
+      const birthDate = new Date(birthdate);
+
+      let age = currentDate.getFullYear() - birthDate.getFullYear();
+
+      // Adjust age if birthday hasn't occurred yet this year
+      if (
+        currentDate.getMonth() < birthDate.getMonth() ||
+        (currentDate.getMonth() === birthDate.getMonth() &&
+          currentDate.getDate() < birthDate.getDate())
+      ) {
+        age--;
+      }
+      return age;
+    },
+    truncateData(data, count) {
+      return data.substring(0, count);
+    },
+    emptyStudent() {
+      this.student = {
+        name: '',
+        dob: '',
+        guardian: '',
+        phone: '',
+        profile: '',
+        sub_profile: '',
+        achievement: '',
+        image: '',
+        tag: 'student'
+      }
+    },
+    confirmDelete(student) {
+      const isConfirmed = window.confirm(`Are you sure you want to delete this profile`);
+
+      if (isConfirmed) {
+        this.deleteItem(student.id);
+      } else {
+        console.log('Deletion canceled.');
+      }
+    },
+    deleteItem(id) {
+      let token = this.getCookie('token')
+
+      axios.get('https://mikrobotacademy.com/api/students/delete/' + id,
+        { headers: { 'Authorization': `Bearer ${token}` } }
+      ).then(response => {
+        this.getStudents()
+      }).catch(error => {
+        console.log(error.response)
+      })
+    },
+    getCookie(cname) {
+      let name = cname + "=";
+      let ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
         }
-
-        axios.post('https://mikrobotacademy.com/api/students/update/' + id, formData,
-          { headers:{'Authorization': `Bearer ${token}`}}
-          ).then(response =>{
-            this.getStudents()
-            this.emptyStudent()
-          }).catch(error =>{
-            console.log(error.response)
-          })
-      },
-      assignStudent(data){
-        this.student  = data
-        this.updateImg = false
-      },
-     calculateAge(birthdate){
-        const currentDate = new Date();
-        const birthDate = new Date(birthdate);
-
-        let age = currentDate.getFullYear() - birthDate.getFullYear();
-
-        // Adjust age if birthday hasn't occurred yet this year
-        if (
-          currentDate.getMonth() < birthDate.getMonth() ||
-          (currentDate.getMonth() === birthDate.getMonth() &&
-            currentDate.getDate() < birthDate.getDate())
-        ) {
-          age--;
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
         }
-        return age;
-      },
-      truncateData(data, count) {
-        return data.substring(0, count);
-      },
-      emptyStudent(){
-        this.student = {
-          name:'',
-          dob:'',
-          guardian:'',
-          phone:'',
-          profile:'',
-          sub_profile:'',
-          achievement:'',
-          image:'',
-          tag:'student'
-         }
-      },
-      confirmDelete(student) {
-            const isConfirmed = window.confirm(`Are you sure you want to delete this profile`);
-
-            if (isConfirmed) {
-                this.deleteItem(student.id);
-            } else {
-                console.log('Deletion canceled.');
-            }
-        },
-        deleteItem(id) {
-          let token = this.getCookie('token')
-
-          axios.get('https://mikrobotacademy.com/api/students/delete/' + id,
-          { headers:{'Authorization': `Bearer ${token}`}}
-          ).then(response =>{
-            this.getStudents()            
-          }).catch(error =>{
-            console.log(error.response)
-          })
-        },
-      getCookie(cname) {
-        let name = cname + "=";
-        let ca = document.cookie.split(';');
-        for(let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-      },
-        setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-      },
-    }, 
+      }
+      return "";
+    },
+    setCookie(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    },
+  },
 }
 </script>
 
 <style scoped>
-p{
+p {
   font-weight: 200 !important;
 }
 
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 400 !important;
 }
 
 .card-margin {
-    margin-bottom: 1.875rem;
+  margin-bottom: 1.875rem;
 }
 
-.card-footer a{
+.card-footer a {
   color: #fff;
-  transition: background-color 0.3s cubic-bezier(0.47, 0, 0.745, 0.715); 
+  transition: background-color 0.3s cubic-bezier(0.47, 0, 0.745, 0.715);
 }
-.card-footer a:hover{
+
+.card-footer a:hover {
   background-color: #306102 !important;
 }
 
 .card {
-    border: 0;
-    box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-    -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  border: 0;
+  box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
 }
+
 .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #ffffff;
-    background-clip: border-box;
-    border: 1px solid #e6e4e9;
-    border-radius: 8px;
-    height: 90%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #ffffff;
+  background-clip: border-box;
+  border: 1px solid #e6e4e9;
+  border-radius: 8px;
+  height: 90%;
 }
 
 .card .card-header.no-border {
-    border: 0;
+  border: 0;
 }
+
 .card .card-header {
-    background: none;
-    padding: 0 0.9375rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    min-height: 50px;
+  background: none;
+  padding: 0 0.9375rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  min-height: 50px;
 }
+
 .card-header:first-child {
-    border-radius: calc(8px - 1px) calc(8px - 1px) 0 0;
+  border-radius: calc(8px - 1px) calc(8px - 1px) 0 0;
 }
 
 .widget-49 .widget-49-title-wrapper {
@@ -382,8 +441,8 @@ h1,h2,h3,h4,h5,h6{
   text-transform: uppercase;
 }
 
-.form-control, .form-select{
+.form-control,
+.form-select {
   background-color: #d9d9d941;
 }
-
 </style>

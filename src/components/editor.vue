@@ -9,12 +9,14 @@
                                 @click="tab = 'news'" href="#">News</a>
                         </li>
                         <li class="nav-item rounded-0">
-                            <a class="nav-link text-light rounded-0" :class="tab == 'announcements' ? 'active text-dark' : null"
+                            <a class="nav-link text-light rounded-0"
+                                :class="tab == 'announcements' ? 'active text-dark' : null"
                                 @click="tab = 'announcements'" href="#">Announcements</a>
                         </li>
                         <li class="nav-item rounded-0">
-                            <a class="nav-link text-light rounded-0" :class="tab == 'articles' ? 'active text-dark' : null"
-                                @click="tab = 'articles'" href="#">Articles</a>
+                            <a class="nav-link text-light rounded-0"
+                                :class="tab == 'articles' ? 'active text-dark' : null" @click="tab = 'articles'"
+                                href="#">Articles</a>
                         </li>
                     </ul>
                 </div>
@@ -64,40 +66,48 @@
                 </div>
                 <div class="mb-3" v-if="currentTab === 'announcement'">
                     <label for="title" class="form-label fs-6">Title</label>
-                    <input type="text" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="title" v-model="newsData.header"
-                        placeholder="Innovations in Ghana">
+                    <input type="text" style="font-size: 13px;"
+                        class="form-control fw-light text-dark rounded-1 form-control-sm" id="title"
+                        v-model="newsData.header" placeholder="Innovations in Ghana">
                     <label for="image" class="form-label fs-6">Image</label>
-                    <input style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm " type="file" ref="fileInput"
-                        @change="handleFileChange" />
+                    <input style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm "
+                        type="file" ref="fileInput" @change="handleFileChange" />
                     <label for="content" class="form-label fs-6">Content</label>
-                    <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" v-model="newsData.content" id="content"
-                        rows="3"></textarea>
+                    <textarea style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm"
+                        v-model="newsData.content" id="content" rows="3"></textarea>
                 </div>
                 <div class="mb-3" v-if="currentTab === 'news'">
                     <label for="title" class="form-label fs-6">Title</label>
-                    <input type="text" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="title" v-model="newsData.header"
-                        placeholder="News Title">
+                    <input type="text" style="font-size: 13px;"
+                        class="form-control fw-light text-dark rounded-1 form-control-sm" id="title"
+                        v-model="newsData.header" placeholder="News Title">
                     <label for="link" class="form-label fs-6">Link</label>
-                    <input type="text" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" v-model="newsData.link" id="link"
-                        placeholder="News Link">
+                    <input type="text" style="font-size: 13px;"
+                        class="form-control fw-light text-dark rounded-1 form-control-sm" v-model="newsData.link"
+                        id="link" placeholder="News Link">
                 </div>
                 <div class="mb-3" v-if="currentTab === 'article'" :key="editorKey">
                     <label for="title" class="form-label fs-6">Title</label>
-                    <input type="text" style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm" id="title" v-model="newsData.header" placeholder="Article Title">
+                    <input type="text" style="font-size: 13px;"
+                        class="form-control fw-light text-dark rounded-1 form-control-sm" id="title"
+                        v-model="newsData.header" placeholder="Article Title">
                     <label for="title" class="form-label fs-6">Author</label>
-                    <select style="font-size: 13px;" class="form-select  fw-light text-dark rounded-1 form-select-sm"  v-model="newsData.studentId"  aria-label="Small select example">
+                    <select style="font-size: 13px;" class="form-select  fw-light text-dark rounded-1 form-select-sm"
+                        v-model="newsData.studentId" aria-label="Small select example">
                         <option :value="null" selected>select author</option>
-                        <option :value="student.id" v-for="(student, i) in students" :key="i" >{{ student.name }}<span style="font-size: 11px;">{{ student.tag }}</span> </option>
+                        <option :value="student.id" v-for="(student, i) in students" :key="i">{{ student.name }}<span
+                                style="font-size: 11px;">{{ student.tag }}</span> </option>
                     </select>
                     <label for="image" class="form-label fs-6">Image</label>
-                    <input style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm " type="file" ref="fileInput"
-                        @change="handleFileChange" />
+                    <input style="font-size: 13px;" class="form-control fw-light text-dark rounded-1 form-control-sm "
+                        type="file" ref="fileInput" @change="handleFileChange" />
                     <h5 class="mt-3" style="text-align: start;">Start an Article</h5>
                     <!-- <Editor class="shadow-lg p-3x" ref="editor" :data="newData" :config="config" @change="changeFn" :initEditorMethod="initializedFn" /> -->
                     <div id="editorjs"></div>
                 </div>
                 <button @click="saveNews" v-if="!update" class="btn btn-sm px-4 btn-warning my-4">Save</button>
-                <button @click="updateNews" v-if="update" class="btn btn-sm px-4 mx-2 btn-warning my-4">Save Changes</button>
+                <button @click="updateNews" v-if="update" class="btn btn-sm px-4 mx-2 btn-warning my-4">Save
+                    Changes</button>
                 <button @click="emptyData" v-if="update" class="btn btn-sm  px-4 mx-2 btn-warning my-4">+</button>
 
                 <!-- <button @click="invokeSave" class="btn btn-sm btn-warning my-4">Save</button> -->
@@ -107,6 +117,7 @@
 </template>
 
 <script>
+import imageCompression from 'browser-image-compression';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
@@ -129,6 +140,7 @@ export default {
         return {
             currentTab: 'article',
             tab: 'news',
+            updateImg: false,
             newData: null,
             editorInstance: null,
             newsData: {
@@ -136,13 +148,13 @@ export default {
                 image: null,
                 content: null,
                 tag: null,
-                studentId:null
+                studentId: null
             },
             update: false,
             allNews: [],
             announcements: [],
             articles: [],
-            students:[]
+            students: []
         };
     },
     mounted() {
@@ -251,16 +263,13 @@ export default {
                     console.log(err)
                 })
         },
-        getStudents(){
-        axios.get('https://mikrobotacademy.com/api/students/'
-        ).then(response =>{
-          this.students = response.data
-        }).catch(error =>{
-          console.log(error.response)
-        })
-      },
-        handleFileChange(event) {
-            this.newsData.image = event.target.files[0];
+        getStudents() {
+            axios.get('https://mikrobotacademy.com/api/students/'
+            ).then(response => {
+                this.students = response.data
+            }).catch(error => {
+                console.log(error.response)
+            })
         },
         confirmDelete(id) {
             const isConfirmed = window.confirm('Are you sure you want to delete this item?');
@@ -272,9 +281,31 @@ export default {
             this.currentTab = tab;
             this.hasImage = false;
         },
-        handleFileChange(event) {
-            this.newsData.image = event.target.files[0];
-            this.updateImg = true
+        async handleFileChange(event) {
+            this.updateImg = true;
+            const file = event.target.files[0];
+
+            if (file) {
+                try {
+                    const options = {
+                        maxSizeMB: 0.1,
+                        maxWidthOrHeight: 1024,
+                        useWebWorker: true,
+                    };
+
+                    const compressedFile = await imageCompression(file, options);
+
+                    const renamedCompressedFile = new File(
+                        [compressedFile],
+                        file.name,
+                        { type: compressedFile.type }
+                    );
+
+                    this.newsData.image = renamedCompressedFile;
+                } catch (error) {
+                    console.error('Error compressing image:', error);
+                }
+            }
         },
         assignUpdate() {
             this.update = true
@@ -414,20 +445,20 @@ export default {
 </script>
 
 <style scoped>
-
-.form-control, .form-select{
-  background-color: #d9d9d941;
+.form-control,
+.form-select {
+    background-color: #d9d9d941;
 }
 
 
-.btn-outline-primary{
+.btn-outline-primary {
     background-color: #00263d;
     color: #fff;
-    border:none
+    border: none
 }
 
 
-.btn-outline-primary:hover{
+.btn-outline-primary:hover {
     opacity: .9;
 }
 
@@ -435,29 +466,31 @@ export default {
     margin: 20px;
 }
 
-.alert:hover{
+.alert:hover {
     background-color: rgba(240, 240, 240, 0.803);
 }
 
 .card-header {
     background-color: #00263d;
-    font-size:13px;
+    font-size: 13px;
     padding-inline: 1px;
-  padding-block: 5px;
+    padding-block: 5px;
 }
 
-.nav-link{
+.nav-link {
     padding-block: 6px;
     border-bottom: none;
     border-inline: none;
 }
-.nav-link:hover{
+
+.nav-link:hover {
     border-bottom: none;
-  border-inline: none;
+    border-inline: none;
 }
+
 .card-body {
-    padding:0px;
-    border:none;
+    padding: 0px;
+    border: none;
     padding-block: 20px;
     font-size: 14px;
 }
