@@ -14,17 +14,17 @@ coverage
 *.local
 .env
 
-/cypress/videos/
-/cypress/screenshots/
+# /cypress/videos/
+# /cypress/screenshots/
 
-backend/newsImages/
-backend/profileImages/
+# backend/newsImages/
+# backend/profileImages/
 
-# /backend/newsImages/*
-# !/backend/newsImages/.gitkeep
+/backend/newsImages/*
+!/backend/newsImages/.gitkeep
 
-# /backend/profileImages/*
-# !/backend/profileImages/.gitkeep
+/backend/profileImages/*
+!/backend/profileImages/.gitkeep
 dist/
 
 # Editor directories and files
