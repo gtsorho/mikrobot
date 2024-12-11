@@ -17,9 +17,9 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
-backend/newsImages/
-backend/profileImages/
-dist/
+# backend/newsImages/
+# backend/profileImages/
+# dist/
 
 
 # Editor directories and files
