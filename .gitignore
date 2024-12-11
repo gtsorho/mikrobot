@@ -17,10 +17,15 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
-# backend/newsImages/
-# backend/profileImages/
-# dist/
+backend/newsImages/
+backend/profileImages/
 
+# /backend/newsImages/*
+# !/backend/newsImages/.gitkeep
+
+# /backend/profileImages/*
+# !/backend/profileImages/.gitkeep
+dist/
 
 # Editor directories and files
 .vscode/*
