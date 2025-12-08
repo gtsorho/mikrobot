@@ -1,16 +1,19 @@
 <template>
-      <swiper  :autoplay="{ delay: 2500, disableOnInteraction: false,}" :pagination="{ type: 'progressbar', }" :navigation="true" :modules="modules" class="mySwiper">
+    <swiper :autoplay="{ delay: 2500, disableOnInteraction: false, }" :pagination="{ type: 'progressbar', }"
+        :navigation="true" :modules="modules" class="mySwiper">
         <swiper-slide class="slide" v-for="(slide, i) in announcements"
             :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null})` }"
             :key="i">
             <div class="container hero-item overlay">
-                <a class="post-category-marker" style="  background: rgb(228, 107, 0);" href="category.html">Announcement</a>
+                <a class="post-category-marker" style="  background: rgb(228, 107, 0);"
+                    href="category.html">Announcement</a>
                 <div class="clearfix"></div>
                 <h2><a href="post-single.html" class="text-light fw-bolder">{{ slide.header }}</a></h2>
                 <p style="font-size:14px" class="text-light fw-medium">{{ slide.content }} </p>
                 <div class="clearfix"></div>
                 <p class="post-date font-bold fw-normal" style="font-size:12px ;color: #fff;"><i
-                        class="bi bi-clock-fill" style="color: rgb(228, 107, 0);"></i> {{ convertDate(slide.updatedAt) }}</p>
+                        class="bi bi-clock-fill" style="color: rgb(228, 107, 0);"></i> {{ convertDate(slide.updatedAt)
+                    }}</p>
             </div>
         </swiper-slide>
     </swiper>
@@ -43,10 +46,10 @@
                                     v-html="truncateData(parseData(article.content), 150)"></p>
                                 <div class="d-flex align-items-center" style="font-size: 11px;">
                                     <div class="widget-49-date-primary"
-                                    :style="`background-image:url('https://mikrobotacademy.com/profile_images/${article.student?.image}') !important`">
+                                        :style="`background-image:url('https://mikrobotacademy.com/profile_images/${article.student?.image}') !important`">
                                     </div>
                                     <div>
-                                        <span class="me-3">{{article.student?.name}}</span><br>
+                                        <span class="me-3">{{ article.student?.name }}</span><br>
                                         <span class="text-muted me-3">{{ convertDate(article.updatedAt) }}</span>
                                     </div>
                                 </div>
@@ -59,7 +62,8 @@
             <!-- Right Section: Popular/Recent Articles -->
             <div class="col-lg-4 d-flex align-items-center overflow-y-auto " style="max-height:7in">
                 <div>
-                    <li class="btn btn-sm w-100 rounded-0 rounded-top-1" style="  background: rgb(228, 107, 0); color:#fff;">
+                    <li class="btn btn-sm w-100 rounded-0 rounded-top-1"
+                        style="  background: rgb(228, 107, 0); color:#fff;">
                         Popular News
                     </li>
                     <div class="list-group">
@@ -93,7 +97,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Pagination, Navigation , Autoplay} from 'swiper/modules';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import axios from 'axios';
 import edjsParser from "editorjs-parser";
 
@@ -148,7 +152,8 @@ export default {
             })
         },
         truncateData(data, count) {
-            return data.substring(0, count);
+            if (!data) return "";
+            return String(data).substring(0, count);
         },
         handleArticle(id) {
             this.$router.push({ name: 'article', params: { article: id } })
@@ -356,19 +361,19 @@ export default {
     width: 100%;
     position: relative;
 }
- .widget-49-date-primary {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  font-weight: 500;
-  font-size: 1.5rem;
-  background-size: cover;
-  background-position: 0px;
-  background-repeat: no-repeat;
-}
 
+.widget-49-date-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    font-weight: 500;
+    font-size: 1.5rem;
+    background-size: cover;
+    background-position: 0px;
+    background-repeat: no-repeat;
+}
 </style>

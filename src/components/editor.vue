@@ -140,6 +140,7 @@ export default {
         return {
             currentTab: 'article',
             tab: 'news',
+            editorKey: 0,
             updateImg: false,
             newData: null,
             editorInstance: null,

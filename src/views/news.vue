@@ -115,6 +115,7 @@ export default {
         })
       },
       truncateData(data, count) {
+        if (!data) return "";
         return data.substring(0, count);
       },
       handleArticle(id){
