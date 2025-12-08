@@ -66,7 +66,7 @@ export default {
       this.gridColumns = columns;
     },
     getImages(){
-      axios.get('https://mikrobotacademy.com/api/students/gallery'
+      axios.get('http://localhost:3000/api/students/gallery'
         ).then(response =>{
           this.images = response.data.data.files
           console.log(response.data.data.files)

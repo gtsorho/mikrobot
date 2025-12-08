@@ -91,7 +91,7 @@
     <section class="m-5" id="news">
       <swiper  :autoplay="{ delay: 2500, disableOnInteraction: false,}" :pagination="{ type: 'progressbar', }" :navigation="true" :modules="modules" class="mySwiper">
           <swiper-slide class="slide" v-for="(slide, i) in announcements"
-              :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null})` }" :key="i">
+              :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${slide.image ? `http://localhost:3000/news_images/${slide.image}` : null})` }" :key="i">
               <div class="container hero-item overlay">
                   <a class="post-category-marker" style="  background: rgb(228, 107, 0);">Announcement</a>
                   <div class="clearfix"></div>
@@ -150,7 +150,7 @@ import { Pagination, Navigation , Autoplay} from 'swiper/modules';
       },
       methods: {
         getNews(){
-          axios.get('https://mikrobotacademy.com/api/news')
+          axios.get('http://localhost:3000/api/news')
           .then(res =>{
             const groupedData = res.data.reduce((acc, currentItem) => {
             const { tag, ...rest } = currentItem;
@@ -175,7 +175,7 @@ import { Pagination, Navigation , Autoplay} from 'swiper/modules';
           return truncatedWords.join(' ');
       },
       getFacts() {
-            axios.get('https://mikrobotacademy.com/api/facts/',
+            axios.get('http://localhost:3000/api/facts/',
             ).then(response => {
                 this.facts = response.data
             }).catch(error => {

@@ -21,7 +21,7 @@
         :content="!slide.image ? slide.content : null"
         :title="!slide.image ? slide.header : null"
         style="background-color: #004e7c"
-        :image="slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null">
+        :image="slide.image ? `http://localhost:3000/news_images/${slide.image}` : null">
         </vueper-slide>
     </vueper-slides>
 
@@ -44,7 +44,7 @@
     <div class="row row-cols-md-2 my-2 justify-content-center row-cols-lg-3" >
       <div  class="col-lg-4 my-2" v-for="(article, index) in articles" :key="index" @click="handleArticle(article.id)">
         <div class="card shadow" style="width: 18rem; height:4in">
-          <img :src="article.image ? `https://mikrobotacademy.com/news_images/${article.image}` : noImage" style="height:2.5in; object-fit:cover" class="card-img-top" > 
+          <img :src="article.image ? `http://localhost:3000/news_images/${article.image}` : noImage" style="height:2.5in; object-fit:cover" class="card-img-top" > 
           <div class="card-body"> 
             <h5 class="card-title">{{article.header}}</h5>
             <p class="card-text" style="font-size:12px" v-if="article.content" v-html="truncateData(parseData(article.content), 150)"></p>
@@ -87,7 +87,7 @@ export default {
     },
     methods:{
       getNews(){
-        axios.get('https://mikrobotacademy.com/api/news')
+        axios.get('http://localhost:3000/api/news')
         .then(res =>{
           const groupedData = res.data.reduce((acc, currentItem) => {
           const { tag, ...rest } = currentItem;
@@ -107,7 +107,7 @@ export default {
         })
       },
       search(){
-        axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
+        axios.get('http://localhost:3000/api/students/search/' + this.searchQuery
         ).then(response =>{
           this.students = response.data
         }).catch(error =>{

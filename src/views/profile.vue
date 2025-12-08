@@ -26,7 +26,7 @@
             <div class="widget-49">
               <div class="widget-49-title-wrapper">
                 <div class="widget-49-date-primary"
-                  :style="`background-image:url('https://mikrobotacademy.com/profile_images/${student.image}') !important`">
+                  :style="`background-image:url('http://localhost:3000/profile_images/${student.image}') !important`">
                 </div>
                 <div class="widget-49-meeting-info mx-auto" style="width: 70%;">
                   <p class="fst-italic m-0 text-muted">Meet:</p>
@@ -53,7 +53,7 @@
             <div class="widget-49">
               <div class="widget-49-title-wrapper">
                 <div class="widget-49-date-primary shadow m-2" style=" border-radius: 10px; width:7rem; height:7rem "
-                  :style="`background-image:url('https://mikrobotacademy.com/profile_images/${coach.image}') !important`">
+                  :style="`background-image:url('http://localhost:3000/profile_images/${coach.image}') !important`">
                 </div>
                 <div class="widget-49-meeting-info mx-auto" style="width: 100%;">
                   <p class="fst-italic m-0 text-muted">Meet:</p>
@@ -79,7 +79,7 @@
             <div class="widget-49">
               <div class="widget-49-title-wrapper">
                 <div class="widget-49-date-primary shadow m-2" style=" border-radius: 10px; width:7rem; height:7rem "
-                  :style="`background-image:url('https://mikrobotacademy.com/profile_images/${director.image}') !important`">
+                  :style="`background-image:url('http://localhost:3000/profile_images/${director.image}') !important`">
                 </div>
                 <div class="widget-49-meeting-info mx-auto" style="width: 100%;">
                   <!-- <p class="fst-italic m-0 text-muted">Meet:</p> -->
@@ -112,7 +112,7 @@
       <div class="widget-49">
         <div class="">
           <div class="shadow mx-auto" style=" border-radius: 50%; width:12rem; height:12rem; background-position: center center; background-size: cover;"
-            :style="`background-image:url('https://mikrobotacademy.com/profile_images/${selectedProfile.image}') !important`">
+            :style="`background-image:url('http://localhost:3000/profile_images/${selectedProfile.image}') !important`">
           </div>
           <div class="widget-49-meeting-info mx-auto" style="width: 100%;">
             <p class="fst-italic m-0 text-muted">Meet:</p>
@@ -145,7 +145,7 @@ export default {
   },
   methods: {
     // getStudents(){
-    //   axios.get('https://mikrobotacademy.com/api/students/'
+    //   axios.get('http://localhost:3000/api/students/'
     //   ).then(response =>{
     //     this.students = response.data
     //   }).catch(error =>{
@@ -153,7 +153,7 @@ export default {
     //   })
     // },
     getStudents() {
-      axios.get('https://mikrobotacademy.com/api/students/')
+      axios.get('http://localhost:3000/api/students/')
         .then(res => {
           const groupedData = res.data.reduce((acc, currentItem) => {
             const { tag, ...rest } = currentItem;
@@ -173,7 +173,7 @@ export default {
         })
     },
     search() {
-      axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery)
+      axios.get('http://localhost:3000/api/students/search/' + this.searchQuery)
         .then(res => {
           const groupedData = res.data.reduce((acc, currentItem) => {
             const { tag, ...rest } = currentItem;

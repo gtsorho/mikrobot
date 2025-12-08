@@ -7,7 +7,7 @@
       <div class="col-md-4">
         <!-- Placeholder for the image if available -->
         <img v-if="profile.image" 
-             :src="`https://mikrobotacademy.com/profile_images/${ profile.image}`" 
+             :src="`http://localhost:3000/profile_images/${ profile.image}`" 
              alt="Profile Image" 
              class="img-fluid rounded-0" 
              style="width:100%; object-fit:cover">
@@ -146,7 +146,7 @@ export default {
   },
   methods:{
     getStudent(){
-      axios.get('https://mikrobotacademy.com/api/students/student/'+this.student
+      axios.get('http://localhost:3000/api/students/student/'+this.student
       ).then(response =>{
         this.profile = response.data
       }).catch(error =>{

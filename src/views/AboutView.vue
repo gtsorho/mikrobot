@@ -75,7 +75,7 @@ import axios from 'axios'
         },
         methods:{
             getFacts() {
-            axios.get('https://mikrobotacademy.com/api/facts/',
+            axios.get('http://localhost:3000/api/facts/',
             ).then(response => {
                 this.facts = response.data
             }).catch(error => {
