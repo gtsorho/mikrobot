@@ -175,7 +175,7 @@ import { Pagination, Navigation , Autoplay} from 'swiper/modules';
           return truncatedWords.join(' ');
       },
       getFacts() {
-            axios.get('https://mikrobotacademy.com/api/facts/',
+            axios.get('https://mikrobotacademy.com/api/facts',
             ).then(response => {
                 this.facts = response.data
             }).catch(error => {
