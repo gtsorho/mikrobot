@@ -87,7 +87,7 @@ export default {
     },
     methods:{
       getNews(){
-        axios.get('https://mikrobotacademy.com/api/news')
+        axios.get('https://mikrobotacademy.com/api/news/')
         .then(res =>{
           const groupedData = res.data.reduce((acc, currentItem) => {
           const { tag, ...rest } = currentItem;

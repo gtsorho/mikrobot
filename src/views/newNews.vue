@@ -123,7 +123,7 @@ export default {
     },
     methods: {
         getNews() {
-            axios.get('https://mikrobotacademy.com/api/news')
+            axios.get('https://mikrobotacademy.com/api/news/')
                 .then(res => {
                     const data = Array.isArray(res.data) ? res.data : [];
                     const groupedData = data.reduce((acc, currentItem) => {
