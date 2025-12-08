@@ -40,8 +40,8 @@ app.use('/profile_images', express.static(path.join(__dirname, 'backend', 'profi
 app.use('/news_images', express.static(path.join(__dirname, 'backend', 'newsImages')));
 
 
-app.get(/.*/, function(req, res){
-    res.sendFile(path.join(__dirname, 'dist/index.html'))
+app.get(/^\/(?!api).*/, function(req, res){
+  res.sendFile(path.join(__dirname, 'dist/index.html'))
 })
 
   
