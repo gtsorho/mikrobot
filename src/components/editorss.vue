@@ -206,7 +206,7 @@ methods: {
       this.editorKey += 1;
     },
     getNews(){
-        axios.get('http://localhost:3000/api/news')
+        axios.get('https://mikrobotacademy.com/api/news')
         .then(res =>{
           const groupedData = res.data.reduce((acc, currentItem) => {
           const { tag, ...rest } = currentItem;
@@ -261,7 +261,7 @@ methods: {
 
         try {
             const response = await axios.post(
-            'http://localhost:3000/api/news/',
+            'https://mikrobotacademy.com/api/news/',
             formData,
             { headers: { 'Authorization': `Bearer ${token}` } }
             );
@@ -289,7 +289,7 @@ methods: {
 
         try {
             const response = await axios.post(
-            'http://localhost:3000/api/news/update/'+ this.newsData.id,
+            'https://mikrobotacademy.com/api/news/update/'+ this.newsData.id,
             formData,
             { headers: { 'Authorization': `Bearer ${token}` } }
             );
@@ -342,7 +342,7 @@ methods: {
     deleteItem(id) {
         let token = this.getCookie('token')
 
-        axios.get('http://localhost:3000/api/news/delete/' + id,
+        axios.get('https://mikrobotacademy.com/api/news/delete/' + id,
         { headers:{'Authorization': `Bearer ${token}`}}
         ).then(response =>{
             this.getNews()            

@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     getFacts() {
-      axios.get('http://localhost:3000/api/facts/'
+      axios.get('https://mikrobotacademy.com/api/facts/'
       ).then(response => {
         this.facts = response.data
       }).catch(error => {
@@ -103,7 +103,7 @@ export default {
     submitForm() {
       let token = this.getCookie('token')
 
-      axios.post('http://localhost:3000/api/facts/', this.fact,
+      axios.post('https://mikrobotacademy.com/api/facts/', this.fact,
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
         this.getFacts()
@@ -118,7 +118,7 @@ export default {
     updateFact(id) {
       let token = this.getCookie('token')
 
-      axios.post('http://localhost:3000/api/facts/update/' + id, this.fact,
+      axios.post('https://mikrobotacademy.com/api/facts/update/' + id, this.fact,
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
         this.getFacts()
@@ -137,7 +137,7 @@ export default {
     },
     deleteItem(id) {
       let token = this.getCookie('token')
-      axios.get('http://localhost:3000/api/facts/delete/' + id,
+      axios.get('https://mikrobotacademy.com/api/facts/delete/' + id,
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
         this.getFacts()

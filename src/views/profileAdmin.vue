@@ -76,7 +76,7 @@ export default {
     },
     methods:{
       login(){
-        axios.post('http://localhost:3000/api/users/login', this.user
+        axios.post('https://mikrobotacademy.com/api/users/login', this.user
         ).then(response =>{
           this.setCookie('token', response.data, 1 )
           const trig = this.$refs.modalClose

@@ -1,7 +1,7 @@
 <template>
   <div v-if="articleContent" class="" style="margin-inline:10%; margin-block:5%">
     <div class=" border border-warning">
-      <img :src=" articleContent.image ? `http://localhost:3000/news_images/${ articleContent.image}` : noImage " style="height:3in; width:100%; object-fit:cover" alt="News Image" class="img-fluid">
+      <img :src=" articleContent.image ? `https://mikrobotacademy.com/news_images/${ articleContent.image}` : noImage " style="height:3in; width:100%; object-fit:cover" alt="News Image" class="img-fluid">
     </div>
     <h1>{{articleContent.header}}</h1>
     <div>
@@ -27,7 +27,7 @@ export default {
   },
   methods:{
     getArticle(){
-      axios.get('http://localhost:3000/api/news/find/'+ this.article
+      axios.get('https://mikrobotacademy.com/api/news/find/'+ this.article
       ).then(response =>{
         this.articleContent = response.data
       }).catch(error =>{

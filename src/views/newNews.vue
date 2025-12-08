@@ -2,7 +2,7 @@
     <swiper :autoplay="{ delay: 2500, disableOnInteraction: false, }" :pagination="{ type: 'progressbar', }"
         :navigation="true" :modules="modules" class="mySwiper">
         <swiper-slide class="slide" v-for="(slide, i) in announcements"
-            :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${slide.image ? `http://localhost:3000/news_images/${slide.image}` : null})` }"
+            :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${slide.image ? `https://mikrobotacademy.com/news_images/${slide.image}` : null})` }"
             :key="i">
             <div class="container hero-item overlay">
                 <a class="post-category-marker" style="  background: rgb(228, 107, 0);"
@@ -34,7 +34,7 @@
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img style="height: 150px;"
-                                :src="article.image ? `http://localhost:3000/news_images/${article.image}` : noImage"
+                                :src="article.image ? `https://mikrobotacademy.com/news_images/${article.image}` : noImage"
                                 class="img-fluid rounded-start" alt="..." />
                         </div>
                         <div class="col-md-8">
@@ -46,7 +46,7 @@
                                     v-html="truncateData(parseData(article.content), 150)"></p>
                                 <div class="d-flex align-items-center" style="font-size: 11px;">
                                     <div class="widget-49-date-primary"
-                                        :style="`background-image:url('http://localhost:3000/profile_images/${article.student?.image}') !important`">
+                                        :style="`background-image:url('https://mikrobotacademy.com/profile_images/${article.student?.image}') !important`">
                                     </div>
                                     <div>
                                         <span class="me-3">{{ article.student?.name }}</span><br>
@@ -123,7 +123,7 @@ export default {
     },
     methods: {
         getNews() {
-            axios.get('http://localhost:3000/api/news')
+            axios.get('https://mikrobotacademy.com/api/news')
                 .then(res => {
                     const data = Array.isArray(res.data) ? res.data : [];
                     const groupedData = data.reduce((acc, currentItem) => {
@@ -143,7 +143,7 @@ export default {
                 })
         },
         search() {
-            axios.get('http://localhost:3000/api/students/search/' + this.searchQuery
+            axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
             ).then(response => {
                 this.students = response.data
             }).catch(error => {

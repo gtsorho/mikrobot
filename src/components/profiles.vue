@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-4 d-flex justify-content-center my-auto">
                   <img v-if="student.hasOwnProperty('image')"
-                    :src="`http://localhost:3000/profile_images/${student.image}`" class="rounded-circle"
+                    :src="`https://mikrobotacademy.com/profile_images/${student.image}`" class="rounded-circle"
                     style="width:5rem; height:5rem; object-fit:cover">
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     getStudents() {
-      axios.get('http://localhost:3000/api/students/'
+      axios.get('https://mikrobotacademy.com/api/students/'
       ).then(response => {
         this.students = response.data
         console.log(response.data)
@@ -177,7 +177,7 @@ export default {
       }
     },
     search() {
-      axios.get('http://localhost:3000/api/students/search/' + this.searchQuery
+      axios.get('https://mikrobotacademy.com/api/students/search/' + this.searchQuery
       ).then(response => {
         this.students = response.data
       }).catch(error => {
@@ -195,7 +195,7 @@ export default {
         }
       }
 
-      axios.post('http://localhost:3000/api/students/', formData,
+      axios.post('https://mikrobotacademy.com/api/students/', formData,
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
         this.getStudents()
@@ -221,7 +221,7 @@ export default {
         }
       }
 
-      axios.post('http://localhost:3000/api/students/update/' + id, formData,
+      axios.post('https://mikrobotacademy.com/api/students/update/' + id, formData,
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
         this.getStudents()
@@ -279,7 +279,7 @@ export default {
     deleteItem(id) {
       let token = this.getCookie('token')
 
-      axios.get('http://localhost:3000/api/students/delete/' + id,
+      axios.get('https://mikrobotacademy.com/api/students/delete/' + id,
         { headers: { 'Authorization': `Bearer ${token}` } }
       ).then(response => {
         this.getStudents()
