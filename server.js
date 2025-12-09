@@ -39,6 +39,7 @@ app.use('/', serveStatic(path.join(__dirname,'/dist')))
 app.use('/profile_images', express.static('/app/profile_images'));
 app.use('/news_images', express.static('/app/news_images'));
 
+//test [osj]
 // app.use('/profile_images', express.static(path.join(__dirname, 'backend', 'profileImages')));
 // app.use('/news_images', express.static(path.join(__dirname, 'backend', 'newsImages')));
 
