@@ -20,12 +20,12 @@ coverage
 # backend/newsImages/
 # backend/profileImages/
 
-/backend/newsImages/*
-!/backend/newsImages/.gitkeep
+# /backend/newsImages/*
+# !/backend/newsImages/.gitkeep
 
-/backend/profileImages/*
-!/backend/profileImages/.gitkeep
-dist/
+# /backend/profileImages/*
+# !/backend/profileImages/.gitkeep
+# dist/
 
 # Editor directories and files
 .vscode/*
