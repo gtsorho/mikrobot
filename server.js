@@ -11,7 +11,7 @@ const multer = require('multer');
 const cors = require('cors');
 require('dotenv').config()
 
-
+const UPLOADS_BASE_PATH = process.env.UPLOADS_PATH 
 const app = express()
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -36,16 +36,16 @@ app.use((err, req, res, next) => {
   });
 
 app.use('/', serveStatic(path.join(__dirname,'/dist')))
-app.use('/profile_images', express.static(`${UPLOADS_PATH}/profile_images`));
-app.use('/news_images', express.static(`${UPLOADS_PATH}/news_images`));
+app.use('/profile_images', express.static(`${UPLOADS_BASE_PATH}/profile_images`));
+app.use('/news_images', express.static(`${UPLOADS_BASE_PATH}/news_images`));
 
 // Ensure directories exist
 const fs = require('fs');
-if (!fs.existsSync(`${UPLOADS_PATH}/profile_images`)) {
-  fs.mkdirSync(`${UPLOADS_PATH}/profile_images`, { recursive: true });
+if (!fs.existsSync(`${UPLOADS_BASE_PATH}/profile_images`)) {
+  fs.mkdirSync(`${UPLOADS_BASE_PATH}/profile_images`, { recursive: true });
 }
-if (!fs.existsSync(`${UPLOADS_PATH}/news_images`)) {
-  fs.mkdirSync(`${UPLOADS_PATH}/news_images`, { recursive: true });
+if (!fs.existsSync(`${UPLOADS_BASE_PATH}/news_images`)) {
+  fs.mkdirSync(`${UPLOADS_BASE_PATH}/news_images`, { recursive: true });
 }
 
 // app.use('/profile_images', express.static(path.join(__dirname, 'backend', 'profileImages')));
