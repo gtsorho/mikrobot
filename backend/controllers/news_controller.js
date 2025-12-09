@@ -89,8 +89,8 @@ module.exports = {
             function validateNews(news) {
                 const schema = Joi.object({
                     header: Joi.string().allow(null, '').max(255),
-                    content: Joi.string().allow(null, '').max(5000),
-                    link: Joi.string().allow(null, '').uri().max(1000),
+                    content: Joi.string().allow(null, ''),
+                    link: Joi.string().allow(null, '').max(1000),
                     tag: Joi.string().required().max(100),
                     studentId: Joi.alternatives()
                         .try(
@@ -169,8 +169,8 @@ module.exports = {
             function validateNews(news) {
                 const schema = Joi.object({
                     header: Joi.string().allow(null, '').max(255),
-                    content: Joi.string().allow(null, '').max(5000),
-                    link: Joi.string().allow(null, '').uri().max(1000),
+                    content: Joi.string().allow(null, ''),
+                    link: Joi.string().allow(null, '').max(1000),
                     tag: Joi.string().required().max(100),
                     studentId: Joi.alternatives()
                         .try(
@@ -260,8 +260,6 @@ module.exports = {
             });
         }
     },
-    
-
     
     delete: async (req, res) => {
         try {
