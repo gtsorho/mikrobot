@@ -36,10 +36,18 @@ app.use((err, req, res, next) => {
   });
 
 app.use('/', serveStatic(path.join(__dirname,'/dist')))
-app.use('/profile_images', express.static('/app/profile_images'));
-app.use('/news_images', express.static('/app/news_images'));
+app.use('/profile_images', express.static(`${UPLOADS_PATH}/profile_images`));
+app.use('/news_images', express.static(`${UPLOADS_PATH}/news_images`));
 
-//test [osj]
+// Ensure directories exist
+const fs = require('fs');
+if (!fs.existsSync(`${UPLOADS_PATH}/profile_images`)) {
+  fs.mkdirSync(`${UPLOADS_PATH}/profile_images`, { recursive: true });
+}
+if (!fs.existsSync(`${UPLOADS_PATH}/news_images`)) {
+  fs.mkdirSync(`${UPLOADS_PATH}/news_images`, { recursive: true });
+}
+
 // app.use('/profile_images', express.static(path.join(__dirname, 'backend', 'profileImages')));
 // app.use('/news_images', express.static(path.join(__dirname, 'backend', 'newsImages')));
 

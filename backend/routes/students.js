@@ -9,24 +9,23 @@ require('dotenv').config()
 const router = express.Router()
 let upload = multer();
 
-const upFile = multer({
+const profileUpload = multer({
   storage: multer.diskStorage({
-    destination: function (req, file, callback) {
-      callback(null, '/app/profile_images');
+    destination: function (req, file, cb) {
+      cb(null, `${process.env.UPLOADS_PATH}/profile_images`);
     },
-    filename: function (req, file, callback) {
-      callback(null, file.originalname);
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
     },
   }),
-  limits: {
-    fileSize: 5 * 1024 * 1024, 
-  },
+  limits: { fileSize: 5 * 1024 * 1024 },
 });
+
 
   router.get('/', cc.getStudents);
   router.get('/student/:id', cc.getStudent);
-  router.post('/',[ authenticateToken,  upFile.single("image")], cc.create);
-  router.post('/update/:id', [authenticateToken, upFile.single("image")], cc.update);
+  router.post('/',[ authenticateToken,  profileUpload.single("image")], cc.create);
+  router.post('/update/:id', [authenticateToken, profileUpload.single("image")], cc.update);
   router.get('/delete/:id', authenticateToken, cc.delete);
   router.get('/search/:searchValue', upload.fields([]), cc.search)
   router.get('/gallery', cc.getGallery)

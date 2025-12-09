@@ -9,24 +9,21 @@ require('dotenv').config()
 const router = express.Router()
 let upload = multer();
 
-const upFile = multer({
+const newsUpload = multer({
   storage: multer.diskStorage({
-    destination: function (req, file, callback) {
-      callback(null, "/app/news_images");
+    destination: function (req, file, cb) {
+      cb(null, `${process.env.UPLOADS_PATH}/news_images`);
     },
-    filename: function (req, file, callback) {
-      callback(null, file.originalname);
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
     },
   }),
-  limits: {
-    fileSize: 5 * 1024 * 1024, 
-  },
 });
 
   router.get('/', cc.getNews);
   router.get('/find/:id', cc.getOneNews);
-  router.post('/',[ authenticateToken,  upFile.single("image")], cc.create);
-  router.post('/update/:id', [authenticateToken, upFile.single("image")], cc.update);
+  router.post('/',[ authenticateToken,  newsUpload.single("image")], cc.create);
+  router.post('/update/:id', [authenticateToken, newsUpload.single("image")], cc.update);
   router.get('/delete/:id', authenticateToken, cc.delete);
 
 module.exports = router
