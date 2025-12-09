@@ -12,7 +12,7 @@ let upload = multer();
 const upFile = multer({
   storage: multer.diskStorage({
     destination: function (req, file, callback) {
-      callback(null, `${__dirname}/../profileImages`);
+      callback(null, '/app/profile_images');
     },
     filename: function (req, file, callback) {
       callback(null, file.originalname);
