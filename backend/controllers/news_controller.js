@@ -172,12 +172,7 @@ module.exports = {
                     content: Joi.string().allow(null, ''),
                     link: Joi.string().allow(null, '').max(1000),
                     tag: Joi.string().required().max(100),
-                    studentId: Joi.alternatives()
-                        .try(
-                            Joi.number().integer().positive(),
-                            Joi.valid(null), 
-                            Joi.string().valid('null')
-                        )
+                    studentId: Joi.alternatives().try(Joi.number(), Joi.valid(null), Joi.string().valid('null'))
                 }).unknown(true);
                 return schema.validate(news);
             }
