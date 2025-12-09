@@ -46,69 +46,153 @@ module.exports = {
     },
 
     create: async (req, res) => {
+        try {
+            if (req.fileValidationError) {
+                return res.status(400).json({ error: req.fileValidationError });
+            }
 
-        if (req.fileValidationError) {
-            return res.status(400).json({ error: req.fileValidationError });
+            function validateStudent(student) {
+                const schema = Joi.object({
+                    name: Joi.string().required().min(2).max(100),
+                    dob: Joi.date().required(),
+                    guardian: Joi.string().required().min(2).max(100),
+                    phone: Joi.string().required().min(10).max(15),
+                    profile: Joi.string().required(),
+                    tag: Joi.string().required(),
+                    sub_profile: Joi.string().allow(null, '').max(1000),
+                    achievement: Joi.string().allow(null, '').max(1000),
+                }).unknown(true);
+                return schema.validate(student);
+            }
+
+            const { error } = validateStudent(req.body);
+            if (error) {
+                return res.status(400).json({ 
+                    success: false,
+                    message: 'Validation error',
+                    error: error.details[0].message 
+                });
+            }
+
+            const studentData = { ...req.body };
+            
+            if (req.file) {
+                try {
+                    studentData.image = req.file.originalname;
+                } catch (fileError) {
+                    console.error('File processing error:', fileError);
+                    return res.status(500).json({
+                        success: false,
+                        message: 'Error processing image file',
+                        error: fileError.message
+                    });
+                }
+            }
+
+            const student = await db.student.create(studentData);
+            
+            return res.status(201).json({
+                success: true,
+                message: 'Student created successfully',
+                data: student
+            });
+
+        } catch (error) {
+            console.error('Error creating student:', error);
+            return res.status(500).json({
+                success: false,
+                message: 'Failed to create student',
+                error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+            });
         }
-
-        function validExtOfficer(student){
-            const schema = Joi.object({
-                name:Joi.string().required(),
-                dob:Joi.date().required(),
-                guardian:Joi.string().required(),
-                phone:Joi.string().required(),
-                profile:Joi.string().required(),
-                tag:Joi.string().required(),
-                sub_profile:Joi.string().allow(null).allow(''),
-                achievement:Joi.string().allow(null).allow(''),
-            }).unknown(true)
-            return schema.validate(student)
-        } 
-        const validate = validExtOfficer(req.body) 
-        if (validate.error) return res.status(400).send(validate.error.details[0].message)
-
-
-        student = req.body
-        if (req.file) {
-            student.image = req.file.originalname
-        }
-
-        student = await db.student.create(student)
-        res.send(student)
     }, 
     update: async (req, res) => {
-        if (req.fileValidationError) {
-            return res.status(400).json({ error: req.fileValidationError });
+        try {
+            if (req.fileValidationError) {
+                return res.status(400).json({ 
+                    success: false,
+                    error: req.fileValidationError 
+                });
+            }
+
+            function validateStudent(student) {
+                const schema = Joi.object({
+                    name: Joi.string().required().min(2).max(100),
+                    dob: Joi.date().required(),
+                    guardian: Joi.string().required().min(2).max(100),
+                    phone: Joi.string().required().min(10).max(15),
+                    profile: Joi.string().required(),
+                    tag: Joi.string().required(),
+                    sub_profile: Joi.string().allow(null, '').max(1000),
+                    achievement: Joi.string().allow(null, '').max(1000),
+                }).unknown(true);
+                return schema.validate(student);
+            }
+
+            const { error } = validateStudent(req.body);
+            if (error) {
+                return res.status(400).json({ 
+                    success: false,
+                    message: 'Validation error',
+                    error: error.details[0].message 
+                });
+            }
+
+            // Check if student exists
+            const existingStudent = await db.student.findByPk(req.params.id);
+            if (!existingStudent) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Student not found'
+                });
+            }
+
+            const studentData = { ...req.body };
+            
+            if (req.file) {
+                try {
+                    // Delete old image if it exists
+                    if (existingStudent.image) {
+                        const oldImagePath = `./profileImages/${existingStudent.image}`;
+                        try {
+                            await fs.unlink(oldImagePath);
+                        } catch (unlinkError) {
+                            console.warn('Warning: Could not delete old profile image:', unlinkError.message);
+                        }
+                    }
+                    studentData.image = req.file.originalname;
+                } catch (fileError) {
+                    console.error('File processing error:', fileError);
+                    return res.status(500).json({
+                        success: false,
+                        message: 'Error processing image file',
+                        error: fileError.message
+                    });
+                }
+            }
+
+            await db.student.update(studentData, {
+                where: { id: req.params.id },
+                returning: true,
+                plain: true
+            });
+
+            const updatedStudent = await db.student.findByPk(req.params.id);
+            
+            return res.json({
+                success: true,
+                message: 'Student updated successfully',
+                data: updatedStudent
+            });
+
+        } catch (error) {
+            console.error('Error updating student:', error);
+            return res.status(500).json({
+                success: false,
+                message: 'Failed to update student',
+                error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+            });
         }
-
-        function validExtOfficer(student){
-            const schema = Joi.object({
-                name:Joi.string().required(),
-                dob:Joi.date().required(),
-                guardian:Joi.string().required(),
-                phone:Joi.string().required(),
-                profile:Joi.string().required(),
-                tag:Joi.string().required(),  
-                sub_profile:Joi.string().allow(null).allow(''),
-                achievement:Joi.string().allow(null).allow(''),
-            }).unknown(true)
-            return schema.validate(student)
-        }
-
-        const validate = validExtOfficer(req.body) 
-        if (validate.error) return res.status(400).send(validate.error.details[0].message)
-        
-        
-        student = req.body
-        if (req.file) {
-            student.image = req.file.originalname
-        }
-
-        student = await db.student.update(req.body, {
-            where:{id : req.params.id}
-        })
-
-        res.send(student)
     }, 
 
     // delete: async(req, res) =>{
@@ -119,12 +203,34 @@ module.exports = {
     //     });
     //     res.sendStatus(200)  
     // },
-    delete: async (req, res) => {
-        const studentId = req.params.id;
+        delete: async (req, res) => {
+        try {
+            const studentId = req.params.id;
 
-        await deleteStudentProfile(studentId);
+            // Check if student exists
+            const student = await db.student.findByPk(studentId);
+            if (!student) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Student not found'
+                });
+            }
 
-        res.sendStatus(200);
+            await deleteStudentProfile(studentId);
+
+            return res.status(200).json({
+                success: true,
+                message: 'Student deleted successfully'
+            });
+
+        } catch (error) {
+            console.error('Error deleting student:', error);
+            return res.status(500).json({
+                success: false,
+                message: 'Failed to delete student',
+                error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+            });
+        }
     },
 
     search: async (req, res) => {

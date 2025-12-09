@@ -78,83 +78,218 @@ module.exports = {
         res.send(news)
     },
     create: async (req, res) => {
-        if (req.fileValidationError) {
-            return res.status(400).json({ error: req.fileValidationError });
+        try {
+            if (req.fileValidationError) {
+                return res.status(400).json({ 
+                    success: false,
+                    error: req.fileValidationError 
+                });
+            }
+        
+            function validateNews(news) {
+                const schema = Joi.object({
+                    header: Joi.string().allow(null, '').max(255),
+                    content: Joi.string().allow(null, '').max(5000),
+                    link: Joi.string().allow(null, '').uri().max(1000),
+                    tag: Joi.string().required().max(100),
+                    studentId: Joi.alternatives()
+                        .try(
+                            Joi.number().integer().positive(),
+                            Joi.valid(null), 
+                            Joi.string().valid('null')
+                        )
+                }).unknown(true);
+                return schema.validate(news);
+            }
+        
+            const { error } = validateNews(req.body);
+            if (error) {
+                return res.status(400).json({ 
+                    success: false,
+                    message: 'Validation error',
+                    error: error.details[0].message 
+                });
+            }
+        
+            const newsData = { ...req.body };
+        
+            // Convert 'null' string to null if it exists
+            if (newsData.studentId === 'null') {
+                newsData.studentId = null;
+            }
+        
+            if (req.file) {
+                try {
+                    newsData.image = req.file.originalname;
+                } catch (fileError) {
+                    console.error('File processing error:', fileError);
+                    return res.status(500).json({
+                        success: false,
+                        message: 'Error processing image file',
+                        error: fileError.message
+                    });
+                }
+            }
+        
+            // Validate that either content or link is provided
+            if (!newsData.content && !newsData.link) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Either content or link must be provided'
+                });
+            }
+        
+            const news = await db.news.create(newsData);
+            
+            return res.status(201).json({
+                success: true,
+                message: 'News created successfully',
+                data: news
+            });
+            
+        } catch (error) {
+            console.error('Error creating news:', error);
+            return res.status(500).json({
+                success: false,
+                message: 'Failed to create news',
+                error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+            });
         }
-    
-        function validExtOfficer(news) {
-            const schema = Joi.object({
-                header: Joi.string().allow(null),
-                content: Joi.string().allow(null),
-                link: Joi.string().allow(null),
-                tag: Joi.string().required(),
-                studentId: Joi.alternatives().try(Joi.number(), Joi.valid(null), Joi.string().valid('null'))
-            }).unknown(true);
-            return schema.validate(news);
-        }
-    
-        const validate = validExtOfficer(req.body);
-        if (validate.error) return res.status(400).send(validate.error.details[0].message);
-    
-        let news = req.body;
-    
-        // Convert 'null' string to null if it exists
-        if (news.studentId === 'null') {
-            news.studentId = null;
-        }
-    
-        if (req.file) {
-            news.image = req.file.originalname;
-        }
-    
-        news = await db.news.create(news);
-        res.send(news);
     },
     
     update: async (req, res) => {
-        if (req.fileValidationError) {
-            return res.status(400).json({ error: req.fileValidationError });
+        try {
+            if (req.fileValidationError) {
+                return res.status(400).json({ 
+                    success: false,
+                    error: req.fileValidationError 
+                });
+            }
+        
+            function validateNews(news) {
+                const schema = Joi.object({
+                    header: Joi.string().allow(null, '').max(255),
+                    content: Joi.string().allow(null, '').max(5000),
+                    link: Joi.string().allow(null, '').uri().max(1000),
+                    tag: Joi.string().required().max(100),
+                    studentId: Joi.alternatives()
+                        .try(
+                            Joi.number().integer().positive(),
+                            Joi.valid(null), 
+                            Joi.string().valid('null')
+                        )
+                }).unknown(true);
+                return schema.validate(news);
+            }
+        
+            const { error } = validateNews(req.body);
+            if (error) {
+                return res.status(400).json({ 
+                    success: false,
+                    message: 'Validation error',
+                    error: error.details[0].message 
+                });
+            }
+            
+            // Check if news exists
+            const existingNews = await db.news.findByPk(req.params.id);
+            if (!existingNews) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'News not found'
+                });
+            }
+        
+            const newsData = { ...req.body };
+        
+            // Convert 'null' string to null if it exists
+            if (newsData.studentId === 'null') {
+                newsData.studentId = null;
+            }
+        
+            if (req.file) {
+                try {
+                    // Delete old image if it exists
+                    if (existingNews.image) {
+                        const oldImagePath = `./newsImages/${existingNews.image}`;
+                        try {
+                            await fs.unlink(oldImagePath);
+                        } catch (unlinkError) {
+                            console.warn('Warning: Could not delete old news image:', unlinkError.message);
+                        }
+                    }
+                    newsData.image = req.file.originalname;
+                } catch (fileError) {
+                    console.error('File processing error:', fileError);
+                    return res.status(500).json({
+                        success: false,
+                        message: 'Error processing image file',
+                        error: fileError.message
+                    });
+                }
+            }
+            
+            // Validate that either content or link is provided
+            if (!newsData.content && !newsData.link) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Either content or link must be provided'
+                });
+            }
+        
+            await db.news.update(newsData, {
+                where: { id: req.params.id },
+                returning: true,
+                plain: true
+            });
+            
+            const updatedNews = await db.news.findByPk(req.params.id);
+        
+            return res.json({
+                success: true,
+                message: 'News updated successfully',
+                data: updatedNews
+            });
+            
+        } catch (error) {
+            console.error('Error updating news:', error);
+            return res.status(500).json({
+                success: false,
+                message: 'Failed to update news',
+                error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+            });
         }
-    
-        function validExtOfficer(news) {
-            const schema = Joi.object({
-                header: Joi.string().allow(null),
-                content: Joi.string().allow(null),
-                link: Joi.string().allow(null),
-                tag: Joi.string().required(),
-                studentId: Joi.alternatives().try(Joi.number(), Joi.valid(null), Joi.string().valid('null'))
-            }).unknown(true);
-            return schema.validate(news);
-        }
-    
-        const validate = validExtOfficer(req.body);
-        if (validate.error) return res.status(400).send(validate.error.details[0].message);
-    
-        let news = req.body;
-    
-        // Convert 'null' string to null if it exists
-        if (news.studentId === 'null') {
-            news.studentId = null;
-        }
-    
-        if (req.file) {
-            news.image = req.file.originalname;
-        }
-    
-        news = await db.news.update(req.body, {
-            where: { id: req.params.id }
-        });
-    
-        res.send(news);
     },
     
 
     
     delete: async (req, res) => {
-        const newsId = req.params.id;
+        try {
+            const newsId = req.params.id;
 
-        await deleteNews(newsId);
+            // Check if news exists
+            const news = await db.news.findByPk(newsId);
+            if (!news) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'News not found'
+                });
+            }
 
-        res.sendStatus(200);
+            await deleteNews(newsId);
+
+            return res.status(200).json({
+                success: true,
+                message: 'News deleted successfully'
+            });
+
+        } catch (error) {
+            console.error('Error deleting news:', error);
+            return res.status(500).json({
+                success: false,
+                message: 'Failed to delete news',
+                error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+            });
+        }
     },
 }
