@@ -36,8 +36,11 @@ app.use((err, req, res, next) => {
   });
 
 app.use('/', serveStatic(path.join(__dirname,'/dist')))
-app.use('/profile_images', express.static(path.join(__dirname, 'backend', 'profileImages')));
-app.use('/news_images', express.static(path.join(__dirname, 'backend', 'newsImages')));
+app.use('/profile_images', express.static('/app/profile_images'));
+app.use('/news_images', express.static('/app/news_images'));
+
+// app.use('/profile_images', express.static(path.join(__dirname, 'backend', 'profileImages')));
+// app.use('/news_images', express.static(path.join(__dirname, 'backend', 'newsImages')));
 
 
 app.get(/^\/(?!api).*/, function(req, res){
