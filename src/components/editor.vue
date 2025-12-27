@@ -6,16 +6,16 @@
                     <ul class="nav nav-tabs card-header-tabs mx-auto">
                         <li class="nav-item rounded-0">
                             <a class="nav-link rounded-0 text-light" :class="tab == 'news' ? 'active text-dark' : null"
-                                @click="tab = 'news'" href="#">News</a>
+                                @click="tab = 'news'; currentTab = 'news'; newsData.tag = 'news'" href="#">News</a>
                         </li>
                         <li class="nav-item rounded-0">
                             <a class="nav-link text-light rounded-0"
                                 :class="tab == 'announcements' ? 'active text-dark' : null"
-                                @click="tab = 'announcements'" href="#">Announcements</a>
+                                @click="tab = 'announcements'; currentTab = 'announcement'; newsData.tag = 'announcement'" href="#">Announcements</a>
                         </li>
                         <li class="nav-item rounded-0">
                             <a class="nav-link text-light rounded-0"
-                                :class="tab == 'articles' ? 'active text-dark' : null" @click="tab = 'articles'"
+                                :class="tab == 'articles' ? 'active text-dark' : null" @click="tab = 'articles'; currentTab = 'article'; newsData.tag = 'article'"
                                 href="#">Articles</a>
                         </li>
                     </ul>
@@ -56,13 +56,13 @@
                 <div class="pb-4">
                     <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-1"
                         :class="currentTab == 'announcement' ? 'isActive' : null"
-                        @click="selectTab('announcement'), newsData.tag = 'announcement'">Announcement</button>
+                        @click="selectTab('announcement'), newsData.tag = 'announcement', tab = 'announcements'">Announcement</button>
                     <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-1"
                         :class="currentTab == 'news' ? 'isActive' : null"
-                        @click="selectTab('news'), newsData.tag = 'news'">News</button>
+                        @click="selectTab('news'), newsData.tag = 'news', tab = 'news'">News</button>
                     <button class="btn btn-sm btn-outline-primary mx-2 px-3 rounded-1"
                         :class="currentTab == 'article' ? 'isActive' : null"
-                        @click="selectTab('article'), newsData.tag = 'article'">Article</button>
+                        @click="selectTab('article'), newsData.tag = 'article', tab = 'articles'">Article</button>
                 </div>
                 <div class="mb-3" v-if="currentTab === 'announcement'">
                     <label for="title" class="form-label fs-6">Title</label>
@@ -95,7 +95,7 @@
                     <select style="font-size: 13px;" class="form-select  fw-light text-dark rounded-1 form-select-sm"
                         v-model="newsData.studentId" aria-label="Small select example">
                         <option :value="null" selected>select author</option>
-                        <option :value="student.id" v-for="(student, i) in students" :key="i">{{ student.name }}<span
+                        <option :value="student.id" v-for="(student, i) in students" :key="i">{{ student.name }} - <span
                                 style="font-size: 11px;">{{ student.tag }}</span> </option>
                     </select>
                     <label for="image" class="form-label fs-6">Image</label>
@@ -243,6 +243,7 @@ export default {
                     console.log('Editor content changed!');
                 },
             });
+            console.log('Editor initialized:', this.editorInstance)
         },
         getNews() {
             axios.get('https://mikrobotacademy.com/api/news/')
@@ -281,6 +282,17 @@ export default {
         selectTab(tab) {
             this.currentTab = tab;
             this.hasImage = false;
+            
+            // Initialize editor when switching to article tab in new item mode
+            if (tab === 'article' && !this.update) {
+                this.$nextTick(() => {
+                    if (this.editorInstance) {
+                        this.editorInstance.destroy();
+                    }
+                    this.editorInstance = null;
+                    this.initializeEditor();
+                });
+            }
         },
         async handleFileChange(event) {
             this.updateImg = true;
@@ -391,7 +403,7 @@ export default {
             this.initializeEditor()
             this.reloadEditor()
         },
-        emptyData() {
+        async emptyData() {
             this.newsData = {
                 header: null,
                 image: null,
@@ -399,9 +411,25 @@ export default {
                 link: null,
                 tag: null
             }
-            if (this.currentTab == 'article') {
-                this.newData = null
-                this.initializeEditor()
+            this.update = false;
+            
+            if (this.currentTab === 'article' && this.editorInstance) {
+                try {
+                    // Clear the editor content
+                    await this.editorInstance.clear();
+                    // Reset any saved data
+                    this.newData = null;
+                    // Force re-render of the editor
+                    this.editorKey++;
+                    this.initializeEditor();
+                } catch (error) {
+                    console.error('Error clearing editor:', error);
+                    // Fallback to full reinitialization if clearing fails
+                    this.editorInstance = null;
+                    this.$nextTick(() => {
+                        this.initializeEditor();
+                    });
+                }
             }
         },
         confirmDelete(id) {
@@ -451,16 +479,34 @@ export default {
     background-color: #d9d9d941;
 }
 
-
 .btn-outline-primary {
     background-color: #00263d;
     color: #fff;
-    border: none
+    border: none;
+    transition: all 0.2s ease;
 }
 
-
 .btn-outline-primary:hover {
-    opacity: .9;
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-outline-primary.isActive {
+    background-color: #00388d;
+    color: #fff;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+    position: relative;
+    z-index: 1;
+}
+
+.btn-outline-primary.isActive::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #00388d;
 }
 
 .demo {
